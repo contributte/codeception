@@ -43,7 +43,9 @@ class Nette extends \Codeception\Util\Framework
 			),
 		));
 		$configurator->setTempDirectory($this->config['tempDir']);
-		foreach ($this->config['configFiles'] as $file) {
+		$files = $this->config['configFiles'];
+		$files[] = __DIR__ . '/config.neon';
+		foreach ($files as $file) {
 			$configurator->addConfig($file);
 		}
 		$loader = $configurator->createRobotLoader();
