@@ -31,10 +31,17 @@ class Nette extends \Codeception\Util\Framework
 		Validators::assertField($this->config, 'robotLoader', 'array');
 	}
 
-	public function _initialize()
+	public function _beforeSuite($settings = array())
 	{
+		parent::_beforeSuite($settings);
+
 		self::purge($this->config['tempDir']);
 		$configurator = new \Nette\Config\Configurator();
+		$configurator->addParameters(array(
+			'container' => array(
+				'class' => ucfirst($this->detectSuiteName($settings)) . 'SuiteContainer',
+			),
+		));
 		$configurator->setTempDirectory($this->config['tempDir']);
 		foreach ($this->config['configFiles'] as $file) {
 			$configurator->addConfig($file);
@@ -58,6 +65,19 @@ class Nette extends \Codeception\Util\Framework
 		} catch (\Nette\DI\MissingServiceException $e) {
 			$this->fail($e->getMessage());
 		}
+	}
+
+	private function detectSuiteName($settings)
+	{
+		if (!isset($settings['path'])) {
+			throw new \Nette\InvalidStateException('Could not detect suite name, path is not set.');
+		}
+		$directory = rtrim($settings['path'], DIRECTORY_SEPARATOR);
+		$position = strrpos($directory, DIRECTORY_SEPARATOR);
+		if ($position === FALSE) {
+			throw new \Nette\InvalidStateException('Could not detect suite name, path is invalid.');
+		}
+		return substr($directory, $position + 1);
 	}
 
 	/**
