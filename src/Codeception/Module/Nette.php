@@ -16,11 +16,11 @@ class Nette extends \Codeception\Util\Framework
 	public function __construct($config = array())
 	{
 		$this->requiredFields = array('tempDir');
-		$this->defaultConfig = array(
+		$this->config = array(
 			'configFiles' => array(),
 			'robotLoader' => array(),
 		);
-		$this->_reconfigure($config);
+		parent::__construct($config);
 	}
 
 	protected function validateConfig()
