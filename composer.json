@@ -1,5 +1,5 @@
 {
-	"name": "arachne/nette-codeception-module",
+	"name": "arachne/codeception",
 	"type": "library",
 	"keywords": [ "nette", "arachne", "codeception" ],
 	"homepage": "http://enumag.cz",
