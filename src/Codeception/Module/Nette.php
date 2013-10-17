@@ -10,6 +10,9 @@ class Nette extends \Codeception\Util\Framework
 	/** @var \Nette\DI\Container */
 	protected $container;
 
+	/** @var \Nette\Loaders\RobotLoader */
+	private $robotLoader;
+
 	/**
 	 * @var array $config
 	 */
@@ -51,12 +54,17 @@ class Nette extends \Codeception\Util\Framework
 		foreach ($files as $file) {
 			$configurator->addConfig($file);
 		}
-		$loader = $configurator->createRobotLoader();
+		$this->robotLoader = $configurator->createRobotLoader();
 		foreach ($this->config['robotLoader'] as $dir) {
-			$loader->addDirectory($dir);
+			$this->robotLoader->addDirectory($dir);
 		}
-		$loader->register();
+		$this->robotLoader->register();
 		$this->container = $configurator->createContainer();
+	}
+
+	public function _afterSuite()
+	{
+		$this->robotLoader->unregister();
 	}
 
 	/**
