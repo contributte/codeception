@@ -2,15 +2,23 @@
 
 namespace Codeception\Module;
 
+use Codeception\Util\Framework;
+use Nette\Configurator;
+use Nette\InvalidStateException;
+use Nette\DI\Container;
+use Nette\DI\MissingServiceException;
+use Nette\Loaders\RobotLoader;
 use Nette\Utils\Validators;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
-class Nette extends \Codeception\Util\Framework
+class Nette extends Framework
 {
 
-	/** @var \Nette\DI\Container */
+	/** @var Container */
 	protected $container;
 
-	/** @var \Nette\Loaders\RobotLoader */
+	/** @var RobotLoader */
 	private $robotLoader;
 
 	/**
@@ -42,7 +50,7 @@ class Nette extends \Codeception\Util\Framework
 		$tempDir = $this->config['tempDir'] . DIRECTORY_SEPARATOR . $suite;
 
 		self::purge($tempDir);
-		$configurator = new \Nette\Config\Configurator();
+		$configurator = new Configurator();
 		$configurator->setTempDirectory($tempDir);
 		$configurator->addParameters(array(
 			'container' => array(
@@ -75,7 +83,7 @@ class Nette extends \Codeception\Util\Framework
 	{
 		try {
 			return $this->container->getByType($service);
-		} catch (\Nette\DI\MissingServiceException $e) {
+		} catch (MissingServiceException $e) {
 			$this->fail($e->getMessage());
 		}
 	}
@@ -83,12 +91,12 @@ class Nette extends \Codeception\Util\Framework
 	private function detectSuiteName($settings)
 	{
 		if (!isset($settings['path'])) {
-			throw new \Nette\InvalidStateException('Could not detect suite name, path is not set.');
+			throw new InvalidStateException('Could not detect suite name, path is not set.');
 		}
 		$directory = rtrim($settings['path'], DIRECTORY_SEPARATOR);
 		$position = strrpos($directory, DIRECTORY_SEPARATOR);
 		if ($position === FALSE) {
-			throw new \Nette\InvalidStateException('Could not detect suite name, path is invalid.');
+			throw new InvalidStateException('Could not detect suite name, path is invalid.');
 		}
 		return substr($directory, $position + 1);
 	}
@@ -102,7 +110,7 @@ class Nette extends \Codeception\Util\Framework
 		if (!is_dir($dir)) {
 			mkdir($dir);
 		}
-		foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir), \RecursiveIteratorIterator::CHILD_FIRST) as $entry) {
+		foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir), RecursiveIteratorIterator::CHILD_FIRST) as $entry) {
 			if (substr($entry->getBasename(), 0, 1) === '.') {
 				// nothing
 			} elseif ($entry->isDir()) {
