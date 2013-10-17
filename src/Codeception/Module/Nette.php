@@ -35,14 +35,17 @@ class Nette extends \Codeception\Util\Framework
 	{
 		parent::_beforeSuite($settings);
 
-		self::purge($this->config['tempDir']);
+		$suite = $this->detectSuiteName($settings);
+		$tempDir = $this->config['tempDir'] . DIRECTORY_SEPARATOR . $suite;
+
+		self::purge($tempDir);
 		$configurator = new \Nette\Config\Configurator();
+		$configurator->setTempDirectory($tempDir);
 		$configurator->addParameters(array(
 			'container' => array(
-				'class' => ucfirst($this->detectSuiteName($settings)) . 'SuiteContainer',
+				'class' => ucfirst($suite) . 'SuiteContainer',
 			),
 		));
-		$configurator->setTempDirectory($this->config['tempDir']);
 		$files = $this->config['configFiles'];
 		$files[] = __DIR__ . '/config.neon';
 		foreach ($files as $file) {
