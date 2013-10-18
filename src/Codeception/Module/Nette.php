@@ -12,6 +12,9 @@ use Nette\Utils\Validators;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
+/**
+ * @author Jáchym Toušek
+ */
 class Nette extends Framework
 {
 
