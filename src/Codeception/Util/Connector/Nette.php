@@ -4,6 +4,7 @@ namespace Codeception\Util\Connector;
 
 use Nette\DI\Container;
 use Nette\Diagnostics\Debugger;
+use Nette\Environment;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\BrowserKit\Response;
@@ -36,6 +37,9 @@ class Nette extends Client
 
 		$_SERVER['REQUEST_METHOD'] = strtoupper($request->getMethod());
 		$_SERVER['REQUEST_URI'] = $uri;
+
+		$this->container->initialize();
+		Environment::setContext($this->container);
 
 		ob_start();
 		try {

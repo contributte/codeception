@@ -9,7 +9,6 @@ use Nette\Configurator;
 use Nette\DI\Container;
 use Nette\DI\MissingServiceException;
 use Nette\Diagnostics\Debugger;
-use Nette\Environment;
 use Nette\InvalidStateException;
 use Nette\Loaders\RobotLoader;
 use Nette\Utils\Validators;
@@ -85,6 +84,10 @@ class Nette extends Framework
 			$this->robotLoader->addDirectory($dir);
 		}
 		$this->robotLoader->register();
+
+		// Generates and loads the container class.
+		// The actual container is created later.
+		$this->configurator->createContainer();
 	}
 
 	public function _afterSuite()
@@ -95,13 +98,7 @@ class Nette extends Framework
 	public function _before(TestCase $test)
 	{
 		$class = $this->getContainerClass();
-		if (!class_exists($class, FALSE)) {
-			$this->container = $this->configurator->createContainer();
-		} else {
-			$this->container = new $class;
-			$this->container->initialize();
-			Environment::setContext($this->container);
-		}
+		$this->container = new $class;
 		$this->client = new NetteConnector();
 		$this->client->setContainer($this->container);
 		parent::_before($test);
