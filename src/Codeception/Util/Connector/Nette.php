@@ -5,6 +5,7 @@ namespace Codeception\Util\Connector;
 use Nette\DI\Container;
 use Nette\Diagnostics\Debugger;
 use Nette\Environment;
+use Nette\Http\IResponse;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\BrowserKit\Response;
@@ -52,7 +53,7 @@ class Nette extends Client
 		$content = ob_get_clean();
 
 		$httpResponse = $this->container->getByType('Nette\Http\IResponse');
-		$code = $httpResponse->getCode();
+		$code = $httpResponse->getCode() ?: IResponse::S200_OK; // @see https://github.com/nette/nette/issues/1263
 		$headers = $httpResponse->getHeaders();
 
 		$repsonse = new Response($content, $code, $headers);
