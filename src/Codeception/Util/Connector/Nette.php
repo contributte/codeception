@@ -44,7 +44,7 @@ class Nette extends Client
 		ob_start();
 		try {
 			$this->container->getByType('Nette\Application\Application')->run();
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			ob_end_clean();
 			Debugger::log($e);
 			throw $e;
