@@ -38,7 +38,6 @@ class Nette extends Framework
 	 */
 	public function __construct($config = array())
 	{
-		$this->requiredFields = array('tempDir');
 		$this->config = array(
 			'configFiles' => array(),
 			'robotLoader' => array(),
@@ -49,7 +48,6 @@ class Nette extends Framework
 	protected function validateConfig()
 	{
 		parent::validateConfig();
-		Validators::assertField($this->config, 'tempDir', 'string');
 		Validators::assertField($this->config, 'configFiles', 'array');
 		Validators::assertField($this->config, 'robotLoader', 'array');
 	}
