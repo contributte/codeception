@@ -39,6 +39,7 @@ class Nette extends Client
 		$_SERVER['REQUEST_METHOD'] = strtoupper($request->getMethod());
 		$_SERVER['REQUEST_URI'] = $uri;
 
+		// Container initialization can't be called earlier because Nette\Http\IRequest service might be initialized too soon and amOnPage method would not work anymore.
 		$this->container->initialize();
 		Environment::setContext($this->container);
 
