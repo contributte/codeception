@@ -44,6 +44,9 @@ class Nette extends Client
 
 		ob_start();
 		try {
+			// The HTTP code from previous test sometimes survives in http_response_code() so it's necessary to reset it manually.
+			// @link https://github.com/nette/nette/pull/1263
+			$this->container->getByType('Nette\Http\IResponse')->setCode(IResponse::S200_OK);
 			$this->container->getByType('Nette\Application\Application')->run();
 		} catch (\Exception $e) {
 			ob_end_clean();
@@ -53,7 +56,7 @@ class Nette extends Client
 		$content = ob_get_clean();
 
 		$httpResponse = $this->container->getByType('Nette\Http\IResponse');
-		$code = $httpResponse->getCode() ?: IResponse::S200_OK; // @see https://github.com/nette/nette/issues/1263
+		$code = $httpResponse->getCode();
 		$headers = $httpResponse->getHeaders();
 
 		$repsonse = new Response($content, $code, $headers);
