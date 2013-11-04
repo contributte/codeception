@@ -22,8 +22,8 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"Arachne": "src/"
-			"Codeception": "src/"
+			"Arachne\\Codeception": "src/",
+			"Codeception\\Module": "src/"
 		}
 	}
 }
