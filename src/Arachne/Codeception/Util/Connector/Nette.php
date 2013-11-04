@@ -1,6 +1,6 @@
 <?php
 
-namespace Codeception\Util\Connector;
+namespace Arachne\Codeception\Util\Connector;
 
 use Nette\DI\Container;
 use Nette\Diagnostics\Debugger;
