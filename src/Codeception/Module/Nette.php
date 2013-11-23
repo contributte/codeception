@@ -100,7 +100,7 @@ class Nette extends Framework
 		$this->client = new NetteConnector();
 		$this->client->setContainer($this->container);
 		parent::_before($test);
-    }
+	}
 
 	public function _after(TestCase $test)
 	{
