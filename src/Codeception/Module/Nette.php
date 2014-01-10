@@ -90,7 +90,7 @@ class Nette extends Framework
 
 	public function _afterSuite()
 	{
-		$this->robotLoader->unregister();
+		return spl_autoload_unregister(array($this->robotLoader, 'tryLoad'));
 	}
 
 	public function _before(TestCase $test)
