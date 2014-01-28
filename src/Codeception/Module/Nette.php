@@ -52,7 +52,9 @@ class Nette extends Framework
 		Validators::assertField($this->config, 'robotLoader', 'array');
 	}
 
-	// TODO: separate RobotLoader extension
+	// TODO: separate RobotLoader module (autoloading)
+	// TODO: separate Tracy module (exceptions logging)
+	// TODO: separate ArachneTools module (debugContent method)
 	public function _beforeSuite($settings = array())
 	{
 		parent::_beforeSuite($settings);
@@ -125,7 +127,6 @@ class Nette extends Framework
 		}
 	}
 
-	// TODO: move to separate ArachneTools extension
 	public function debugContent()
 	{
 		$this->debugSection('Content', $this->client->getInternalResponse()->getContent());
