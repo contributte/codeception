@@ -52,6 +52,7 @@ class Nette extends Framework
 		Validators::assertField($this->config, 'robotLoader', 'array');
 	}
 
+	// TODO: separate RobotLoader extension
 	public function _beforeSuite($settings = array())
 	{
 		parent::_beforeSuite($settings);
@@ -122,6 +123,12 @@ class Nette extends Framework
 		} catch (MissingServiceException $e) {
 			$this->fail($e->getMessage());
 		}
+	}
+
+	// TODO: move to separate ArachneTools extension
+	public function debugContent()
+	{
+		$this->debugSection('Content', $this->client->getInternalResponse()->getContent());
 	}
 
 	private function detectSuiteName($settings)
