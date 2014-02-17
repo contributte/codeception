@@ -41,13 +41,16 @@ class Nette extends Client
 
 		// Container initialization can't be called earlier because Nette\Http\IRequest service might be initialized too soon and amOnPage method would not work anymore.
 		$this->container->initialize();
+
+		// Compatibility
 		Environment::setContext($this->container);
+
+        // The HTTP code from previous test sometimes survives in http_response_code() so it's necessary to reset it manually.
+		$httpResponse = $this->container->getByType('Nette\Http\IResponse');
+		$httpResponse->setCode(IResponse::S200_OK);
 
 		ob_start();
 		try {
-			// The HTTP code from previous test sometimes survives in http_response_code() so it's necessary to reset it manually.
-			// @link https://github.com/nette/nette/pull/1263
-			$this->container->getByType('Nette\Http\IResponse')->setCode(IResponse::S200_OK);
 			$this->container->getByType('Nette\Application\Application')->run();
 		} catch (\Exception $e) {
 			ob_end_clean();
@@ -56,12 +59,10 @@ class Nette extends Client
 		}
 		$content = ob_get_clean();
 
-		$httpResponse = $this->container->getByType('Nette\Http\IResponse');
 		$code = $httpResponse->getCode();
 		$headers = $httpResponse->getHeaders();
 
-		$repsonse = new Response($content, $code, $headers);
-		return $repsonse;
+		return new Response($content, $code, $headers);
 	}
 
 }
