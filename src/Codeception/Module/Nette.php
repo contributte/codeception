@@ -27,9 +27,6 @@ class Nette extends Framework
 	/** @var Container */
 	protected $container;
 
-	/** @var RobotLoader */
-	private $robotLoader;
-
 	/** @var string */
 	private $suite;
 
@@ -40,7 +37,6 @@ class Nette extends Framework
 	{
 		$this->config = array(
 			'configFiles' => array(),
-			'robotLoader' => array(),
 		);
 		parent::__construct($config);
 	}
@@ -49,10 +45,8 @@ class Nette extends Framework
 	{
 		parent::validateConfig();
 		Validators::assertField($this->config, 'configFiles', 'array');
-		Validators::assertField($this->config, 'robotLoader', 'array');
 	}
 
-	// TODO: separate RobotLoader module (autoloading)
 	// TODO: separate Tracy module (exceptions logging)
 	// TODO: separate ArachneTools module (debugContent method)
 	public function _beforeSuite($settings = array())
@@ -80,20 +74,9 @@ class Nette extends Framework
 			$this->configurator->addConfig($file);
 		}
 
-		$this->robotLoader = $this->configurator->createRobotLoader();
-		foreach ($this->config['robotLoader'] as $dir) {
-			$this->robotLoader->addDirectory($dir);
-		}
-		$this->robotLoader->register();
-
 		// Generates and loads the container class.
 		// The actual container is created later.
 		$this->configurator->createContainer();
-	}
-
-	public function _afterSuite()
-	{
-		return spl_autoload_unregister(array($this->robotLoader, 'tryLoad'));
 	}
 
 	public function _before(TestCase $test)
