@@ -45,7 +45,7 @@ class Nette extends Client
 		// Compatibility
 		Environment::setContext($this->container);
 
-        // The HTTP code from previous test sometimes survives in http_response_code() so it's necessary to reset it manually.
+		// The HTTP code from previous test sometimes survives in http_response_code() so it's necessary to reset it manually.
 		$httpResponse = $this->container->getByType('Nette\Http\IResponse');
 		$httpResponse->setCode(IResponse::S200_OK);
 
