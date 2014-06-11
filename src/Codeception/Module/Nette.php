@@ -4,7 +4,7 @@ namespace Codeception\Module;
 
 use Arachne\Codeception\Util\Connector\Nette as NetteConnector;
 use Codeception\TestCase;
-use Codeception\Util\Framework;
+use Codeception\Lib\Framework;
 use Nette\Configurator;
 use Nette\DI\Container;
 use Nette\DI\MissingServiceException;
