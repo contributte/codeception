@@ -8,9 +8,7 @@ use Codeception\Lib\Framework;
 use Nette\Configurator;
 use Nette\DI\Container;
 use Nette\DI\MissingServiceException;
-use Nette\Diagnostics\Debugger;
 use Nette\InvalidStateException;
-use Nette\Loaders\RobotLoader;
 use Nette\Utils\Validators;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -47,7 +45,6 @@ class Nette extends Framework
 		Validators::assertField($this->config, 'configFiles', 'array');
 	}
 
-	// TODO: separate Tracy module (exceptions logging)
 	// TODO: separate ArachneTools module (debugContent method)
 	public function _beforeSuite($settings = array())
 	{
@@ -56,7 +53,6 @@ class Nette extends Framework
 		$this->detectSuiteName($settings);
 		$path = pathinfo($settings['path'], PATHINFO_DIRNAME);
 		$tempDir = $path . DIRECTORY_SEPARATOR . '_temp' . DIRECTORY_SEPARATOR . $this->suite;
-		Debugger::$logDirectory = $path . DIRECTORY_SEPARATOR . '_log';
 
 		self::purge($tempDir);
 		$this->configurator = new Configurator();

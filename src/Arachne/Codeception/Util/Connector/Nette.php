@@ -3,7 +3,6 @@
 namespace Arachne\Codeception\Util\Connector;
 
 use Nette\DI\Container;
-use Nette\Diagnostics\Debugger;
 use Nette\Environment;
 use Nette\Http\IResponse;
 use Symfony\Component\BrowserKit\Client;
@@ -50,13 +49,7 @@ class Nette extends Client
 		$httpResponse->setCode(IResponse::S200_OK);
 
 		ob_start();
-		try {
-			$this->container->getByType('Nette\Application\Application')->run();
-		} catch (\Exception $e) {
-			ob_end_clean();
-			Debugger::log($e);
-			throw $e;
-		}
+		$this->container->getByType('Nette\Application\Application')->run();
 		$content = ob_get_clean();
 
 		$code = $httpResponse->getCode();
