@@ -82,7 +82,7 @@ class Nette extends Framework
 	public function _before(TestCase $test)
 	{
 		$class = $this->getContainerClass();
-        // Cannot use $this->configurator->createContainer() directly beacuse it would call $container->initialize().
+		// Cannot use $this->configurator->createContainer() directly beacuse it would call $container->initialize().
 		// Container initialization is called laiter by NetteConnector.
 		$this->container = new $class;
 		$this->client = new NetteConnector();
