@@ -10,7 +10,7 @@ use Tracy\Debugger;
 class Logger extends Extension
 {
 
-	static $events = [
+	public static $events = [
 		Events::TEST_FAIL => 'testFail',
 		Events::TEST_ERROR => 'testError',
 	];
