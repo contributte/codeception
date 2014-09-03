@@ -44,9 +44,15 @@ class Nette extends Client
 		$httpResponse = $this->container->getByType('Nette\Http\IResponse');
 		$httpResponse->setCode(IResponse::S200_OK);
 
-		ob_start();
-		$this->container->getByType('Nette\Application\Application')->run();
-		$content = ob_get_clean();
+		try {
+			ob_start();
+			$this->container->getByType('Nette\Application\Application')->run();
+			$content = ob_get_clean();
+
+		} catch (\Exception $e) {
+			ob_end_clean();
+			throw $e;
+		}
 
 		$code = $httpResponse->getCode();
 		$headers = $httpResponse->getHeaders();
