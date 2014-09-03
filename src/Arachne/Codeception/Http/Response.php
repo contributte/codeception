@@ -149,7 +149,10 @@ class Response extends Object implements IResponse
 	 */
 	public function deleteCookie($name, $path = NULL, $domain = NULL, $secure = NULL)
 	{
-		return $this;
+	}
+
+	public function removeDuplicateCookies()
+	{
 	}
 
 }
