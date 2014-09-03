@@ -83,6 +83,8 @@ class Nette extends Framework
 		$this->container = new $class;
 		$this->client = new NetteConnector();
 		$this->client->setContainer($this->container);
+		// TODO: make this configurable
+		$this->client->followRedirects(FALSE);
 		parent::_before($test);
 	}
 
