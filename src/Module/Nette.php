@@ -109,7 +109,7 @@ class Nette extends Framework
 			$this->fail($e->getMessage());
 		}
 	}
-	
+
 	public function seeRedirectTo($url)
 	{
 		$response = $this->container->getByType('Nette\Http\IResponse');
