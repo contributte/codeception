@@ -20,7 +20,7 @@
 	},
 	"require-dev": {
 		"arachne/coding-style": "~0.2",
-		"squizlabs/php_codesniffer": "~1.4"
+		"squizlabs/php_codesniffer": "~2.0"
 	},
 	"autoload": {
 		"psr-4": {
