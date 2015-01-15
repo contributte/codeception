@@ -1,13 +1,13 @@
 <?php
 
-namespace Arachne\Codeception\Http\DI;
+namespace Arachne\Codeception\DI;
 
 use Nette\DI\CompilerExtension;
 
 /**
  * @author Jáchym Toušek
  */
-class HttpExtension extends CompilerExtension
+class CodeceptionExtension extends CompilerExtension
 {
 
 	public function loadConfiguration()

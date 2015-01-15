@@ -1,6 +1,6 @@
 <?php
 
-namespace Arachne\Codeception\Util\Connector;
+namespace Arachne\Codeception\Connector;
 
 use Nette\DI\Container;
 use Nette\Http\IResponse;

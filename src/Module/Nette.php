@@ -2,7 +2,7 @@
 
 namespace Codeception\Module;
 
-use Arachne\Codeception\Util\Connector\Nette as NetteConnector;
+use Arachne\Codeception\Connector\Nette as NetteConnector;
 use Codeception\TestCase;
 use Codeception\Lib\Framework;
 use Nette\Configurator;

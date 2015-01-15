@@ -1,6 +1,6 @@
 <?php
 
-namespace Arachne\Codeception\Console\Input;
+namespace Arachne\Codeception\Console;
 
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\ArgvInput;

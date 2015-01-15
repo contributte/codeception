@@ -21,9 +21,9 @@
 		"arachne/coding-style": "~0.2"
 	},
 	"autoload": {
-		"psr-0": {
-			"Arachne\\Codeception": "src/",
-			"Codeception\\Module": "src/"
+		"psr-4": {
+			"Arachne\\Codeception\\": "src/",
+			"Codeception\\Module\\": "src/Module/"
 		}
 	}
 }
