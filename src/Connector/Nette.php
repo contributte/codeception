@@ -40,16 +40,6 @@ class Nette extends Client
 		// Container initialization can't be called earlier because Nette\Http\IRequest service might be initialized too soon and amOnPage method would not work anymore.
 		$this->container->initialize();
 
-		// RequestFactory leaves port NULL in CLI mode but the urls created by amOnPage have port 80 which breaks canonicalization.
-		$url = $this->container->getByType('Nette\Http\IRequest')->getUrl();
-		if (!$url->getPort()) {
-			$url->setPort(80);
-		}
-
-		// The HTTP code from previous test sometimes survives in http_response_code() so it's necessary to reset it manually.
-		$httpResponse = $this->container->getByType('Nette\Http\IResponse');
-		$httpResponse->setCode(IResponse::S200_OK);
-
 		try {
 			ob_start();
 			$this->container->getByType('Nette\Application\Application')->run();
@@ -60,6 +50,7 @@ class Nette extends Client
 			throw $e;
 		}
 
+		$httpResponse = $this->container->getByType('Nette\Http\IResponse');
 		$code = $httpResponse->getCode();
 		$headers = $httpResponse->getHeaders();
 

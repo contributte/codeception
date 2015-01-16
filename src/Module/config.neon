@@ -1,6 +1,0 @@
-nette:
-	security:
-		frames: true
-
-extensions:
-	Arachne.Codeception.Http: Arachne\Codeception\Http\DI\HttpExtension

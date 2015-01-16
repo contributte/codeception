@@ -1,0 +1,13 @@
+extensions:
+	nette: Nette\Bridges\Framework\NetteExtension
+	enumag.application: Enumag\Application\DI\ApplicationExtension
+
+nette:
+	application:
+		catchExceptions: null
+		mapping:
+			*: Tests\Integration\Classes\*Presenter
+
+services:
+	routerFactory: Tests\Integration\Classes\RouterFactory
+	router: @routerFactory::create()

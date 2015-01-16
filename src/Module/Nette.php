@@ -2,10 +2,13 @@
 
 namespace Codeception\Module;
 
+use Arachne\Codeception\ConfigFilesInterface;
 use Arachne\Codeception\Connector\Nette as NetteConnector;
+use Arachne\Codeception\DI\CodeceptionExtension;
 use Codeception\TestCase;
 use Codeception\Lib\Framework;
-use Nette\Configurator;
+use Arachne\Bootstrap\Configurator;
+use Nette\DI\Compiler;
 use Nette\DI\Container;
 use Nette\DI\MissingServiceException;
 use Nette\InvalidStateException;
@@ -28,22 +31,8 @@ class Nette extends Framework
 	/** @var string */
 	private $suite;
 
-	/**
-	 * @var array $config
-	 */
-	public function __construct($config = array())
-	{
-		$this->config = array(
-			'configFiles' => array(),
-		);
-		parent::__construct($config);
-	}
-
-	protected function validateConfig()
-	{
-		parent::validateConfig();
-		Validators::assertField($this->config, 'configFiles', 'array');
-	}
+	/** @var string */
+	private $path;
 
 	// TODO: separate ArachneTools module (debugContent method)
 	public function _beforeSuite($settings = array())
@@ -51,10 +40,16 @@ class Nette extends Framework
 		parent::_beforeSuite($settings);
 
 		$this->detectSuiteName($settings);
-		$path = pathinfo($settings['path'], PATHINFO_DIRNAME);
-		$tempDir = $path . DIRECTORY_SEPARATOR . '_temp' . DIRECTORY_SEPARATOR . $this->suite;
+		$this->path = pathinfo($settings['path'], PATHINFO_DIRNAME);
 
-		self::purge($tempDir);
+		self::purge($this->path . DIRECTORY_SEPARATOR . '_temp' . DIRECTORY_SEPARATOR . $this->suite);
+	}
+
+	public function _before(TestCase $test)
+	{
+		$tempDir = $this->path . DIRECTORY_SEPARATOR . '_temp' . DIRECTORY_SEPARATOR . $this->suite . DIRECTORY_SEPARATOR . (new \ReflectionClass($test))->getShortName() . '_' . $test->getName();
+		@mkdir($tempDir, 0777, TRUE);
+
 		$this->configurator = new Configurator();
 		$this->configurator->setDebugMode(FALSE);
 		$this->configurator->setTempDirectory($tempDir);
@@ -63,20 +58,20 @@ class Nette extends Framework
 				'class' => $this->getContainerClass(),
 			),
 		));
+		$this->configurator->onCompile[] = function ($config, Compiler $compiler) {
+			$compiler->addExtension('arachne.codeception', new CodeceptionExtension());
+		};
 
-		$files = $this->config['configFiles'];
-		$files[] = __DIR__ . '/config.neon';
-		foreach ($files as $file) {
-			$this->configurator->addConfig($file);
+		if ($test instanceof ConfigFilesInterface) {
+			foreach ($test->getConfigFiles() as $file) {
+				$this->configurator->addConfig($this->path . DIRECTORY_SEPARATOR . $this->suite . DIRECTORY_SEPARATOR . $file);
+			}
 		}
 
 		// Generates and loads the container class.
 		// The actual container is created later.
 		$this->configurator->createContainer();
-	}
 
-	public function _before(TestCase $test)
-	{
 		$class = $this->getContainerClass();
 		// Cannot use $this->configurator->createContainer() directly beacuse it would call $container->initialize().
 		// Container initialization is called laiter by NetteConnector.
@@ -112,8 +107,9 @@ class Nette extends Framework
 
 	public function seeRedirectTo($url)
 	{
+		$request = $this->container->getByType('Nette\Http\IRequest');
 		$response = $this->container->getByType('Nette\Http\IResponse');
-		if ($response->getHeader('Location') !== $url) {
+		if ($response->getHeader('Location') !== $request->getUrl()->getHostUrl() . $url) {
 			$this->fail('Couldn\'t confirm redirect target to be "' . $url . '", Location header contains "' . $response->getHeader('Location') . '".');
 		}
 	}
@@ -148,7 +144,7 @@ class Nette extends Framework
 	protected static function purge($dir)
 	{
 		if (!is_dir($dir)) {
-			mkdir($dir);
+			return;
 		}
 		foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir), RecursiveIteratorIterator::CHILD_FIRST) as $entry) {
 			if (substr($entry->getBasename(), 0, 1) === '.') {

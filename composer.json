@@ -20,12 +20,20 @@
 	},
 	"require-dev": {
 		"arachne/coding-style": "~0.2",
+		"enumag/application": "~0.2",
+		"nette/nette": "~2.2",
 		"squizlabs/php_codesniffer": "~2.0"
 	},
 	"autoload": {
 		"psr-4": {
-			"Arachne\\Codeception\\": "src/",
-			"Codeception\\Module\\": "src/Module/"
+			"Arachne\\Codeception\\": "src",
+			"Codeception\\Module\\": "src/Module"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\Unit\\": "tests/unit/src",
+			"Tests\\Integration\\": "tests/integration/src"
 		}
 	}
 }
