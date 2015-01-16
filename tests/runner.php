@@ -1,6 +1,6 @@
 <?php
 
-use Arachne\Codeception\Console\Input\RunTestInput;
+use Arachne\Codeception\Console\RunTestInput;
 use Codeception\Codecept;
 use Codeception\Command\Run;
 use Symfony\Component\Console\Application;
