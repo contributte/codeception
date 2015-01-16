@@ -109,7 +109,7 @@ class Nette extends Framework
 	{
 		$request = $this->container->getByType('Nette\Http\IRequest');
 		$response = $this->container->getByType('Nette\Http\IResponse');
-		if ($response->getHeader('Location') !== $request->getUrl()->getHostUrl() . $url) {
+		if ($response->getHeader('Location') !== $request->getUrl()->getHostUrl() . $url && $response->getHeader('Location') !== $url) {
 			$this->fail('Couldn\'t confirm redirect target to be "' . $url . '", Location header contains "' . $response->getHeader('Location') . '".');
 		}
 	}
