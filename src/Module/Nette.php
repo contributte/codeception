@@ -35,7 +35,7 @@ class Nette extends Framework
 	private $path;
 
 	// TODO: separate ArachneTools module (debugContent method)
-	public function _beforeSuite($settings = array())
+	public function _beforeSuite($settings = [])
 	{
 		parent::_beforeSuite($settings);
 
@@ -53,11 +53,11 @@ class Nette extends Framework
 		$this->configurator = new Configurator();
 		$this->configurator->setDebugMode(FALSE);
 		$this->configurator->setTempDirectory($tempDir);
-		$this->configurator->addParameters(array(
-			'container' => array(
+		$this->configurator->addParameters([
+			'container' => [
 				'class' => $this->getContainerClass(),
-			),
-		));
+			],
+		]);
 		$this->configurator->onCompile[] = function ($config, Compiler $compiler) {
 			$compiler->addExtension('arachne.codeception', new CodeceptionExtension());
 		};
@@ -86,10 +86,10 @@ class Nette extends Framework
 	public function _after(TestCase $test)
 	{
 		parent::_after($test);
-		$_SESSION = array();
-		$_GET = array();
-		$_POST = array();
-		$_COOKIE = array();
+		$_SESSION = [];
+		$_GET = [];
+		$_POST = [];
+		$_COOKIE = [];
 	}
 
 	/**

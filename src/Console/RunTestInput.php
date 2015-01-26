@@ -17,7 +17,7 @@ class RunTestInput extends ArgvInput
 
 	public function __construct(InputDefinition $definition = NULL)
 	{
-		$parameters = array($_SERVER['argv'][0], 'run');
+		$parameters = [ $_SERVER['argv'][0], 'run' ];
 
 		if (isset($_SERVER['argv'][1])) {
 			$filename = $this->normalizePath($_SERVER['argv'][1]);
