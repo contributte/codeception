@@ -9,7 +9,7 @@ use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\BrowserKit\Response;
 
 /**
- * @author Jáchym Toušek
+ * @author Jáchym Toušek <enumag@gmail.com>
  */
 class Nette extends Client
 {

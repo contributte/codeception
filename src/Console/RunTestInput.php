@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\ArgvInput;
  *
  * This should only be used when debugging using xDebug and NetBeans (or different IDE).
  *
- * @author Jáchym Toušek
+ * @author Jáchym Toušek <enumag@gmail.com>
  */
 class RunTestInput extends ArgvInput
 {

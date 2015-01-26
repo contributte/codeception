@@ -17,7 +17,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 /**
- * @author Jáchym Toušek
+ * @author Jáchym Toušek <enumag@gmail.com>
  */
 class Nette extends Framework
 {

@@ -8,7 +8,7 @@ use Nette\Application\Routers\RouteList;
 use Nette\Object;
 
 /**
- * @author Jáchym Toušek
+ * @author Jáchym Toušek <enumag@gmail.com>
  */
 class RouterFactory extends Object
 {

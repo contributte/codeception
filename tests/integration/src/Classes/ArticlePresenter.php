@@ -5,7 +5,7 @@ namespace Tests\Integration\Classes;
 use Nette\Application\UI\Presenter;
 
 /**
- * @author Jáchym Toušek
+ * @author Jáchym Toušek <enumag@gmail.com>
  */
 class ArticlePresenter extends Presenter
 {

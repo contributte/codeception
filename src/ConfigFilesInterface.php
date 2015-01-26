@@ -3,7 +3,7 @@
 namespace Arachne\Codeception;
 
 /**
- * @author Jáchym Toušek
+ * @author Jáchym Toušek <enumag@gmail.com>
  */
 interface ConfigFilesInterface
 {

@@ -7,7 +7,7 @@ use Nette\DI\CompilerExtension;
 use Nette\Http\IResponse;
 
 /**
- * @author Jáchym Toušek
+ * @author Jáchym Toušek <enumag@gmail.com>
  */
 class CodeceptionExtension extends CompilerExtension
 {

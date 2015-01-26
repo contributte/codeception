@@ -7,7 +7,7 @@ use Codeception\TestCase\Test;
 use Nette\Application\Application;
 
 /**
- * @author Jáchym Toušek
+ * @author Jáchym Toušek <enumag@gmail.com>
  */
 class ApplicationTest extends Test implements ConfigFilesInterface
 {

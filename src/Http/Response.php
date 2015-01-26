@@ -10,7 +10,7 @@ use Nette\Utils\DateTime;
 /**
  * HttpResponse class for tests.
  *
- * @author Jáchym Toušek
+ * @author Jáchym Toušek <enumag@gmail.com>
  */
 class Response extends Object implements IResponse
 {
