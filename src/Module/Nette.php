@@ -12,7 +12,6 @@ use Nette\DI\Compiler;
 use Nette\DI\Container;
 use Nette\DI\MissingServiceException;
 use Nette\InvalidStateException;
-use Nette\Utils\Validators;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
