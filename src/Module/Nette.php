@@ -52,11 +52,13 @@ class Nette extends Framework
 		$this->configurator = new Configurator();
 		$this->configurator->setDebugMode(FALSE);
 		$this->configurator->setTempDirectory($tempDir);
-		$this->configurator->addParameters([
-			'container' => [
-				'class' => $this->getContainerClass(),
-			],
-		]);
+		if (!class_exists('Nette\DI\ContainerLoader')) { // Nette 2.2 compatibility
+			$this->configurator->addParameters([
+				'container' => [
+					'class' => $this->getContainerClass(),
+				],
+			]);
+		}
 		$this->configurator->onCompile[] = function ($config, Compiler $compiler) {
 			$compiler->addExtension('arachne.codeception', new CodeceptionExtension());
 		};
@@ -69,9 +71,8 @@ class Nette extends Framework
 
 		// Generates and loads the container class.
 		// The actual container is created later.
-		$this->configurator->createContainer();
+		$class = get_class($this->configurator->createContainer());
 
-		$class = $this->getContainerClass();
 		// Cannot use $this->configurator->createContainer() directly beacuse it would call $container->initialize().
 		// Container initialization is called laiter by NetteConnector.
 		$this->container = new $class;
