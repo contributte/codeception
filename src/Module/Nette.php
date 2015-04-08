@@ -64,8 +64,12 @@ class Nette extends Framework
 		};
 
 		if ($test instanceof ConfigFilesInterface) {
-			foreach ($test->getConfigFiles() as $file) {
-				$this->configurator->addConfig($this->path . DIRECTORY_SEPARATOR . $this->suite . DIRECTORY_SEPARATOR . $file);
+			foreach ($test->getConfigFiles() as $file => $section) {
+				if (!is_string($file)) {
+					$file = $section;
+					$section = NULL;
+				}
+				$this->configurator->addConfig($this->path . DIRECTORY_SEPARATOR . $this->suite . DIRECTORY_SEPARATOR . $file, $section);
 			}
 		}
 
