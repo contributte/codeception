@@ -27,7 +27,7 @@
 	"autoload": {
 		"psr-4": {
 			"Arachne\\Codeception\\": "src",
-			"Codeception\\Module\\": "src/Module"
+			"Codeception\\Module\\": "src/CodeceptionModule"
 		}
 	},
 	"autoload-dev": {
