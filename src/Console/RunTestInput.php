@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\ArgvInput;
 class RunTestInput extends ArgvInput
 {
 
-	public function __construct(InputDefinition $definition = NULL)
+	public function __construct(InputDefinition $definition = null)
 	{
 		$parameters = [ $_SERVER['argv'][0], 'run' ];
 

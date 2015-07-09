@@ -1,0 +1,30 @@
+common:
+	extensions:
+		codeception: Arachne\Codeception\DI\CodeceptionExtension
+
+	services:
+		routerFactory: Tests\Integration\Classes\RouterFactory
+		router: @routerFactory::create()
+
+nette_2.2 < common:
+	extensions:
+		nette: Nette\Bridges\Framework\NetteExtension
+		enumag.application: Enumag\Application\DI\ApplicationExtension
+
+	nette:
+		application:
+			catchExceptions: null
+			mapping:
+				*: Tests\Integration\Classes\*Presenter
+
+nette_2.3 < common:
+	extensions:
+		nette.application: Nette\Bridges\ApplicationDI\ApplicationExtension
+		nette.http: Nette\Bridges\HttpDI\HttpExtension
+		nette.latte: Nette\Bridges\ApplicationDI\LatteExtension
+		enumag.application: Enumag\Application\DI\ApplicationExtension
+
+	nette.application:
+		catchExceptions: null
+		mapping:
+			*: Tests\Integration\Classes\*Presenter

@@ -13,21 +13,21 @@
 	"require": {
 		"php": ">=5.5.0",
 		"arachne/bootstrap": "~0.1",
-		"codeception/codeception": "~2.0",
+		"codeception/codeception": "~2.1",
 		"nette/bootstrap": "~2.2",
 		"nette/di": "~2.2",
 		"nette/http": "~2.2"
 	},
 	"require-dev": {
-		"arachne/coding-style": "~0.2",
+		"arachne/coding-style": "~0.3",
 		"enumag/application": "~0.2",
-		"nette/nette": "~2.2",
-		"squizlabs/php_codesniffer": "~2.0"
+		"latte/latte": "~2.2",
+		"squizlabs/php_codesniffer": "~2.0",
+		"tracy/tracy": "~2.2"
 	},
 	"autoload": {
 		"psr-4": {
-			"Arachne\\Codeception\\": "src",
-			"Codeception\\Module\\": "src/CodeceptionModule"
+			"Arachne\\Codeception\\": "src"
 		}
 	},
 	"autoload-dev": {
@@ -35,5 +35,11 @@
 			"Tests\\Unit\\": "tests/unit/src",
 			"Tests\\Integration\\": "tests/integration/src"
 		}
-	}
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "http://packages.m33.cz"
+		}
+	]
 }

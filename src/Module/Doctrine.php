@@ -3,7 +3,7 @@
 namespace Arachne\Codeception\Module;
 
 use Arachne\Codeception\Module\Nette;
-use Codeception\Exception\ModuleConfig;
+use Codeception\Exception\ModuleConfigException;
 use Codeception\Module;
 use Codeception\TestCase;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,13 +23,13 @@ class Doctrine extends Module
 					$stmt = $connection->prepare($command);
 					if (!$stmt->execute()) {
 						$error = $stmt->errorInfo();
-						throw new ModuleConfig(__CLASS__, $error[2]);
+						throw new ModuleConfigException(__CLASS__, $error[2]);
 					}
 					$stmt->closeCursor();
 				}
 
 			} catch (\PDOException $e) {
-				throw new ModuleConfig(__CLASS__, $e->getMessage(), $e);
+				throw new ModuleConfigException(__CLASS__, $e->getMessage(), $e);
 			}
 		}
 	}

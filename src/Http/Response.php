@@ -21,6 +21,12 @@ class Response extends Object implements IResponse
 	/** @var array */
 	private $headers = [];
 
+	public function reset()
+	{
+		$this->code = self::S200_OK;
+		$this->headers = [];
+	}
+
 	/**
 	 * @param int
 	 * @return self
@@ -66,7 +72,7 @@ class Response extends Object implements IResponse
 	 * @param string $charset
 	 * @return self
 	 */
-	public function setContentType($type, $charset = NULL)
+	public function setContentType($type, $charset = null)
 	{
 		$this->setHeader('Content-Type', $type . ($charset ? '; charset=' . $charset : ''));
 		return $this;
@@ -105,7 +111,7 @@ class Response extends Object implements IResponse
 	 */
 	public function isSent()
 	{
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -113,7 +119,7 @@ class Response extends Object implements IResponse
 	 * @param mixed $default
 	 * @return mixed
 	 */
-	public function getHeader($name, $default = NULL)
+	public function getHeader($name, $default = null)
 	{
 		return isset($this->headers[$name]) ? $this->headers[$name] : $default;
 	}
@@ -136,8 +142,15 @@ class Response extends Object implements IResponse
 	 * @param bool $httpOnly
 	 * @return self
 	 */
-	public function setCookie($name, $value, $time, $path = NULL, $domain = NULL, $secure = NULL, $httpOnly = NULL)
+	public function setCookie($name, $value, $time, $path = null, $domain = null, $secure = null, $httpOnly = null)
 	{
+		/*$maxAge = $time ? \Nette\Utils\DateTime::from($time)->format('U') : 0;
+		$this->addHeader('Set-Cookie', rawurlencode($name) . '=' . rawurlencode($value)
+			. (empty($maxAge) ? '' : '; Expires=' . gmdate('D, d-M-Y H:i:s', $maxAge) . ' GMT; Max-Age=' . $maxAge)
+			. (empty($path) ? '' : '; Path=' . $path)
+			. (empty($domain) ? '' : '; Domain=' . $domain)
+			. (!$secure ? '' : '; Secure')
+			. (!$httpOnly ? '' : '; HttpOnly'));*/
 		return $this;
 	}
 
@@ -147,7 +160,7 @@ class Response extends Object implements IResponse
 	 * @param string $domain
 	 * @param bool $secure
 	 */
-	public function deleteCookie($name, $path = NULL, $domain = NULL, $secure = NULL)
+	public function deleteCookie($name, $path = null, $domain = null, $secure = null)
 	{
 	}
 

@@ -2,7 +2,11 @@
 
 namespace Arachne\Codeception\Connector;
 
+use Arachne\Codeception\Http\Request as HttpRequest;
+use Arachne\Codeception\Http\Response as HttpResponse;
+use Nette\Application\Application;
 use Nette\DI\Container;
+use Nette\Http\IRequest;
 use Nette\Http\IResponse;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\BrowserKit\Request;
@@ -32,17 +36,26 @@ class Nette extends Client
 		$_SERVER = $request->getServer();
 		$_FILES = $request->getFiles();
 
-		$uri = str_replace('http://localhost', '', $request->getUri());
+		$_SERVER['REQUEST_METHOD'] = $method = strtoupper($request->getMethod());
+		$_SERVER['REQUEST_URI'] = $uri = str_replace('http://localhost', '', $request->getUri());
 
-		$_SERVER['REQUEST_METHOD'] = strtoupper($request->getMethod());
-		$_SERVER['REQUEST_URI'] = $uri;
+		if ($method === 'HEAD' || $method === 'GET') {
+			$_GET = $request->getParameters();
+		} else {
+			$_POST = $request->getParameters();
+		}
 
-		// Container initialization can't be called earlier because Nette\Http\IRequest service might be initialized too soon and amOnPage method would not work anymore.
-		$this->container->initialize();
+		$httpRequest = $this->container->getByType(IRequest::class);
+		$httpResponse = $this->container->getByType(IResponse::class);
+		if (!$httpRequest instanceof HttpRequest || !$httpResponse instanceof HttpResponse) {
+			throw new \Exception('Arachne\Codeception\DI\CodeceptionExtension is not used or conflicts with another extension.');
+		}
+		$httpRequest->reset();
+		$httpResponse->reset();
 
 		try {
 			ob_start();
-			$this->container->getByType('Nette\Application\Application')->run();
+			$this->container->getByType(Application::class)->run();
 			$content = ob_get_clean();
 
 		} catch (\Exception $e) {
@@ -50,7 +63,6 @@ class Nette extends Client
 			throw $e;
 		}
 
-		$httpResponse = $this->container->getByType('Nette\Http\IResponse');
 		$code = $httpResponse->getCode();
 		$headers = $httpResponse->getHeaders();
 

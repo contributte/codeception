@@ -4,4 +4,5 @@ class_name: IntegrationSuiteGuy
 
 modules:
     enabled:
-        - Nette
+        - Arachne\Codeception\Module\Nette:
+            followRedirects: false

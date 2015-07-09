@@ -3,6 +3,7 @@
 namespace Arachne\Codeception\Module;
 
 use Arachne\Codeception\Connector\Nette as NetteConnector;
+use Codeception\Exception\ModuleConfigException;
 use Codeception\TestCase;
 use Codeception\Lib\Framework;
 use Nette\DI\MissingServiceException;
@@ -15,16 +16,20 @@ class Nette extends Framework
 
 	public static $containerClass;
 
+	protected $config = [
+		'followRedirects' => true,
+	];
+
 	public function _before(TestCase $test)
 	{
 		if (!class_exists(self::$containerClass)) {
-			throw new \Codeception\Exception\ModuleConfig(__CLASS__, 'Specify container class in bootstrap.');
+			throw new ModuleConfigException(__CLASS__, 'Specify container class in bootstrap.');
 		}
 		$this->container = new self::$containerClass();
+		$this->container->initialize();
 		$this->client = new NetteConnector();
 		$this->client->setContainer($this->container);
-		// TODO: make this configurable
-		$this->client->followRedirects(false);
+		$this->client->followRedirects($this->config['followRedirects']);
 		parent::_before($test);
 	}
 
@@ -34,6 +39,7 @@ class Nette extends Framework
 		$_SESSION = [];
 		$_GET = [];
 		$_POST = [];
+		$_FILES = [];
 		$_COOKIE = [];
 	}
 

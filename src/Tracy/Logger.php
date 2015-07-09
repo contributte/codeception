@@ -4,7 +4,7 @@ namespace Arachne\Codeception\Tracy;
 
 use Codeception\Events;
 use Codeception\Event\FailEvent;
-use Codeception\Platform\Extension;
+use Codeception\Extension;
 use Tracy\Debugger;
 
 class Logger extends Extension

@@ -2,22 +2,14 @@
 
 namespace Tests\Integration;
 
-use Arachne\Codeception\ConfigFilesInterface;
 use Codeception\TestCase\Test;
 use Nette\Application\Application;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class ApplicationTest extends Test implements ConfigFilesInterface
+class ApplicationTest extends Test
 {
-
-	public function getConfigFiles()
-	{
-		return [
-			'config/application.neon',
-		];
-	}
 
 	public function testApplication()
 	{
@@ -42,8 +34,8 @@ class ApplicationTest extends Test implements ConfigFilesInterface
 	public function testRedirect()
 	{
 		$this->guy->amOnPage('/article/redirect');
-		$this->guy->seeRedirectTo('/article/page');
 		$this->guy->seeResponseCodeIs(301);
+		$this->guy->seeRedirectTo('/article/page');
 	}
 
 	public function testUnknown()
