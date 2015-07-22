@@ -38,11 +38,14 @@ class Nette extends Client
 
 		$_SERVER['REQUEST_METHOD'] = $method = strtoupper($request->getMethod());
 		$_SERVER['REQUEST_URI'] = $uri = str_replace('http://localhost', '', $request->getUri());
+		$_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 
 		if ($method === 'HEAD' || $method === 'GET') {
 			$_GET = $request->getParameters();
+			$_POST = [];
 		} else {
 			$_POST = $request->getParameters();
+			$_GET = [];
 		}
 
 		$httpRequest = $this->container->getByType(IRequest::class);
