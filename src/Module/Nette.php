@@ -64,6 +64,9 @@ class Nette extends Framework
 
 	public function seeRedirectTo($url)
 	{
+		if ($this->config['followRedirects']) {
+			$this->fail('Method seeRedirectTo only works when followRedirects option is disabled');
+		}
 		$request = $this->container->getByType('Nette\Http\IRequest');
 		$response = $this->container->getByType('Nette\Http\IResponse');
 		if ($response->getHeader('Location') !== $request->getUrl()->getHostUrl() . $url && $response->getHeader('Location') !== $url) {
