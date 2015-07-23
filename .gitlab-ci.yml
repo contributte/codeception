@@ -1,0 +1,10 @@
+sniffer:
+    script:
+        - composer install
+        - ./vendor/bin/phpcs -p --standard=vendor/arachne/coding-style/ruleset.xml --ignore=_* src tests
+
+latest:
+    script:
+        - composer install
+        - ./vendor/bin/codecept build
+        - ./vendor/bin/codecept run
