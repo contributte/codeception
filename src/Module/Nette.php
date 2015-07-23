@@ -36,6 +36,12 @@ class Nette extends Framework
 	public function _after(TestCase $test)
 	{
 		parent::_after($test);
+
+		try {
+			$this->container->getByType('Nette\Http\Session')->close();
+		} catch (MissingServiceException $e) {
+		}
+
 		$_SESSION = [];
 		$_GET = [];
 		$_POST = [];
