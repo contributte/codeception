@@ -1,10 +1,10 @@
 sniffer:
     script:
-        - composer install
+        - composer update --no-interaction --prefer-source
         - ./vendor/bin/phpcs -p --standard=vendor/arachne/coding-style/ruleset.xml --ignore=_* src tests
 
 latest:
     script:
-        - composer install
+        - composer update --no-interaction --prefer-source
         - ./vendor/bin/codecept build
         - ./vendor/bin/codecept run

@@ -1,0 +1,28 @@
+{
+	"require": {
+		"php": ">=5.4.0",
+		"arachne/bootstrap": "~0.1",
+		"codeception/codeception": "~2.1",
+		"nette/bootstrap": "~2.2.0",
+		"nette/di": "~2.2.0",
+		"nette/http": "~2.2.0"
+	},
+	"require-dev": {
+		"php": ">=5.5.0",
+		"arachne/coding-style": "~0.3",
+		"enumag/application": "~0.2",
+		"nette/nette": "~2.2",
+		"squizlabs/php_codesniffer": "~2.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Arachne\\Codeception\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\Unit\\": "tests/unit/src",
+			"Tests\\Integration\\": "tests/integration/src"
+		}
+	}
+}

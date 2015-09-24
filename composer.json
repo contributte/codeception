@@ -35,11 +35,5 @@
 			"Tests\\Unit\\": "tests/unit/src",
 			"Tests\\Integration\\": "tests/integration/src"
 		}
-	},
-	"repositories": [
-		{
-			"type": "composer",
-			"url": "http://packages.m33.cz"
-		}
-	]
+	}
 }

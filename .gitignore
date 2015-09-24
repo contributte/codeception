@@ -1,6 +1,6 @@
 /vendor
 /tests/_log/*
 /tests/_temp/*
-/composer.lock
+/composer*.lock
 
 !.gitkeep

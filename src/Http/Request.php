@@ -30,6 +30,10 @@ class Request extends HttpRequest implements IRequest
 	public function reset()
 	{
 		$this->request = $this->factory->createHttpRequest();
+		$url = $this->request->getUrl();
+		if (!$url->getPort()) {
+			$url->setPort(80); // Fix canonicalization in Nette 2.2.
+		}
 	}
 
 	public function getCookie($key, $default = null)
