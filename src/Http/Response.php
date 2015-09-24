@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * This file is part of the Arachne
+ *
+ * Copyright (c) Jáchym Toušek (enumag@gmail.com)
+ *
+ * For the full copyright and license information, please view the file license.md that was distributed with this source code.
+ */
+
 namespace Arachne\Codeception\Http;
 
 use Nette\Http\IResponse;
@@ -144,13 +152,6 @@ class Response extends Object implements IResponse
 	 */
 	public function setCookie($name, $value, $time, $path = null, $domain = null, $secure = null, $httpOnly = null)
 	{
-		/*$maxAge = $time ? \Nette\Utils\DateTime::from($time)->format('U') : 0;
-		$this->addHeader('Set-Cookie', rawurlencode($name) . '=' . rawurlencode($value)
-			. (empty($maxAge) ? '' : '; Expires=' . gmdate('D, d-M-Y H:i:s', $maxAge) . ' GMT; Max-Age=' . $maxAge)
-			. (empty($path) ? '' : '; Path=' . $path)
-			. (empty($domain) ? '' : '; Domain=' . $domain)
-			. (!$secure ? '' : '; Secure')
-			. (!$httpOnly ? '' : '; HttpOnly'));*/
 		return $this;
 	}
 

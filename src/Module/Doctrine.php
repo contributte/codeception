@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * This file is part of the Arachne
+ *
+ * Copyright (c) Jáchym Toušek (enumag@gmail.com)
+ *
+ * For the full copyright and license information, please view the file license.md that was distributed with this source code.
+ */
+
 namespace Arachne\Codeception\Module;
 
 use Arachne\Codeception\Module\Nette;
@@ -7,6 +15,7 @@ use Codeception\Exception\ModuleConfigException;
 use Codeception\Module;
 use Codeception\TestCase;
 use Doctrine\ORM\EntityManagerInterface;
+use PDOException;
 
 class Doctrine extends Module
 {
@@ -28,7 +37,7 @@ class Doctrine extends Module
 					$stmt->closeCursor();
 				}
 
-			} catch (\PDOException $e) {
+			} catch (PDOException $e) {
 				throw new ModuleConfigException(__CLASS__, $e->getMessage(), $e);
 			}
 		}

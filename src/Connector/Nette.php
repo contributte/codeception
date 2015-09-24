@@ -1,9 +1,18 @@
 <?php
 
+/**
+ * This file is part of the Arachne
+ *
+ * Copyright (c) Jáchym Toušek (enumag@gmail.com)
+ *
+ * For the full copyright and license information, please view the file license.md that was distributed with this source code.
+ */
+
 namespace Arachne\Codeception\Connector;
 
 use Arachne\Codeception\Http\Request as HttpRequest;
 use Arachne\Codeception\Http\Response as HttpResponse;
+use Exception;
 use Nette\Application\Application;
 use Nette\DI\Container;
 use Nette\Http\IRequest;
@@ -51,7 +60,7 @@ class Nette extends Client
 		$httpRequest = $this->container->getByType(IRequest::class);
 		$httpResponse = $this->container->getByType(IResponse::class);
 		if (!$httpRequest instanceof HttpRequest || !$httpResponse instanceof HttpResponse) {
-			throw new \Exception('Arachne\Codeception\DI\CodeceptionExtension is not used or conflicts with another extension.');
+			throw new Exception('Arachne\Codeception\DI\CodeceptionExtension is not used or conflicts with another extension.');
 		}
 		$httpRequest->reset();
 		$httpResponse->reset();
@@ -61,7 +70,7 @@ class Nette extends Client
 			$this->container->getByType(Application::class)->run();
 			$content = ob_get_clean();
 
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			ob_end_clean();
 			throw $e;
 		}
