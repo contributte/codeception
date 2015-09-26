@@ -31,7 +31,7 @@ You can use these commands to do more specific tasks.
 ./vendor/bin/codecept run integration
 
 # run specific test
-./vendor/bin/codecept tests/unit/src/FooTest.php
+./vendor/bin/codecept run tests/unit/src/FooTest.php
 ```
 
 Testing with Nette 2.2
