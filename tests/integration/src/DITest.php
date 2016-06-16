@@ -10,10 +10,8 @@ use Nette\DI\Container;
  */
 class DITest extends Test
 {
-
-	public function testContainer()
-	{
-		$this->assertInstanceOf(Container::class, $this->guy->grabService(Container::class));
-	}
-
+    public function testContainer()
+    {
+        $this->assertInstanceOf(Container::class, $this->guy->grabService(Container::class));
+    }
 }
