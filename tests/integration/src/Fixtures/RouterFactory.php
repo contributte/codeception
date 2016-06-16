@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\Classes;
+namespace Tests\Integration\Fixtures;
 
 use Nette\Application\IRouter;
 use Nette\Application\Routers\Route;
