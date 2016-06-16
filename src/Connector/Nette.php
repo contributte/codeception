@@ -26,7 +26,9 @@ use Symfony\Component\BrowserKit\Response;
  */
 class Nette extends Client
 {
-    /** @var Container */
+    /**
+     * @var Container
+     */
     protected $container;
 
     public function setContainer(Container $container)

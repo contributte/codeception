@@ -13,10 +13,14 @@ use Nette\Http\RequestFactory;
  */
 class Request extends HttpRequest implements IRequest
 {
-    /** @var RequestFactory */
+    /**
+     * @var RequestFactory
+     */
     private $factory;
 
-    /** @var HttpRequest */
+    /**
+     * @var HttpRequest
+     */
     private $request;
 
     public function __construct(RequestFactory $factory)

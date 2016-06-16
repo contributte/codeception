@@ -22,10 +22,14 @@ use Nette\Utils\DateTime;
  */
 class Response extends Object implements IResponse
 {
-    /** @var int */
+    /**
+     * @var int
+     */
     private $code = self::S200_OK;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     private $headers = [];
 
     public function reset()
