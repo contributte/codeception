@@ -15,6 +15,7 @@ use Codeception\TestInterface;
 use Nette\Caching\Storages\IJournal;
 use Nette\Caching\Storages\SQLiteJournal;
 use Nette\Configurator;
+use Nette\DI\Container as DIContainer;
 use Nette\DI\MissingServiceException;
 use Nette\Http\Session;
 use Nette\Utils\FileSystem;
@@ -37,6 +38,11 @@ class Container extends Module
      * @var string
      */
     private $path;
+
+    /**
+     * @var array
+     */
+    private $configFiles;
 
     /**
      * @var Container
@@ -78,12 +84,42 @@ class Container extends Module
         }
     }
 
-    public function createContainer(array $configFiles = null)
+    public function useConfigFiles(array $configFiles)
     {
         if ($this->container) {
-            $this->fail('Can\'t create more than one container.');
+            $this->fail('Can\'t set configFiles after the container is created.');
+        }
+        $this->configFiles = $configFiles;
+    }
+
+    /**
+     * @return DIContainer
+     */
+    public function getContainer()
+    {
+        if (!$this->container) {
+            $this->createContainer();
         }
 
+        return $this->container;
+    }
+
+    /**
+     * @param string $service
+     *
+     * @return object
+     */
+    public function grabService($service)
+    {
+        try {
+            return $this->getContainer()->getByType($service);
+        } catch (MissingServiceException $e) {
+            $this->fail($e->getMessage());
+        }
+    }
+
+    private function createContainer()
+    {
         $configurator = new $this->config['configurator']();
 
         if ($this->config['logDir']) {
@@ -99,28 +135,11 @@ class Container extends Module
             $configurator->setDebugMode($this->config['debugMode']);
         }
 
-        $configFiles = is_array($configFiles) ? $configFiles : $this->config['configFiles'];
+        $configFiles = is_array($this->configFiles) ? $this->configFiles : $this->config['configFiles'];
         foreach ($configFiles as $file) {
             $configurator->addConfig($this->path.'/'.$file, false);
         }
 
         $this->container = $configurator->createContainer();
-
-        return $this->container;
     }
-
-    /**
-     * @param string $service
-     *
-     * @return object
-     */
-    public function grabService($service)
-    {
-        try {
-            return call_user_func($this->containerAccessor)->getByType($service);
-        } catch (MissingServiceException $e) {
-            $this->fail($e->getMessage());
-        }
-    }
-
 }
