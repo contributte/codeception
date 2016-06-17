@@ -6,3 +6,7 @@ modules:
     enabled:
         - Arachne\Codeception\Module\Nette:
             followRedirects: false
+            configurator: Arachne\Bootstrap\Configurator
+            tempDir: ../_temp/integration
+            configFiles:
+                - config/config.neon

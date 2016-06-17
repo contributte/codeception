@@ -14,7 +14,6 @@ use Arachne\Codeception\Http\Request as HttpRequest;
 use Arachne\Codeception\Http\Response as HttpResponse;
 use Exception;
 use Nette\Application\Application;
-use Nette\DI\Container;
 use Nette\Http\IRequest;
 use Nette\Http\IResponse;
 use Symfony\Component\BrowserKit\Client;
@@ -27,13 +26,13 @@ use Symfony\Component\BrowserKit\Response;
 class Nette extends Client
 {
     /**
-     * @var Container
+     * @var callable
      */
-    protected $container;
+    protected $containerAccessor;
 
-    public function setContainer(Container $container)
+    public function setContainerAccessor(callable $containerAccessor)
     {
-        $this->container = $container;
+        $this->containerAccessor = $containerAccessor;
     }
 
     /**
@@ -55,12 +54,14 @@ class Nette extends Client
             $_GET = $request->getParameters();
             $_POST = [];
         } else {
-            $_POST = $request->getParameters();
             $_GET = [];
+            $_POST = $request->getParameters();
         }
 
-        $httpRequest = $this->container->getByType(IRequest::class);
-        $httpResponse = $this->container->getByType(IResponse::class);
+        $container = call_user_func($this->containerAccessor);
+
+        $httpRequest = $container->getByType(IRequest::class);
+        $httpResponse = $container->getByType(IResponse::class);
         if (!$httpRequest instanceof HttpRequest || !$httpResponse instanceof HttpResponse) {
             throw new Exception('Arachne\Codeception\DI\CodeceptionExtension is not used or conflicts with another extension.');
         }
@@ -69,7 +70,7 @@ class Nette extends Client
 
         try {
             ob_start();
-            $this->container->getByType(Application::class)->run();
+            $container->getByType(Application::class)->run();
             $content = ob_get_clean();
         } catch (Exception $e) {
             ob_end_clean();
