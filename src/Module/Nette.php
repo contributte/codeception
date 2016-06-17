@@ -13,7 +13,7 @@ namespace Arachne\Codeception\Module;
 use Arachne\Codeception\Connector\Nette as NetteConnector;
 use Arachne\Codeception\Module\Container as ContainerModule;
 use Codeception\Lib\Framework;
-use Codeception\TestCase;
+use Codeception\TestInterface;
 use Nette\DI\Container;
 use Nette\DI\MissingServiceException;
 
@@ -51,7 +51,7 @@ class Nette extends Framework
         $this->path = $settings['path'];
     }
 
-    public function _before(TestCase $test)
+    public function _before(TestInterface $test)
     {
         $this->configFiles = null;
         $this->container = null;
@@ -78,7 +78,7 @@ class Nette extends Framework
         $this->configFiles = $configFiles;
     }
 
-    public function _after(TestCase $test)
+    public function _after(TestInterface $test)
     {
         parent::_after($test);
 

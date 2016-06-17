@@ -12,13 +12,13 @@ namespace Arachne\Codeception\Module;
 
 use Codeception\Exception\ModuleConfigException;
 use Codeception\Module;
-use Codeception\TestCase;
+use Codeception\TestInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PDOException;
 
 class Doctrine extends Module
 {
-    public function _before(TestCase $test)
+    public function _before(TestInterface $test)
     {
         if ($this->config['dump']) {
             $em = $this->getModule(Nette::class)->grabService(EntityManagerInterface::class);
