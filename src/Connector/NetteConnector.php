@@ -23,7 +23,7 @@ use Symfony\Component\BrowserKit\Response;
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class Nette extends Client
+class NetteConnector extends Client
 {
     /**
      * @var callable

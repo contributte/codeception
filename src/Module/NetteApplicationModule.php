@@ -10,7 +10,7 @@
 
 namespace Arachne\Codeception\Module;
 
-use Arachne\Codeception\Connector\Nette as NetteConnector;
+use Arachne\Codeception\Connector\NetteConnector;
 use Codeception\Lib\Framework;
 use Codeception\TestInterface;
 use Nette\Http\IRequest;
@@ -19,7 +19,7 @@ use Nette\Http\IResponse;
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class Nette extends Framework
+class NetteApplicationModule extends Framework
 {
     protected $config = [
         'followRedirects' => true,
@@ -40,7 +40,7 @@ class Nette extends Framework
         $this->configFiles = null;
         $this->client = new NetteConnector();
         $this->client->setContainerAccessor(function () {
-            return $this->getModule(Container::class)->getContainer();
+            return $this->getModule(NetteDIModule::class)->getContainer();
         });
         $this->client->followRedirects($this->config['followRedirects']);
 
@@ -63,8 +63,8 @@ class Nette extends Framework
         if ($this->config['followRedirects']) {
             $this->fail('Method seeRedirectTo only works when followRedirects option is disabled');
         }
-        $request = $this->getModule(Container::class)->grabService(IRequest::class);
-        $response = $this->getModule(Container::class)->grabService(IResponse::class);
+        $request = $this->getModule(NetteDIModule::class)->grabService(IRequest::class);
+        $response = $this->getModule(NetteDIModule::class)->grabService(IResponse::class);
         if ($response->getHeader('Location') !== $request->getUrl()->getHostUrl().$url && $response->getHeader('Location') !== $url) {
             $this->fail('Couldn\'t confirm redirect target to be "'.$url.'", Location header contains "'.$response->getHeader('Location').'".');
         }

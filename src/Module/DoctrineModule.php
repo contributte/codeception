@@ -16,7 +16,7 @@ use Codeception\TestInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PDOException;
 
-class Doctrine extends Module
+class DoctrineModule extends Module
 {
     public function _before(TestInterface $test)
     {

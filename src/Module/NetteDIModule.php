@@ -15,13 +15,13 @@ use Codeception\TestInterface;
 use Nette\Caching\Storages\IJournal;
 use Nette\Caching\Storages\SQLiteJournal;
 use Nette\Configurator;
-use Nette\DI\Container as DIContainer;
+use Nette\DI\Container;
 use Nette\DI\MissingServiceException;
 use Nette\Http\Session;
 use Nette\Utils\FileSystem;
 use ReflectionProperty;
 
-class Container extends Module
+class NetteDIModule extends Module
 {
     protected $config = [
         'configFiles' => [],
