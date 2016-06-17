@@ -108,4 +108,19 @@ class Container extends Module
 
         return $this->container;
     }
+
+    /**
+     * @param string $service
+     *
+     * @return object
+     */
+    public function grabService($service)
+    {
+        try {
+            return call_user_func($this->containerAccessor)->getByType($service);
+        } catch (MissingServiceException $e) {
+            $this->fail($e->getMessage());
+        }
+    }
+
 }
