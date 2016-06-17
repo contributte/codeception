@@ -15,7 +15,7 @@ use Nette\DI\CompilerExtension;
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class CodeceptionExtension extends CompilerExtension
+class HttpExtension extends CompilerExtension
 {
     public function beforeCompile()
     {

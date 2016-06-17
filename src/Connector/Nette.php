@@ -63,7 +63,7 @@ class Nette extends Client
         $httpRequest = $container->getByType(IRequest::class);
         $httpResponse = $container->getByType(IResponse::class);
         if (!$httpRequest instanceof HttpRequest || !$httpResponse instanceof HttpResponse) {
-            throw new Exception('Arachne\Codeception\DI\CodeceptionExtension is not used or conflicts with another extension.');
+            throw new Exception('Arachne\Codeception\DI\HttpExtension is not used or conflicts with another extension.');
         }
         $httpRequest->reset();
         $httpResponse->reset();

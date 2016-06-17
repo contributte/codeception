@@ -1,5 +1,5 @@
 extensions:
-    codeception: Arachne\Codeception\DI\CodeceptionExtension
+    codeception: Arachne\Codeception\DI\HttpExtension
     nette.application: Nette\Bridges\ApplicationDI\ApplicationExtension(%debugMode%, [], %tempDir%)
     nette.http: Nette\Bridges\HttpDI\HttpExtension
     nette.latte: Nette\Bridges\ApplicationDI\LatteExtension(%tempDir%, %debugMode%)
