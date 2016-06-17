@@ -11,9 +11,9 @@
 namespace Arachne\Codeception\Module;
 
 use Arachne\Codeception\Connector\Nette as NetteConnector;
+use Arachne\Codeception\Module\Container as ContainerModule;
 use Codeception\Lib\Framework;
 use Codeception\TestCase;
-use Nette\Configurator;
 use Nette\DI\Container;
 use Nette\DI\MissingServiceException;
 use Nette\Utils\FileSystem;
@@ -25,14 +25,6 @@ class Nette extends Framework
 {
     protected $config = [
         'followRedirects' => true,
-        'configFiles' => [],
-        'logDir' => null,
-        'debugMode' => null,
-        'configurator' => Configurator::class,
-    ];
-
-    protected $requiredFields = [
-        'tempDir',
     ];
 
     /**
@@ -66,27 +58,7 @@ class Nette extends Framework
         $this->container = null;
         $this->containerAccessor = function () {
             if (!$this->container) {
-                $configurator = new $this->config['configurator']();
-
-                if ($this->config['logDir']) {
-                    $configurator->enableDebugger($this->path.'/'.$this->config['logDir']);
-                }
-
-                $tempDir = $this->path.'/'.$this->config['tempDir'];
-                FileSystem::delete($tempDir);
-                FileSystem::createDir($tempDir);
-                $configurator->setTempDirectory($tempDir);
-
-                if ($this->config['debugMode'] !== null) {
-                    $configurator->setDebugMode($this->config['debugMode']);
-                }
-
-                $configFiles = is_array($this->configFiles) ? $this->configFiles : $this->config['configFiles'];
-                foreach ($configFiles as $file) {
-                    $configurator->addConfig($this->path.'/'.$file, false);
-                }
-
-                $this->container = $configurator->createContainer();
+                $this->container = $this->getModule(ContainerModule::class)->createContainer();
             }
 
             return $this->container;
