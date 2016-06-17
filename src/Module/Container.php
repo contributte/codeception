@@ -11,9 +11,14 @@
 namespace Arachne\Codeception\Module;
 
 use Codeception\Module;
-use Codeception\TestCase;
+use Codeception\TestInterface;
+use Nette\Caching\Storages\IJournal;
+use Nette\Caching\Storages\SQLiteJournal;
 use Nette\Configurator;
+use Nette\DI\MissingServiceException;
+use Nette\Http\Session;
 use Nette\Utils\FileSystem;
+use ReflectionProperty;
 
 class Container extends Module
 {
@@ -33,25 +38,52 @@ class Container extends Module
      */
     private $path;
 
+    /**
+     * @var Container
+     */
+    private $container;
+
     public function _beforeSuite($settings = [])
     {
         $this->path = $settings['path'];
     }
 
-    public function _before(TestCase $test)
+    public function _before(TestInterface $test)
     {
         $tempDir = $this->path.'/'.$this->config['tempDir'];
         FileSystem::delete($tempDir);
         FileSystem::createDir($tempDir);
+        $this->container = null;
     }
 
-    public function _afterSuite()
+    public function _after(TestInterface $test)
     {
-        FileSystem::delete($this->path.'/'.$this->config['tempDir']);
+        if ($this->container) {
+            try {
+                $this->container->getByType(Session::class)->close();
+            } catch (MissingServiceException $e) {
+            }
+
+            try {
+                $journal = $this->container->getByType(IJournal::class);
+                if ($journal instanceof SQLiteJournal) {
+                    $property = new ReflectionProperty(SQLiteJournal::class, 'pdo');
+                    $property->setAccessible(true);
+                    $property->setValue($journal, null);
+                }
+            } catch (MissingServiceException $e) {
+            }
+
+            FileSystem::delete($this->container->getParameters()['tempDir']);
+        }
     }
 
     public function createContainer(array $configFiles = null)
     {
+        if ($this->container) {
+            $this->fail('Can\'t create more than one container.');
+        }
+
         $configurator = new $this->config['configurator']();
 
         if ($this->config['logDir']) {
@@ -72,6 +104,8 @@ class Container extends Module
             $configurator->addConfig($this->path.'/'.$file, false);
         }
 
-        return $configurator->createContainer();
+        $this->container = $configurator->createContainer();
+
+        return $this->container;
     }
 }

@@ -16,7 +16,6 @@ use Codeception\Lib\Framework;
 use Codeception\TestCase;
 use Nette\DI\Container;
 use Nette\DI\MissingServiceException;
-use Nette\Utils\FileSystem;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
@@ -82,15 +81,6 @@ class Nette extends Framework
     public function _after(TestCase $test)
     {
         parent::_after($test);
-
-        if ($this->container) {
-            try {
-                $this->container->getByType('Nette\Http\Session')->close();
-            } catch (MissingServiceException $e) {
-            }
-
-            FileSystem::delete($this->container->getParameters()['tempDir']);
-        }
 
         $_SESSION = [];
         $_GET = [];
