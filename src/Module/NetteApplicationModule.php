@@ -58,9 +58,20 @@ class NetteApplicationModule extends Framework
         $_COOKIE = [];
     }
 
+    /**
+     * @param bool $followRedirects
+     */
+    public function followRedirects($followRedirects)
+    {
+        $this->client->followRedirects($followRedirects);
+    }
+
+    /**
+     * @param string $url
+     */
     public function seeRedirectTo($url)
     {
-        if ($this->config['followRedirects']) {
+        if ($this->client->isFollowingRedirects()) {
             $this->fail('Method seeRedirectTo only works when followRedirects option is disabled');
         }
         $request = $this->getModule(NetteDIModule::class)->grabService(IRequest::class);
