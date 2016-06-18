@@ -1,39 +1,37 @@
 {
-	"name": "arachne/codeception",
-	"type": "library",
-	"keywords": [ "arachne", "codeception", "nette" ],
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Jáchym Toušek",
-			"homepage": "http://enumag.cz",
-			"email": "enumag@gmail.com"
-		}
-	],
-	"require": {
-		"php": ">=5.5.0",
-		"codeception/codeception": "~2.1",
-		"nette/bootstrap": "~2.2",
-		"nette/di": "~2.2",
-		"nette/http": "~2.2"
-	},
-	"require-dev": {
-		"arachne/bootstrap": "~0.2.1",
-		"arachne/coding-style": "~0.3",
-		"enumag/application": "~0.2",
-		"latte/latte": "~2.2",
-		"squizlabs/php_codesniffer": "~2.0",
-		"tracy/tracy": "~2.2"
-	},
-	"autoload": {
-		"psr-4": {
-			"Arachne\\Codeception\\": "src"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Tests\\Unit\\": "tests/unit/src",
-			"Tests\\Integration\\": "tests/integration/src"
-		}
-	}
+    "name": "arachne/codeception",
+    "description": "Integration of Nette framework to Codeception.",
+    "type": "library",
+    "keywords": [ "arachne", "codeception", "nette" ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jáchym Toušek",
+            "homepage": "http://enumag.cz",
+            "email": "enumag@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.5.0|^7.0.0",
+        "codeception/codeception": "^2.2.0",
+        "nette/bootstrap": "^2.3.0",
+        "nette/di": "^2.3.0",
+        "nette/http": "^2.3.0"
+    },
+    "require-dev": {
+        "arachne/bootstrap": "^0.2.1",
+        "enumag/application": "^0.3.0",
+        "latte/latte": "^2.3.0",
+        "tracy/tracy": "^2.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arachne\\Codeception\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Integration\\": "tests/integration/src"
+        }
+    }
 }

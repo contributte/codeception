@@ -1,8 +1,13 @@
 error_level: "E_ALL"
 
-class_name: IntegrationSuiteGuy
+class_name: IntegrationSuiteTester
 
 modules:
     enabled:
-        - Arachne\Codeception\Module\Nette:
+        - Arachne\Codeception\Module\NetteApplicationModule:
             followRedirects: false
+        - Arachne\Codeception\Module\NetteDIModule:
+            tempDir: ../_temp/integration
+            configurator: Arachne\Bootstrap\Configurator
+            configFiles:
+                - config/config.neon

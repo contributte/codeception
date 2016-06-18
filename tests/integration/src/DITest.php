@@ -2,18 +2,16 @@
 
 namespace Tests\Integration;
 
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Nette\DI\Container;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class DITest extends Test
+class DITest extends Unit
 {
-
-	public function testContainer()
-	{
-		$this->assertInstanceOf(Container::class, $this->guy->grabService(Container::class));
-	}
-
+    public function testContainer()
+    {
+        $this->assertInstanceOf(Container::class, $this->tester->grabService(Container::class));
+    }
 }

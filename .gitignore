@@ -3,4 +3,6 @@
 /tests/_temp/*
 /composer*.lock
 
+.php_cs.cache
+
 !.gitkeep

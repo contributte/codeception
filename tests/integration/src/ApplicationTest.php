@@ -2,46 +2,44 @@
 
 namespace Tests\Integration;
 
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Nette\Application\Application;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class ApplicationTest extends Test
+class ApplicationTest extends Unit
 {
+    public function testApplication()
+    {
+        $this->assertInstanceOf(Application::class, $this->tester->grabService(Application::class));
+    }
 
-	public function testApplication()
-	{
-		$this->assertInstanceOf(Application::class, $this->guy->grabService(Application::class));
-	}
+    public function testPage()
+    {
+        $this->tester->amOnPage('/article/page');
+        $this->tester->seeResponseCodeIs(200);
+        $this->tester->see('headline', 'h1');
+    }
 
-	public function testPage()
-	{
-		$this->guy->amOnPage('/article/page');
-		$this->guy->seeResponseCodeIs(200);
-		$this->guy->see('headline', 'h1');
-	}
+    public function testLink()
+    {
+        $this->tester->amOnPage('/article/link');
+        $this->tester->seeResponseCodeIs(200);
+        $this->tester->see('Normal link');
+        $this->tester->seeLink('Normal link', '/article/page');
+    }
 
-	public function testLink()
-	{
-		$this->guy->amOnPage('/article/link');
-		$this->guy->seeResponseCodeIs(200);
-		$this->guy->see('Normal link');
-		$this->guy->seeLink('Normal link', '/article/page');
-	}
+    public function testRedirect()
+    {
+        $this->tester->amOnPage('/article/redirect');
+        $this->tester->seeResponseCodeIs(301);
+        $this->tester->seeRedirectTo('/article/page');
+    }
 
-	public function testRedirect()
-	{
-		$this->guy->amOnPage('/article/redirect');
-		$this->guy->seeResponseCodeIs(301);
-		$this->guy->seeRedirectTo('/article/page');
-	}
-
-	public function testUnknown()
-	{
-		$this->guy->amOnPage('/article/unknown');
-		$this->guy->seeResponseCodeIs(404);
-	}
-
+    public function testUnknown()
+    {
+        $this->tester->amOnPage('/article/unknown');
+        $this->tester->seeResponseCodeIs(404);
+    }
 }
