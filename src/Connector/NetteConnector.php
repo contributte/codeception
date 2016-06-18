@@ -47,7 +47,7 @@ class NetteConnector extends Client
         $_FILES = $request->getFiles();
 
         $_SERVER['REQUEST_METHOD'] = $method = strtoupper($request->getMethod());
-        $_SERVER['REQUEST_URI'] = $uri = str_replace('http://localhost', '', $request->getUri());
+        $_SERVER['REQUEST_URI'] = str_replace('http://localhost', '', $request->getUri());
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 
         if ($method === 'HEAD' || $method === 'GET') {
