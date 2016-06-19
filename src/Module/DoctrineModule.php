@@ -18,24 +18,37 @@ use PDOException;
 
 class DoctrineModule extends Module
 {
+    /**
+     * @var string
+     */
+    private $path;
+
+    public function _beforeSuite($settings = [])
+    {
+        $this->path = $settings['path'];
+    }
+
     public function _before(TestInterface $test)
     {
-        if ($this->config['dump']) {
+        if ($this->config['loadFiles']) {
             $em = $this->getModule(NetteDIModule::class)->grabService(EntityManagerInterface::class);
             $connection = $em->getConnection();
-            $generator = $this->load(file_get_contents($this->config['dump']));
 
-            try {
-                foreach ($generator as $command) {
-                    $stmt = $connection->prepare($command);
-                    if (!$stmt->execute()) {
-                        $error = $stmt->errorInfo();
-                        throw new ModuleConfigException(__CLASS__, $error[2]);
+            foreach ((array) $this->config['loadFiles'] as $file) {
+                $generator = $this->load(file_get_contents($this->path.'/'.$file));
+
+                try {
+                    foreach ($generator as $command) {
+                        $stmt = $connection->prepare($command);
+                        if (!$stmt->execute()) {
+                            $error = $stmt->errorInfo();
+                            throw new ModuleConfigException(__CLASS__, $error[2]);
+                        }
+                        $stmt->closeCursor();
                     }
-                    $stmt->closeCursor();
+                } catch (PDOException $e) {
+                    throw new ModuleConfigException(__CLASS__, $e->getMessage(), $e);
                 }
-            } catch (PDOException $e) {
-                throw new ModuleConfigException(__CLASS__, $e->getMessage(), $e);
             }
         }
     }
