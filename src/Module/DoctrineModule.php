@@ -21,7 +21,7 @@ class DoctrineModule extends Module
     public function _before(TestInterface $test)
     {
         if ($this->config['dump']) {
-            $em = $this->getModule(Nette::class)->grabService(EntityManagerInterface::class);
+            $em = $this->getModule(NetteDIModule::class)->grabService(EntityManagerInterface::class);
             $connection = $em->getConnection();
             $generator = $this->load(file_get_contents($this->config['dump']));
 
