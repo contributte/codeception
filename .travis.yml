@@ -15,7 +15,7 @@ before_install:
 
 install:
     - export PATH="$PATH:$HOME/.composer/vendor/bin"
-    - travis_retry composer global require fabpot/php-cs-fixer "^2.0.0@dev"
+    - travis_retry composer global require friendsofphp/php-cs-fixer "^2.0.0@dev"
     - travis_retry composer global require satooshi/php-coveralls "^1.0.0"
     - travis_retry composer update --no-interaction --prefer-source
 
