@@ -1,16 +1,18 @@
 language: php
+sudo: required
+dist: trusty
+group: edge
 
 php:
     - 5.5
     - 5.6
     - 7.0
-    - hhvm
-
-matrix:
-    allow_failures:
-        - php: hhvm
+    - nightly
+    - hhvm-3.12
+    - hhvm-nightly
 
 before_install:
+    - echo $TRAVIS_PHP_VERSION
     - travis_retry composer self-update
 
 install:
@@ -20,12 +22,12 @@ install:
     - travis_retry composer update --no-interaction --prefer-source
 
 before_script:
-    - if [ $TRAVIS_PHP_VERSION != "hhvm" ]; then coverage="--coverage-xml"; fi
+    - if [[ $TRAVIS_PHP_VERSION != hhvm* ]]; then coverage="--coverage-xml"; fi
     - vendor/bin/codecept build
 
 script:
     - php-cs-fixer fix --dry-run
     - vendor/bin/codecept run $coverage
 
-after_script:
+after_success:
     - if [ $coverage != "" ]; then coveralls --verbose; fi
