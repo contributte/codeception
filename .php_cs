@@ -1,6 +1,8 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
+    ->name('.php_cs')
+    ->ignoreDotFiles(false)
     ->exclude('_helpers')
     ->exclude('_temp')
     ->in(__DIR__);
