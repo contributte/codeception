@@ -25,7 +25,9 @@ class NetteDIModule extends Module
 {
     protected $config = [
         'configFiles' => [],
+        'appDir' => null,
         'logDir' => null,
+        'wwwDir' => null,
         'debugMode' => null,
         'configurator' => Configurator::class,
     ];
@@ -125,6 +127,11 @@ class NetteDIModule extends Module
         if ($this->config['logDir']) {
             $configurator->enableDebugger($this->path.'/'.$this->config['logDir']);
         }
+
+        $configurator->addParameters([
+            'appDir' => $this->path.($this->config['appDir'] ? '/'.$this->config['appDir'] : ''),
+            'wwwDir' => $this->path.($this->config['wwwDir'] ? '/'.$this->config['wwwDir'] : ''),
+        ]);
 
         $tempDir = $this->path.'/'.$this->config['tempDir'];
         FileSystem::delete($tempDir);
