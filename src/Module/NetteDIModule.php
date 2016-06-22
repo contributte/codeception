@@ -59,7 +59,7 @@ class NetteDIModule extends Module
     public function _before(TestInterface $test)
     {
         $tempDir = $this->path.'/'.$this->config['tempDir'];
-        FileSystem::delete($tempDir);
+        FileSystem::delete(realpath($tempDir));
         FileSystem::createDir($tempDir);
         $this->container = null;
     }
@@ -82,7 +82,7 @@ class NetteDIModule extends Module
             } catch (MissingServiceException $e) {
             }
 
-            FileSystem::delete($this->container->getParameters()['tempDir']);
+            FileSystem::delete(realpath($this->container->getParameters()['tempDir']));
         }
     }
 
