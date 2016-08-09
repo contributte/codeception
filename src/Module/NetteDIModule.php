@@ -30,6 +30,7 @@ class NetteDIModule extends Module
         'wwwDir' => null,
         'debugMode' => null,
         'configurator' => Configurator::class,
+        'removeDefaultExtensions' => false,
     ];
 
     protected $requiredFields = [
@@ -123,6 +124,11 @@ class NetteDIModule extends Module
     private function createContainer()
     {
         $configurator = new $this->config['configurator']();
+        if ($this->config['removeDefaultExtensions']) {
+            $configurator->defaultExtensions = [
+                'extensions' => 'Nette\DI\Extensions\ExtensionsExtension',
+            ];
+        }
 
         if ($this->config['logDir']) {
             $configurator->enableDebugger($this->path.'/'.$this->config['logDir']);

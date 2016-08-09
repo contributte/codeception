@@ -19,7 +19,6 @@
         "nette/http": "^2.3.0"
     },
     "require-dev": {
-        "arachne/bootstrap": "^0.2.1",
         "enumag/application": "^0.3.0",
         "latte/latte": "^2.3.0",
         "tracy/tracy": "^2.3.0"
