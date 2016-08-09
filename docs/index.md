@@ -22,8 +22,8 @@ modules:
             # logDir: ../_log
             # Debug mode.
             # debugMode: true
-            # Sometimes you might want to override the default Nette\Configurator with your own to get rid of the default extensions.
-            # configurator: Arachne\Bootstrap\Configurator
+            # Get rid of the default extensions.
+            # removeDefaultExtensions: false
 ```
 
 ```
