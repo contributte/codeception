@@ -19,7 +19,7 @@
         "nette/http": "^2.3.0"
     },
     "require-dev": {
-        "enumag/application": "^0.3.0",
+        "enumag/application": "^0.3.16",
         "latte/latte": "^2.3.0",
         "tracy/tracy": "^2.3.0"
     },
