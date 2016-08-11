@@ -131,7 +131,9 @@ class NetteDIModule extends Module
         }
 
         if ($this->config['logDir']) {
-            $configurator->enableDebugger($this->path.'/'.$this->config['logDir']);
+            $logDir = $this->path.'/'.$this->config['logDir'];
+            FileSystem::createDir($logDir);
+            $configurator->enableDebugger($logDir);
         }
 
         $configurator->addParameters([
