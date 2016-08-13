@@ -3,7 +3,7 @@ How to run tests
 
 ```
 # install php-cs-fixer
-composer global require fabpot/php-cs-fixer "^2.0.0@dev"
+composer global require friendsofphp/php-cs-fixer "^2.0.0@dev"
 
 # go to the project's root directory, but NOT the tests subdirectory 
 cd <project_dir>
