@@ -23,6 +23,11 @@ use ReflectionProperty;
 
 class NetteDIModule extends Module
 {
+    /**
+     * @var callable[]
+     */
+    public $onCreateContainer = [];
+
     protected $config = [
         'configFiles' => [],
         'appDir' => null,
@@ -156,5 +161,9 @@ class NetteDIModule extends Module
         }
 
         $this->container = $configurator->createContainer();
+
+        foreach ($this->onCreateContainer as $callback) {
+            $callback($this->container);
+        }
     }
 }
