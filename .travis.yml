@@ -1,33 +1,30 @@
 language: php
-sudo: required
-dist: trusty
-group: edge
+
+cache:
+  directories:
+    - $HOME/.composer/cache
 
 php:
     - 5.5
     - 5.6
     - 7.0
+    - 7.1
     - nightly
-    - hhvm-3.12
-    - hhvm-nightly
+    - hhvm
 
 matrix:
     allow_failures:
         - php: nightly
-        - php: hhvm-3.12
-        - php: hhvm-nightly
-
-before_install:
-    - travis_retry composer self-update
+        - php: hhvm
 
 install:
-    - export PATH="$PATH:$HOME/.config/composer/vendor/bin"
-    - travis_retry composer global require friendsofphp/php-cs-fixer "^2.0.0@dev"
-    - travis_retry composer global require satooshi/php-coveralls "^1.0.0"
-    - travis_retry composer update --no-interaction --prefer-source
+    - export PATH="$PATH:$HOME/.composer/vendor/bin"
+    - composer global require friendsofphp/php-cs-fixer "^2.0.0@dev"
+    - composer global require satooshi/php-coveralls "^1.0.0"
+    - composer update --no-interaction
 
 before_script:
-    - if [[ $TRAVIS_PHP_VERSION != hhvm* ]] && [[ $TRAVIS_PHP_VERSION != *nightly ]]; then coverage="--coverage-xml"; fi
+    - if php -v | grep -q 'Xdebug'; then coverage="--coverage-xml"; fi
     - vendor/bin/codecept build
 
 script:
@@ -35,4 +32,4 @@ script:
     - vendor/bin/codecept run $coverage
 
 after_success:
-    - if [ $coverage != "" ]; then coveralls --verbose; fi
+    - if [[ ! -z $coverage ]]; then coveralls; fi
