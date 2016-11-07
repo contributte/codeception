@@ -19,4 +19,4 @@ return PhpCsFixer\Config::create()
         'phpdoc_order' => true,
         'short_array_syntax' => true,
     ])
-    ->finder($finder);
+    ->setFinder($finder);
