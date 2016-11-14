@@ -17,6 +17,6 @@ return PhpCsFixer\Config::create()
         'no_useless_return' => true,
         'ordered_imports' => true,
         'phpdoc_order' => true,
-        'short_array_syntax' => true,
+        'array_syntax' => ['syntax' => 'short'],
     ])
     ->setFinder($finder);
