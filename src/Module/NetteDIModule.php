@@ -101,7 +101,7 @@ class NetteDIModule extends Module
     }
 
     /**
-     * @return DIContainer
+     * @return Container
      */
     public function getContainer()
     {
