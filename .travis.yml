@@ -5,9 +5,6 @@ cache:
     - $HOME/.composer/cache
 
 php:
-    - 5.5
-    - 5.6
-    - 7.0
     - 7.1
     - nightly
     - hhvm
@@ -19,8 +16,9 @@ matrix:
 
 install:
     - export PATH="$PATH:$HOME/.composer/vendor/bin"
-    - composer global require friendsofphp/php-cs-fixer "^2.0.0@dev"
-    - composer global require satooshi/php-coveralls "^1.0.0"
+    - composer global require friendsofphp/php-cs-fixer ^2.0.0
+    - composer global require phpstan/phpstan ^0.6.0
+    - composer global require satooshi/php-coveralls ^1.0.0
     - composer update --no-interaction
 
 before_script:
@@ -29,6 +27,7 @@ before_script:
 
 script:
     - php-cs-fixer fix --dry-run
+    - phpstan analyse --level=4 --configuration=phpstan.neon src tests
     - vendor/bin/codecept run $coverage
 
 after_success:
