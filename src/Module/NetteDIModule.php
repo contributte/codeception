@@ -35,6 +35,7 @@ class NetteDIModule extends Module
         'wwwDir' => null,
         'debugMode' => null,
         'removeDefaultExtensions' => false,
+        'newContainerForEachTest' => false,
     ];
 
     protected $requiredFields = [
@@ -59,40 +60,34 @@ class NetteDIModule extends Module
     public function _beforeSuite($settings = [])
     {
         $this->path = $settings['path'];
+        $this->clearTempDir();
     }
 
     public function _before(TestInterface $test)
     {
-        $tempDir = $this->path.'/'.$this->config['tempDir'];
-        FileSystem::delete(realpath($tempDir));
-        FileSystem::createDir($tempDir);
-        $this->container = null;
+        if ($this->config['newContainerForEachTest']) {
+            $this->clearTempDir();
+            $this->container = null;
+        }
+    }
+
+    public function _afterSuite()
+    {
+        $this->stopContainer();
     }
 
     public function _after(TestInterface $test)
     {
-        if ($this->container) {
-            try {
-                $this->container->getByType(Session::class)->close();
-            } catch (MissingServiceException $e) {
-            }
-
-            try {
-                $journal = $this->container->getByType(IJournal::class);
-                if ($journal instanceof SQLiteJournal) {
-                    $property = new ReflectionProperty(SQLiteJournal::class, 'pdo');
-                    $property->setAccessible(true);
-                    $property->setValue($journal, null);
-                }
-            } catch (MissingServiceException $e) {
-            }
-
-            FileSystem::delete(realpath($this->container->getParameters()['tempDir']));
+        if ($this->config['newContainerForEachTest']) {
+            $this->stopContainer();
         }
     }
 
     public function useConfigFiles(array $configFiles)
     {
+        if (!$this->config['newContainerForEachTest']) {
+            $this->fail('The useConfigFiles can only be used if the newContainerForEachTest option is set to true.');
+        }
         if ($this->container) {
             $this->fail('Can\'t set configFiles after the container is created.');
         }
@@ -164,5 +159,36 @@ class NetteDIModule extends Module
         foreach ($this->onCreateContainer as $callback) {
             $callback($this->container);
         }
+    }
+
+    private function clearTempDir(): void
+    {
+        $tempDir = $this->path.'/'.$this->config['tempDir'];
+        FileSystem::delete(realpath($tempDir));
+        FileSystem::createDir($tempDir);
+    }
+
+    private function stopContainer(): void
+    {
+        if (!$this->container) {
+            return;
+        }
+
+        try {
+            $this->container->getByType(Session::class)->close();
+        } catch (MissingServiceException $e) {
+        }
+
+        try {
+            $journal = $this->container->getByType(IJournal::class);
+            if ($journal instanceof SQLiteJournal) {
+                $property = new ReflectionProperty(SQLiteJournal::class, 'pdo');
+                $property->setAccessible(true);
+                $property->setValue($journal, null);
+            }
+        } catch (MissingServiceException $e) {
+        }
+
+        FileSystem::delete(realpath($this->container->getParameters()['tempDir']));
     }
 }
