@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration;
+namespace Tests\Functional;
 
 use Codeception\Test\Unit;
 use Nette\DI\Container;

@@ -5,10 +5,10 @@ extensions:
     nette.latte: Nette\Bridges\ApplicationDI\LatteExtension(%tempDir%, %debugMode%)
 
 services:
-    routerFactory: Tests\Integration\Fixtures\RouterFactory
+    routerFactory: Tests\Functional\Fixtures\RouterFactory
     router: @routerFactory::create()
 
 nette.application:
     catchExceptions: true
     mapping:
-        *: Tests\Integration\Fixtures\*Presenter
+        *: Tests\Functional\Fixtures\*Presenter

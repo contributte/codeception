@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\Fixtures;
+namespace Tests\Functional\Fixtures;
 
 use Nette\Application\UI\Presenter;
 

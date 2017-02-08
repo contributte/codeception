@@ -1,13 +1,13 @@
 error_level: "E_ALL"
 
-class_name: IntegrationSuiteTester
+class_name: FunctionalSuiteTester
 
 modules:
     enabled:
         - Arachne\Codeception\Module\NetteApplicationModule:
             followRedirects: false
         - Arachne\Codeception\Module\NetteDIModule:
-            tempDir: ../_temp/integration
+            tempDir: ../_temp/functional
             removeDefaultExtensions: true
             configFiles:
                 - config/config.neon

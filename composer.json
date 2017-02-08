@@ -31,7 +31,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Integration\\": "tests/integration/src"
+            "Tests\\Functional\\": "tests/functional/src"
         }
     },
     "extra": {
