@@ -12,17 +12,14 @@ cd <project_dir>
 # install dependencies
 composer update
 
-# check coding style
-php-cs-fixer fix --dry-run
-
 # fix coding style
-php-cs-fixer fix
+composer fix
 
 # static analysis
-phpstan analyse --level=4 --configuration=phpstan.neon src tests
+composer analyse
 
 # run tests
-sh ./tests/run.sh
+composer test
 ```
 
 Advanced usage

@@ -43,5 +43,18 @@
         "branch-alias": {
             "dev-master": "1.0-dev"
         }
+    },
+    "scripts": {
+        "all": [
+            "@fix",
+            "@analyse",
+            "@test"
+        ],
+        "fix": "php-cs-fixer fix",
+        "analyse": "phpstan analyse --no-progress --level=4 --configuration=phpstan.neon src tests",
+        "test": [
+            "\"vendor/bin/codecept\" build",
+            "\"vendor/bin/codecept\" run"
+        ]
     }
 }
