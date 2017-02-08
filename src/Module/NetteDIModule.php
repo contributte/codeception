@@ -135,9 +135,8 @@ class NetteDIModule extends Module
             'wwwDir' => $this->path.($this->config['wwwDir'] ? '/'.$this->config['wwwDir'] : ''),
         ]);
 
+        $this->clearTempDir();
         $tempDir = $this->path.'/'.$this->config['tempDir'];
-        FileSystem::delete($tempDir);
-        FileSystem::createDir($tempDir);
         $configurator->setTempDirectory($tempDir);
 
         if ($this->config['debugMode'] !== null) {
