@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Arachne\Codeception\Connector;
 
 use Arachne\Codeception\Http\Request as HttpRequest;

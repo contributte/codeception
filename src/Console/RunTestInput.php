@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Arachne\Codeception\Console;
 
 use Symfony\Component\Console\Input\ArgvInput;

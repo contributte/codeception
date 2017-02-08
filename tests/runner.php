@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Arachne\Codeception\Console\RunTestInput;
 use Codeception\Codecept;
 use Codeception\Command\Run;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Arachne\Codeception\Module;
 
 use Codeception\Module;
@@ -157,7 +159,9 @@ class NetteDIModule extends Module
     private function clearTempDir(): void
     {
         $tempDir = $this->path.'/'.$this->config['tempDir'];
-        FileSystem::delete(realpath($tempDir));
+        if (is_dir($tempDir)) {
+            FileSystem::delete(realpath($tempDir));
+        }
         FileSystem::createDir($tempDir);
     }
 
