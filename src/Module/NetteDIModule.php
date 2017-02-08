@@ -34,7 +34,6 @@ class NetteDIModule extends Module
         'logDir' => null,
         'wwwDir' => null,
         'debugMode' => null,
-        'configurator' => Configurator::class,
         'removeDefaultExtensions' => false,
     ];
 
@@ -128,7 +127,7 @@ class NetteDIModule extends Module
 
     private function createContainer()
     {
-        $configurator = new $this->config['configurator']();
+        $configurator = new Configurator();
         if ($this->config['removeDefaultExtensions']) {
             $configurator->defaultExtensions = [
                 'extensions' => 'Nette\DI\Extensions\ExtensionsExtension',
