@@ -12,7 +12,6 @@ namespace Arachne\Codeception\Http;
 
 use Nette\Http\Helpers;
 use Nette\Http\IResponse;
-use Nette\Http\Response as HttpResponse;
 use Nette\Utils\DateTime;
 
 /**
