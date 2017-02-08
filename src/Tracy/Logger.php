@@ -22,8 +22,9 @@ class Logger extends Extension
         Events::TEST_ERROR => 'testError',
     ];
 
-    public function __construct()
+    public function __construct($config, $options)
     {
+        parent::__construct($config, $options);
         Debugger::$logDirectory = $this->getLogDir();
     }
 

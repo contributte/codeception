@@ -24,6 +24,8 @@
         "nette/utils": "^3.0.0@alpha"
     },
     "require-dev": {
+        "nette/caching": "^3.0.0@alpha",
+        "nette/finder": "^3.0.0@alpha",
         "latte/latte": "^3.0.0@alpha",
         "tracy/tracy": "^2.4.0"
     },

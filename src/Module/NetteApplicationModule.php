@@ -21,6 +21,14 @@ use Nette\Http\IResponse;
  */
 class NetteApplicationModule extends Framework
 {
+    /**
+     * @var NetteConnector
+     */
+    public $client;
+
+    /**
+     * @var array
+     */
     protected $config = [
         'followRedirects' => true,
     ];
@@ -37,11 +45,15 @@ class NetteApplicationModule extends Framework
 
     public function _before(TestInterface $test)
     {
-        $this->configFiles = null;
         $this->client = new NetteConnector();
-        $this->client->setContainerAccessor(function () {
-            return $this->getModule(NetteDIModule::class)->getContainer();
-        });
+        $this->client->setContainerAccessor(
+            function () {
+                /** @var NetteDIModule $diModule */
+                $diModule = $this->getModule(NetteDIModule::class);
+
+                return $diModule->getContainer();
+            }
+        );
         $this->client->followRedirects($this->config['followRedirects']);
 
         parent::_before($test);
@@ -74,8 +86,10 @@ class NetteApplicationModule extends Framework
         if ($this->client->isFollowingRedirects()) {
             $this->fail('Method seeRedirectTo only works when followRedirects option is disabled');
         }
-        $request = $this->getModule(NetteDIModule::class)->grabService(IRequest::class);
-        $response = $this->getModule(NetteDIModule::class)->grabService(IResponse::class);
+        /** @var NetteDIModule $diModule */
+        $diModule = $this->getModule(NetteDIModule::class);
+        $request = $diModule->grabService(IRequest::class);
+        $response = $diModule->grabService(IResponse::class);
         if ($response->getHeader('Location') !== $request->getUrl()->getHostUrl().$url && $response->getHeader('Location') !== $url) {
             $this->fail('Couldn\'t confirm redirect target to be "'.$url.'", Location header contains "'.$response->getHeader('Location').'".');
         }

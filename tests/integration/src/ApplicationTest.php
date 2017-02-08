@@ -10,6 +10,8 @@ use Nette\Application\Application;
  */
 class ApplicationTest extends Unit
 {
+    protected $tester;
+
     public function testApplication()
     {
         $this->assertInstanceOf(Application::class, $this->tester->grabService(Application::class));

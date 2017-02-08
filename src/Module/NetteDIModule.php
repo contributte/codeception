@@ -53,7 +53,7 @@ class NetteDIModule extends Module
     private $configFiles;
 
     /**
-     * @var Container
+     * @var Container|null
      */
     private $container;
 

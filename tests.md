@@ -2,8 +2,9 @@ How to run tests
 ====
 
 ```
-# install php-cs-fixer
-composer global require friendsofphp/php-cs-fixer "^2.0.0@dev"
+# install php-cs-fixer and phpstan
+composer global require friendsofphp/php-cs-fixer
+composer global require phpstan/phpstan
 
 # go to the project's root directory, but NOT the tests subdirectory 
 cd <project_dir>
@@ -16,6 +17,9 @@ php-cs-fixer fix --dry-run
 
 # fix coding style
 php-cs-fixer fix
+
+# static analysis
+phpstan analyse --level=4 --configuration=phpstan.neon src tests
 
 # run tests
 sh ./tests/run.sh

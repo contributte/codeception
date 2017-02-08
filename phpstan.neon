@@ -1,0 +1,3 @@
+parameters:
+    ignoreErrors:
+        - '#^Arachne\\Codeception\\Http\\Request::__construct\(\) does not call parent constructor from Nette\\Http\\Request#'
