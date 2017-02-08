@@ -23,7 +23,9 @@ modules:
             # Debug mode.
             # debugMode: true
             # Get rid of the default extensions.
-            # removeDefaultExtensions: false
+            # removeDefaultExtensions: true
+            # Compile and create new container for each test.
+            # newContainerForEachTest: true
 ```
 
 ```
@@ -40,6 +42,7 @@ class MyServiceTest extends Unit
     public function testMyService()
     {
         // Here you can override the configFiles from integration.suite.yml if needed.
+        // The newContainerForEachTest option is required for this.
         // $this->tester->useConfigFiles(['config/another-config.neon']);
         $this->assertInstanceOf(MyService::class, $this->tester->grabService(MyService::class));
     }
