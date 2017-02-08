@@ -19,6 +19,7 @@ use Nette\Http\IResponse;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\BrowserKit\Response;
+use Throwable;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
@@ -72,7 +73,7 @@ class NetteConnector extends Client
             ob_start();
             $container->getByType(Application::class)->run();
             $content = ob_get_clean();
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             ob_end_clean();
             throw $e;
         }
