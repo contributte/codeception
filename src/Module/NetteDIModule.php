@@ -48,7 +48,7 @@ class NetteDIModule extends Module
     private $path;
 
     /**
-     * @var array
+     * @var array|null
      */
     private $configFiles;
 
@@ -68,6 +68,7 @@ class NetteDIModule extends Module
         if ($this->config['newContainerForEachTest']) {
             $this->clearTempDir();
             $this->container = null;
+            $this->configFiles = null;
         }
     }
 
