@@ -10,9 +10,9 @@
 
 namespace Arachne\Codeception\Http;
 
+use Nette\Http\Helpers;
 use Nette\Http\IResponse;
 use Nette\Http\Response as HttpResponse;
-use Nette\Object;
 use Nette\Utils\DateTime;
 
 /**
@@ -20,7 +20,7 @@ use Nette\Utils\DateTime;
  *
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class Response extends Object implements IResponse
+class Response implements IResponse
 {
     /**
      * @var int
@@ -39,11 +39,11 @@ class Response extends Object implements IResponse
     }
 
     /**
-     * @param int
+     * @param int $code
      *
-     * @return self
+     * @return static
      */
-    public function setCode($code)
+    public function setCode(int $code)
     {
         $this->code = $code;
 
@@ -53,7 +53,7 @@ class Response extends Object implements IResponse
     /**
      * @return int
      */
-    public function getCode()
+    public function getCode(): int
     {
         return $this->code;
     }
@@ -62,9 +62,9 @@ class Response extends Object implements IResponse
      * @param string $name
      * @param string $value
      *
-     * @return self
+     * @return static
      */
-    public function setHeader($name, $value)
+    public function setHeader(string $name, string $value)
     {
         $this->headers[$name] = $value;
 
@@ -75,9 +75,9 @@ class Response extends Object implements IResponse
      * @param string $name
      * @param string $value
      *
-     * @return self
+     * @return static
      */
-    public function addHeader($name, $value)
+    public function addHeader(string $name, string $value)
     {
         $this->headers[$name] = $value;
 
@@ -88,9 +88,9 @@ class Response extends Object implements IResponse
      * @param string $type
      * @param string $charset
      *
-     * @return self
+     * @return static
      */
-    public function setContentType($type, $charset = null)
+    public function setContentType(string $type, string $charset = null)
     {
         $this->setHeader('Content-Type', $type.($charset ? '; charset='.$charset : ''));
 
@@ -101,7 +101,7 @@ class Response extends Object implements IResponse
      * @param string $url
      * @param int    $code
      */
-    public function redirect($url, $code = self::S302_FOUND)
+    public function redirect(string $url, int $code = self::S302_FOUND): void
     {
         $this->setCode($code);
         $this->setHeader('Location', $url);
@@ -110,7 +110,7 @@ class Response extends Object implements IResponse
     /**
      * @param string|int|DateTime $time
      *
-     * @return self
+     * @return static
      */
     public function setExpiration($time)
     {
@@ -123,7 +123,7 @@ class Response extends Object implements IResponse
 
         $time = DateTime::from($time);
         $this->setHeader('Cache-Control', 'max-age='.($time->format('U') - time()));
-        $this->setHeader('Expires', HttpResponse::date($time));
+        $this->setHeader('Expires', Helpers::formatDate($time));
 
         return $this;
     }
@@ -131,26 +131,25 @@ class Response extends Object implements IResponse
     /**
      * @return bool
      */
-    public function isSent()
+    public function isSent(): bool
     {
         return false;
     }
 
     /**
      * @param string $name
-     * @param mixed  $default
      *
      * @return mixed
      */
-    public function getHeader($name, $default = null)
+    public function getHeader(string $name): ?string
     {
-        return isset($this->headers[$name]) ? $this->headers[$name] : $default;
+        return $this->headers[$name] ?? null;
     }
 
     /**
      * @return array
      */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
@@ -166,7 +165,7 @@ class Response extends Object implements IResponse
      *
      * @return self
      */
-    public function setCookie($name, $value, $time, $path = null, $domain = null, $secure = null, $httpOnly = null)
+    public function setCookie(string $name, string $value, $time, string $path = null, string $domain = null, bool $secure = null, bool $httpOnly = null, string $sameSite = null)
     {
         return $this;
     }
@@ -177,11 +176,7 @@ class Response extends Object implements IResponse
      * @param string $domain
      * @param bool   $secure
      */
-    public function deleteCookie($name, $path = null, $domain = null, $secure = null)
-    {
-    }
-
-    public function removeDuplicateCookies()
+    public function deleteCookie(string $name, string $path = null, string $domain = null, bool $secure = null): void
     {
     }
 }

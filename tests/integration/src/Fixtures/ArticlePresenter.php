@@ -11,10 +11,10 @@ class ArticlePresenter extends Presenter
 {
     public function actionRedirect()
     {
-        $this->redirect(301, 'page');
+        $this->redirectPermanent('page');
     }
 
-    public function formatTemplateFiles()
+    public function formatTemplateFiles(): array
     {
         $name = $this->getName();
         $presenter = substr($name, strrpos(':'.$name, ':'));

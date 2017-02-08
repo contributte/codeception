@@ -13,6 +13,7 @@ namespace Arachne\Codeception\Http;
 use Nette\Http\IRequest;
 use Nette\Http\Request as HttpRequest;
 use Nette\Http\RequestFactory;
+use Nette\Http\UrlScript;
 
 /**
  * HttpRequest class for tests.
@@ -40,88 +41,84 @@ class Request extends HttpRequest implements IRequest
     public function reset()
     {
         $this->request = $this->factory->createHttpRequest();
-        $url = $this->request->getUrl();
-        if (!$url->getPort()) {
-            $url->setPort(80); // Fix canonicalization in Nette 2.2.
-        }
     }
 
-    public function getCookie($key, $default = null)
+    public function getCookie(string $key)
     {
-        return $this->request->getCookie($key, $default);
+        return $this->request->getCookie($key);
     }
 
-    public function getCookies()
+    public function getCookies(): array
     {
         return $this->request->getCookies();
     }
 
-    public function getFile($key)
+    public function getFile(string $key)
     {
-        return call_user_func_array([$this->request, 'getFile'], func_get_args());
+        return $this->request->getFile($key);
     }
 
-    public function getFiles()
+    public function getFiles(): array
     {
         return $this->request->getFiles();
     }
 
-    public function getHeader($header, $default = null)
+    public function getHeader(string $header): ?string
     {
-        return $this->request->getHeader($header, $default);
+        return $this->request->getHeader($header);
     }
 
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->request->getHeaders();
     }
 
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->request->getMethod();
     }
 
-    public function getPost($key = null, $default = null)
+    public function getPost(string $key = null)
     {
-        return call_user_func_array([$this->request, 'getPost'], func_get_args());
+        return $this->request->getPost(...func_get_args());
     }
 
-    public function getQuery($key = null, $default = null)
+    public function getQuery(string $key = null)
     {
-        return call_user_func_array([$this->request, 'getQuery'], func_get_args());
+        return $this->request->getQuery(...func_get_args());
     }
 
-    public function getRawBody()
+    public function getRawBody(): string
     {
         return $this->request->getRawBody();
     }
 
-    public function getRemoteAddress()
+    public function getRemoteAddress(): ?string
     {
         return $this->request->getRemoteAddress();
     }
 
-    public function getRemoteHost()
+    public function getRemoteHost(): ?string
     {
         return $this->request->getRemoteHost();
     }
 
-    public function getUrl()
+    public function getUrl(): UrlScript
     {
         return $this->request->getUrl();
     }
 
-    public function isAjax()
+    public function isAjax(): bool
     {
         return $this->request->isAjax();
     }
 
-    public function isMethod($method)
+    public function isMethod(string $method): bool
     {
         return $this->request->isMethod($method);
     }
 
-    public function isSecured()
+    public function isSecured(): bool
     {
         return $this->request->isSecured();
     }

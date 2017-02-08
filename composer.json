@@ -12,16 +12,20 @@
         }
     ],
     "require": {
-        "php": "^5.5.0|^7.0.0",
+        "php": "^7.1.0",
         "codeception/codeception": "^2.2.0",
-        "nette/bootstrap": "^2.3.0",
-        "nette/di": "^2.3.0",
-        "nette/http": "^2.3.0"
+        "nette/application": "^3.0.0@alpha",
+        "nette/bootstrap": "^3.0.0@alpha",
+        "nette/component-model": "^3.0.0@alpha",
+        "nette/di": "^3.0.0@alpha",
+        "nette/http": "^3.0.0@alpha",
+        "nette/neon": "^3.0.0@alpha",
+        "nette/php-generator": "^3.0.0@alpha",
+        "nette/utils": "^3.0.0@alpha"
     },
     "require-dev": {
-        "enumag/application": "^0.3.16",
-        "latte/latte": "^2.3.0",
-        "tracy/tracy": "^2.3.0"
+        "latte/latte": "^3.0.0@alpha",
+        "tracy/tracy": "^2.4.0"
     },
     "autoload": {
         "psr-4": {
@@ -31,6 +35,11 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\Integration\\": "tests/integration/src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
         }
     }
 }

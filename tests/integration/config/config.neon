@@ -3,13 +3,12 @@ extensions:
     nette.application: Nette\Bridges\ApplicationDI\ApplicationExtension(%debugMode%, [], %tempDir%)
     nette.http: Nette\Bridges\HttpDI\HttpExtension
     nette.latte: Nette\Bridges\ApplicationDI\LatteExtension(%tempDir%, %debugMode%)
-    enumag.application: Enumag\Application\DI\ApplicationExtension
 
 services:
     routerFactory: Tests\Integration\Fixtures\RouterFactory
     router: @routerFactory::create()
 
 nette.application:
-    catchExceptions: null
+    catchExceptions: true
     mapping:
         *: Tests\Integration\Fixtures\*Presenter
