@@ -14,21 +14,16 @@
     "require": {
         "php": "^7.1.0",
         "codeception/codeception": "^2.2.0",
-        "nette/application": "^3.0.0@alpha",
         "nette/bootstrap": "^3.0.0@alpha",
-        "nette/component-model": "^3.0.0@alpha",
         "nette/di": "^3.0.0@alpha",
-        "nette/http": "^3.0.0@alpha",
-        "nette/neon": "^3.0.0@alpha",
-        "nette/php-generator": "^3.0.0@alpha",
-        "nette/utils": "^3.0.0@alpha"
+        "nette/http": "^3.0.0@alpha"
     },
     "require-dev": {
-        "nette/caching": "^3.0.0@alpha",
-        "nette/finder": "^3.0.0@alpha",
+        "nette/application": "^3.0.0@alpha",
         "latte/latte": "^3.0.0@alpha",
         "tracy/tracy": "^2.4.0"
     },
+    "minimum-stability": "alpha",
     "autoload": {
         "psr-4": {
             "Arachne\\Codeception\\": "src"
