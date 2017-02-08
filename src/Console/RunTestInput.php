@@ -35,7 +35,7 @@ class RunTestInput extends ArgvInput
                 exit;
             }
 
-            // Cut of the absolute part for Codeception.
+            // Cut off the absolute part for Codeception.
             $parameters[] = substr($filename, strlen($cwd));
         }
 
