@@ -10,6 +10,7 @@ use Nette\Caching\Storages\IJournal;
 use Nette\Caching\Storages\SQLiteJournal;
 use Nette\Configurator;
 use Nette\DI\Container;
+use Nette\DI\Extensions\ExtensionsExtension;
 use Nette\DI\MissingServiceException;
 use Nette\Http\Session;
 use Nette\Utils\FileSystem;
@@ -120,7 +121,7 @@ class NetteDIModule extends Module
         $configurator = new Configurator();
         if ($this->config['removeDefaultExtensions']) {
             $configurator->defaultExtensions = [
-                'extensions' => 'Nette\DI\Extensions\ExtensionsExtension',
+                'extensions' => ExtensionsExtension::class,
             ];
         }
 
