@@ -67,7 +67,7 @@ class NetteApplicationModule extends Framework
     /**
      * @param bool $followRedirects
      */
-    public function followRedirects($followRedirects)
+    public function followRedirects(bool $followRedirects): void
     {
         $this->client->followRedirects($followRedirects);
     }
@@ -75,7 +75,7 @@ class NetteApplicationModule extends Framework
     /**
      * @param string $url
      */
-    public function seeRedirectTo($url)
+    public function seeRedirectTo(string $url): void
     {
         if ($this->client->isFollowingRedirects()) {
             $this->fail('Method seeRedirectTo only works when followRedirects option is disabled');
@@ -89,7 +89,7 @@ class NetteApplicationModule extends Framework
         }
     }
 
-    public function debugContent()
+    public function debugContent(): void
     {
         $this->debugSection('Content', $this->client->getInternalResponse()->getContent());
     }

@@ -78,7 +78,7 @@ class NetteDIModule extends Module
         }
     }
 
-    public function useConfigFiles(array $configFiles)
+    public function useConfigFiles(array $configFiles): void
     {
         if (!$this->config['newContainerForEachTest']) {
             $this->fail('The useConfigFiles can only be used if the newContainerForEachTest option is set to true.');
@@ -92,7 +92,7 @@ class NetteDIModule extends Module
     /**
      * @return Container
      */
-    public function getContainer()
+    public function getContainer(): Container
     {
         if (!$this->container) {
             $this->createContainer();
@@ -106,7 +106,7 @@ class NetteDIModule extends Module
      *
      * @return object
      */
-    public function grabService($service)
+    public function grabService(string $service)
     {
         try {
             return $this->getContainer()->getByType($service);
@@ -115,7 +115,7 @@ class NetteDIModule extends Module
         }
     }
 
-    private function createContainer()
+    private function createContainer(): void
     {
         $configurator = new Configurator();
         if ($this->config['removeDefaultExtensions']) {

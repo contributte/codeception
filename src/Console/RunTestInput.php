@@ -16,7 +16,7 @@ use Symfony\Component\Console\Input\InputDefinition;
  */
 class RunTestInput extends ArgvInput
 {
-    public function __construct(InputDefinition $definition = null)
+    public function __construct(?InputDefinition $definition = null)
     {
         $parameters = [$_SERVER['argv'][0], 'run'];
 
@@ -42,7 +42,7 @@ class RunTestInput extends ArgvInput
         parent::__construct($parameters, $definition);
     }
 
-    private function normalizePath($path)
+    private function normalizePath(string $path): string
     {
         return str_replace('\\', '/', $path);
     }

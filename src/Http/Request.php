@@ -32,7 +32,7 @@ class Request extends HttpRequest implements IRequest
         $this->reset();
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->request = $this->factory->createHttpRequest();
     }

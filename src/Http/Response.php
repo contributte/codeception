@@ -25,7 +25,7 @@ class Response implements IResponse
      */
     private $headers = [];
 
-    public function reset()
+    public function reset(): void
     {
         $this->code = self::S200_OK;
         $this->headers = [];

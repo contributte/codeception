@@ -17,7 +17,7 @@ class RouterFactory extends Object
     /**
      * @return IRouter
      */
-    public function create()
+    public function create(): IRouter
     {
         $router = new RouteList();
         $router[] = new Route('<presenter>[/<action>[/<id>]]', 'Homepage:default');

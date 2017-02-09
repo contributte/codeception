@@ -25,7 +25,7 @@ class NetteConnector extends Client
      */
     protected $containerAccessor;
 
-    public function setContainerAccessor(callable $containerAccessor)
+    public function setContainerAccessor(callable $containerAccessor): void
     {
         $this->containerAccessor = $containerAccessor;
     }
@@ -53,7 +53,7 @@ class NetteConnector extends Client
             $_POST = $request->getParameters();
         }
 
-        $container = call_user_func($this->containerAccessor);
+        $container = ($this->containerAccessor)();
 
         $httpRequest = $container->getByType(IRequest::class);
         $httpResponse = $container->getByType(IResponse::class);
