@@ -3,8 +3,7 @@ How to run tests
 
 ```
 # install php-cs-fixer and phpstan
-composer global require friendsofphp/php-cs-fixer
-composer global require phpstan/phpstan
+composer tools
 
 # go to the project's root directory, but NOT the tests subdirectory 
 cd <project_dir>

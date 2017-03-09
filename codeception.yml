@@ -10,10 +10,6 @@ settings:
     bootstrap: _bootstrap.php
     log: true
 
-extensions:
-    enabled:
-        - Arachne\Codeception\Tracy\Logger
-
 coverage:
     enabled: true
     include:

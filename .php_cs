@@ -5,6 +5,7 @@ $finder = PhpCsFixer\Finder::create()
     ->ignoreDotFiles(false)
     ->exclude('_helpers')
     ->exclude('_temp')
+    ->exclude('vendor-tools')
     ->in(__DIR__);
 
 return PhpCsFixer\Config::create()

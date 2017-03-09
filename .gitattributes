@@ -9,3 +9,4 @@ composer-tools.* export-ignore
 docs export-ignore
 phpstan.neon export-ignore
 tests export-ignore
+*.md export-ignore

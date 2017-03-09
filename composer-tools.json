@@ -1,0 +1,12 @@
+{
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.0.0",
+        "nette/http": "^3.0.0",
+        "phpstan/phpstan": "^0.6.3",
+        "phpstan/phpstan-nette": "^0.6.1"
+    },
+    "minimum-stability": "alpha",
+    "config": {
+        "vendor-dir": "vendor-tools"
+    }
+}

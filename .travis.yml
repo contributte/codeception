@@ -16,8 +16,7 @@ matrix:
 
 install:
     - export PATH="$PATH:$HOME/.composer/vendor/bin"
-    - composer global require friendsofphp/php-cs-fixer ^2.0.0
-    - composer global require phpstan/phpstan ^0.6.0
+    - if php -v | grep -q 'PHP 7'; then composer tools; fi
     - composer global require satooshi/php-coveralls ^1.0.0
     - composer update --no-interaction
 
@@ -26,8 +25,8 @@ before_script:
     - vendor/bin/codecept build
 
 script:
-    - php-cs-fixer fix --dry-run
-    - phpstan analyse --level=4 --configuration=phpstan.neon src tests
+    - if php -v | grep -q 'PHP 7'; then vendor-tools/bin/php-cs-fixer fix --dry-run; fi
+    - if php -v | grep -q 'PHP 7'; then vendor-tools/bin/phpstan analyse --level=4 --configuration=phpstan.neon src tests; fi
     - vendor/bin/codecept run $coverage
 
 after_success:

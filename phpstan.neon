@@ -1,3 +1,6 @@
+includes:
+    - vendor-tools/phpstan/phpstan-nette/extension.neon
+    - vendor-tools/phpstan/phpstan-nette/rules.neon
+
 parameters:
     ignoreErrors:
-        - '#^Arachne\\Codeception\\Http\\Request::__construct\(\) does not call parent constructor from Nette\\Http\\Request#'
