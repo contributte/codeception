@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Arachne\Codeception\Http;
 
 use Nette\Http\IRequest;
-use Nette\Http\Request as HttpRequest;
 use Nette\Http\RequestFactory;
 use Nette\Http\UrlScript;
 
@@ -14,7 +13,7 @@ use Nette\Http\UrlScript;
  *
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class Request extends HttpRequest implements IRequest
+class Request implements IRequest
 {
     /**
      * @var RequestFactory
@@ -22,7 +21,7 @@ class Request extends HttpRequest implements IRequest
     private $factory;
 
     /**
-     * @var HttpRequest
+     * @var IRequest
      */
     private $request;
 
