@@ -50,7 +50,7 @@
         "analyse": "\"vendor-tools/bin/phpstan\" analyse --no-progress --level=4 --configuration=phpstan.neon src tests",
         "test": [
             "\"vendor/bin/codecept\" build",
-            "\"vendor/bin/codecept\" run"
+            "\"vendor/bin/codecept\" run --debug"
         ]
     }
 }
