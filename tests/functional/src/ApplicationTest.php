@@ -19,19 +19,19 @@ class ApplicationTest extends Unit
      */
     protected $tester;
 
-    public function testApplication()
+    public function testApplication(): void
     {
         $this->assertInstanceOf(Application::class, $this->tester->grabService(Application::class));
     }
 
-    public function testPage()
+    public function testPage(): void
     {
         $this->tester->amOnPage('/article/page');
         $this->tester->seeResponseCodeIs(200);
         $this->tester->see('headline', 'h1');
     }
 
-    public function testLink()
+    public function testLink(): void
     {
         $this->tester->amOnPage('/article/link');
         $this->tester->seeResponseCodeIs(200);
@@ -39,14 +39,14 @@ class ApplicationTest extends Unit
         $this->tester->seeLink('Normal link', '/article/page');
     }
 
-    public function testRedirect()
+    public function testRedirect(): void
     {
         $this->tester->amOnPage('/article/redirect');
         $this->tester->seeResponseCodeIs(301);
         $this->tester->seeRedirectTo('/article/page');
     }
 
-    public function testUnknown()
+    public function testUnknown(): void
     {
         $this->tester->amOnPage('/article/unknown');
         $this->tester->seeResponseCodeIs(404);

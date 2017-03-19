@@ -15,7 +15,7 @@ use Nette\Http\IResponse;
  */
 class HttpExtension extends CompilerExtension
 {
-    public function beforeCompile()
+    public function beforeCompile(): void
     {
         $builder = $this->getContainerBuilder();
 

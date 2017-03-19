@@ -18,7 +18,7 @@ class DITest extends Unit
      */
     protected $tester;
 
-    public function testContainer()
+    public function testContainer(): void
     {
         $this->assertInstanceOf(Container::class, $this->tester->grabService(Container::class));
     }

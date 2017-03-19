@@ -11,7 +11,7 @@ use Nette\Application\UI\Presenter;
  */
 class ArticlePresenter extends Presenter
 {
-    public function actionRedirect()
+    public function actionRedirect(): void
     {
         $this->redirectPermanent('page');
     }
