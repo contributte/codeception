@@ -10,6 +10,7 @@ php:
     - hhvm
 
 matrix:
+    fast_finish: true
     allow_failures:
         - php: nightly
         - php: hhvm
@@ -25,6 +26,7 @@ before_script:
     - vendor/bin/codecept build
 
 script:
+    - "! (composer outdated --direct | grep ^)"
     - if php -v | grep -q 'PHP 7'; then vendor-tools/bin/php-cs-fixer fix --dry-run; fi
     - if php -v | grep -q 'PHP 7'; then vendor-tools/bin/phpstan analyse --level=4 --configuration=phpstan.neon src tests; fi
     - vendor/bin/codecept run $coverage
