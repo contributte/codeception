@@ -17,7 +17,7 @@ Installation
 The best way to install Arachne/Codeception is using [Composer](http://getcomposer.org/).
 
 ```sh
-$ composer require arachne/codeception
+composer require --dev arachne/codeception
 ```
 
 Documentation
