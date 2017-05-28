@@ -56,7 +56,7 @@ In functional tests you want to emulate the HTTP request and run `Nette\Applicat
 
 Unfortunately Nette framework has some downsides like the fact that Request and Response are registered as services in the DI Container. For this reason the NetteApplicationModule requires `Arachne\Codeception\DI\CodeceptionExtension` to override the default implementations. **Beware that this is meant for the functional tests only. Do NOT register the extension outside of tests.**
 
-```
+```yml
 # /tests/functional.suite.yml
 error_level: "E_ALL"
 class_name: FunctionalSuiteTester
@@ -72,7 +72,7 @@ modules:
                 - config/config.neon
 ```
 
-```
+```yml
 # /tests/functional/config/config.neon
 extensions:
     codeception: Arachne\Codeception\DI\HttpExtension
