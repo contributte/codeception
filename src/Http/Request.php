@@ -81,7 +81,7 @@ class Request implements IRequest
         return $this->request->getQuery(...func_get_args());
     }
 
-    public function getRawBody(): string
+    public function getRawBody(): ?string
     {
         return $this->request->getRawBody();
     }
