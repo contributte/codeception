@@ -3,4 +3,10 @@ includes:
     - vendor-tools/phpstan/phpstan-nette/rules.neon
 
 parameters:
+    excludes_analyse:
+        - %rootDir%/../../../tests/_*
+
     ignoreErrors:
+        - '#^Calling method getContent\(\) on possibly nullable type Symfony\\Component\\BrowserKit\\Response\|null#'
+        - '#^Method Arachne\\Codeception\\Module\\NetteDIModule::getContainer\(\) should return Nette\\DI\\Container but returns Nette\\DI\\Container\|null#'
+        - '#^Calling method [a-zA-Z]++\(\) on possibly nullable type Nette\\DI\\Container\|null#'

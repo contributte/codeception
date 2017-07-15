@@ -28,7 +28,7 @@ before_script:
 script:
     - "! (composer outdated --direct | grep ^)"
     - vendor-tools/bin/php-cs-fixer fix --dry-run
-    - vendor-tools/bin/phpstan analyse --level=5 --configuration=phpstan.neon src tests
+    - vendor-tools/bin/phpstan analyse --level=7 --configuration=phpstan.neon src tests
     - vendor/bin/codecept run $coverage
 
 after_success:

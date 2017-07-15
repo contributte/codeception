@@ -1,9 +1,9 @@
 {
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.0.0",
+        "friendsofphp/php-cs-fixer": "@stable",
         "nette/http": "^3.0.0",
-        "phpstan/phpstan": "^0.6.3",
-        "phpstan/phpstan-nette": "^0.6.1"
+        "phpstan/phpstan": "@stable",
+        "phpstan/phpstan-nette": "@stable"
     },
     "minimum-stability": "alpha",
     "config": {
