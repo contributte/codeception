@@ -20,6 +20,7 @@
     },
     "require-dev": {
         "nette/application": "^3.0.0@alpha",
+        "nette/caching": "^3.0.0@alpha",
         "latte/latte": "^3.0.0@alpha",
         "tracy/tracy": "^2.4.0"
     },
