@@ -1,8 +1,8 @@
 language: php
 
 cache:
-  directories:
-    - $HOME/.composer/cache
+    directories:
+        - $HOME/.composer/cache
 
 php:
     - 7.1
