@@ -5,7 +5,6 @@
 .php_cs export-ignore
 .travis.yml export-ignore
 codeception.yml export-ignore
-composer-tools.* export-ignore
 docs export-ignore
 phpstan.neon export-ignore
 tests export-ignore

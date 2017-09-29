@@ -1,8 +1,7 @@
 /vendor
-/vendor-tools
 /tests/_log/*
 /tests/_temp/*
-/composer*.lock
+/composer.lock
 
 .php_cs.cache
 
