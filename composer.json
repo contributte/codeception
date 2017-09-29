@@ -48,7 +48,7 @@
             "@test"
         ],
         "fix": "\"vendor/bin/php-cs-fixer\" fix",
-        "analyse": "\"vendor/bin/phpstan\" analyse --no-progress --level=7 --configuration=phpstan.neon src tests",
+        "analyse": "\"vendor/bin/phpstan\" analyse --no-progress --level=max --configuration=phpstan.neon src tests",
         "test": [
             "\"vendor/bin/codecept\" build",
             "\"vendor/bin/codecept\" run --debug"
