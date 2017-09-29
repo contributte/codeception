@@ -12,7 +12,6 @@ namespace Arachne\Codeception\Http;
 
 use Nette\Http\IResponse;
 use Nette\Http\Response as HttpResponse;
-use Nette\Object;
 use Nette\Utils\DateTime;
 
 /**
@@ -20,7 +19,7 @@ use Nette\Utils\DateTime;
  *
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class Response extends Object implements IResponse
+class Response implements IResponse
 {
     /**
      * @var int
