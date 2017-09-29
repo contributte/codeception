@@ -14,14 +14,17 @@
     "require": {
         "php": "^7.1.0",
         "codeception/codeception": "^2.3.2",
-        "nette/bootstrap": "^3.0.0@alpha",
-        "nette/di": "^3.0.0@alpha",
-        "nette/http": "^3.0.0@alpha"
+        "nette/bootstrap": "^3.0.0",
+        "nette/di": "^3.0.0",
+        "nette/http": "^3.0.0"
     },
     "require-dev": {
-        "nette/application": "^3.0.0@alpha",
-        "nette/caching": "^3.0.0@alpha",
-        "latte/latte": "^3.0.0@alpha",
+        "friendsofphp/php-cs-fixer": "^2.7.0@dev",
+        "nette/application": "^3.0.0",
+        "nette/caching": "^3.0.0",
+        "latte/latte": "^3.0.0",
+        "phpstan/phpstan": "^0.8.5",
+        "phpstan/phpstan-nette": "^0.8.3",
         "tracy/tracy": "^2.4.0"
     },
     "minimum-stability": "alpha",
@@ -45,8 +48,8 @@
             "@analyse",
             "@test"
         ],
-        "fix": "\"vendor-tools/bin/php-cs-fixer\" fix",
-        "analyse": "\"vendor-tools/bin/phpstan\" analyse --no-progress --level=7 --configuration=phpstan.neon src tests",
+        "fix": "\"vendor/bin/php-cs-fixer\" fix",
+        "analyse": "\"vendor/bin/phpstan\" analyse --no-progress --level=7 --configuration=phpstan.neon src tests",
         "test": [
             "\"vendor/bin/codecept\" build",
             "\"vendor/bin/codecept\" run --debug"

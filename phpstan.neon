@@ -1,6 +1,6 @@
 includes:
-    - vendor-tools/phpstan/phpstan-nette/extension.neon
-    - vendor-tools/phpstan/phpstan-nette/rules.neon
+    - vendor/phpstan/phpstan-nette/extension.neon
+    - vendor/phpstan/phpstan-nette/rules.neon
 
 parameters:
     excludes_analyse:
