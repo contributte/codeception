@@ -32,10 +32,8 @@ class NetteConnector extends Client
 
     /**
      * @param Request $request
-     *
-     * @return Response
      */
-    public function doRequest($request)
+    public function doRequest($request): Response
     {
         $_COOKIE = $request->getCookies();
         $_SERVER = $request->getServer();

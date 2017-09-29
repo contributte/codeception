@@ -22,13 +22,13 @@ class Logger extends Extension
         Debugger::$logDirectory = $this->getLogDir();
     }
 
-    public function testFail(FailEvent $e)
+    public function testFail(FailEvent $event): void
     {
-        Debugger::log($e->getFail());
+        Debugger::log($event->getFail());
     }
 
-    public function testError(FailEvent $e)
+    public function testError(FailEvent $event): void
     {
-        Debugger::log($e->getFail());
+        Debugger::log($event->getFail());
     }
 }

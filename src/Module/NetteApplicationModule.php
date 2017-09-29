@@ -32,12 +32,12 @@ class NetteApplicationModule extends Framework
      */
     private $path;
 
-    public function _beforeSuite($settings = [])
+    public function _beforeSuite($settings = []): void
     {
         $this->path = $settings['path'];
     }
 
-    public function _before(TestInterface $test)
+    public function _before(TestInterface $test): void
     {
         $this->client = new NetteConnector();
         $this->client->setContainerAccessor(
@@ -53,7 +53,7 @@ class NetteApplicationModule extends Framework
         parent::_before($test);
     }
 
-    public function _after(TestInterface $test)
+    public function _after(TestInterface $test): void
     {
         parent::_after($test);
 
@@ -64,17 +64,11 @@ class NetteApplicationModule extends Framework
         $_COOKIE = [];
     }
 
-    /**
-     * @param bool $followRedirects
-     */
     public function followRedirects(bool $followRedirects): void
     {
         $this->client->followRedirects($followRedirects);
     }
 
-    /**
-     * @param string $url
-     */
     public function seeRedirectTo(string $url): void
     {
         if ($this->client->isFollowingRedirects()) {

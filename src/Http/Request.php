@@ -71,12 +71,12 @@ class Request implements IRequest
         return $this->request->getMethod();
     }
 
-    public function getPost(string $key = null)
+    public function getPost(?string $key = null)
     {
         return $this->request->getPost(...func_get_args());
     }
 
-    public function getQuery(string $key = null)
+    public function getQuery(?string $key = null)
     {
         return $this->request->getQuery(...func_get_args());
     }

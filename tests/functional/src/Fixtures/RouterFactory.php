@@ -13,9 +13,6 @@ use Nette\Application\Routers\RouteList;
  */
 class RouterFactory
 {
-    /**
-     * @return IRouter
-     */
     public function create(): IRouter
     {
         $router = new RouteList();

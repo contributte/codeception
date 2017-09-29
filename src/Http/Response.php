@@ -31,69 +31,39 @@ class Response implements IResponse
         $this->headers = [];
     }
 
-    /**
-     * @param int $code
-     *
-     * @return static
-     */
-    public function setCode(int $code)
+    public function setCode(int $code): Response
     {
         $this->code = $code;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getCode(): int
     {
         return $this->code;
     }
 
-    /**
-     * @param string $name
-     * @param string $value
-     *
-     * @return static
-     */
-    public function setHeader(string $name, string $value)
+    public function setHeader(string $name, string $value): Response
     {
         $this->headers[$name] = $value;
 
         return $this;
     }
 
-    /**
-     * @param string $name
-     * @param string $value
-     *
-     * @return static
-     */
-    public function addHeader(string $name, string $value)
+    public function addHeader(string $name, string $value): Response
     {
         $this->headers[$name] = $value;
 
         return $this;
     }
 
-    /**
-     * @param string $type
-     * @param string $charset
-     *
-     * @return static
-     */
-    public function setContentType(string $type, string $charset = null)
+    public function setContentType(string $type, ?string $charset = null): Response
     {
         $this->setHeader('Content-Type', $type.($charset ? '; charset='.$charset : ''));
 
         return $this;
     }
 
-    /**
-     * @param string $url
-     * @param int    $code
-     */
     public function redirect(string $url, int $code = self::S302_FOUND): void
     {
         $this->setCode($code);
@@ -102,10 +72,8 @@ class Response implements IResponse
 
     /**
      * @param string|int|DateTime $time
-     *
-     * @return static
      */
-    public function setExpiration($time)
+    public function setExpiration($time): Response
     {
         if (!$time) {
             $this->setHeader('Cache-Control', 's-maxage=0, max-age=0, must-revalidate');
@@ -121,55 +89,30 @@ class Response implements IResponse
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isSent(): bool
     {
         return false;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return mixed
-     */
     public function getHeader(string $name): ?string
     {
         return $this->headers[$name] ?? null;
     }
 
-    /**
-     * @return array
-     */
     public function getHeaders(): array
     {
         return $this->headers;
     }
 
     /**
-     * @param string              $name
-     * @param string              $value
      * @param string|int|DateTime $time
-     * @param string              $path
-     * @param string              $domain
-     * @param bool                $secure
-     * @param bool                $httpOnly
-     *
-     * @return self
      */
-    public function setCookie(string $name, string $value, $time, string $path = null, string $domain = null, bool $secure = null, bool $httpOnly = null, string $sameSite = null)
+    public function setCookie(string $name, string $value, $time, ?string $path = null, ?string $domain = null, ?bool $secure = null, ?bool $httpOnly = null, ?string $sameSite = null): Response
     {
         return $this;
     }
 
-    /**
-     * @param string $name
-     * @param string $path
-     * @param string $domain
-     * @param bool   $secure
-     */
-    public function deleteCookie(string $name, string $path = null, string $domain = null, bool $secure = null): void
+    public function deleteCookie(string $name, ?string $path = null, ?string $domain = null, ?bool $secure = null): void
     {
     }
 }

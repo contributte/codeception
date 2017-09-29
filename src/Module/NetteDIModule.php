@@ -23,6 +23,9 @@ class NetteDIModule extends Module
      */
     public $onCreateContainer = [];
 
+    /**
+     * @var array
+     */
     protected $config = [
         'configFiles' => [],
         'appDir' => null,
@@ -33,6 +36,9 @@ class NetteDIModule extends Module
         'newContainerForEachTest' => false,
     ];
 
+    /**
+     * @var array
+     */
     protected $requiredFields = [
         'tempDir',
     ];
@@ -52,13 +58,13 @@ class NetteDIModule extends Module
      */
     private $container;
 
-    public function _beforeSuite($settings = [])
+    public function _beforeSuite($settings = []): void
     {
         $this->path = $settings['path'];
         $this->clearTempDir();
     }
 
-    public function _before(TestInterface $test)
+    public function _before(TestInterface $test): void
     {
         if ($this->config['newContainerForEachTest']) {
             $this->clearTempDir();
@@ -67,12 +73,12 @@ class NetteDIModule extends Module
         }
     }
 
-    public function _afterSuite()
+    public function _afterSuite(): void
     {
         $this->stopContainer();
     }
 
-    public function _after(TestInterface $test)
+    public function _after(TestInterface $test): void
     {
         if ($this->config['newContainerForEachTest']) {
             $this->stopContainer();
@@ -90,9 +96,6 @@ class NetteDIModule extends Module
         $this->configFiles = $configFiles;
     }
 
-    /**
-     * @return Container
-     */
     public function getContainer(): Container
     {
         if (!$this->container) {
@@ -103,8 +106,6 @@ class NetteDIModule extends Module
     }
 
     /**
-     * @param string $service
-     *
      * @return object
      */
     public function grabService(string $service)
