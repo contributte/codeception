@@ -7,16 +7,22 @@ $finder = PhpCsFixer\Finder::create()
     ->exclude('_temp')
     ->in(__DIR__);
 
+$rules = [
+    '@Symfony' => true,
+    'combine_consecutive_unsets' => true,
+    'linebreak_after_opening_tag' => true,
+    'no_multiline_whitespace_before_semicolons' => true,
+    'no_useless_else' => true,
+    'no_useless_return' => true,
+    'ordered_imports' => true,
+    'phpdoc_order' => true,
+    'array_syntax' => ['syntax' => 'short'],
+];
+
+if (class_exists('PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer')) {
+    $rules['yoda_style'] = false;
+}
+
 return PhpCsFixer\Config::create()
-    ->setRules([
-        '@Symfony' => true,
-        'combine_consecutive_unsets' => true,
-        'linebreak_after_opening_tag' => true,
-        'no_multiline_whitespace_before_semicolons' => true,
-        'no_useless_else' => true,
-        'no_useless_return' => true,
-        'ordered_imports' => true,
-        'phpdoc_order' => true,
-        'array_syntax' => ['syntax' => 'short'],
-    ])
+    ->setRules($rules)
     ->setFinder($finder);
