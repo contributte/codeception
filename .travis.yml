@@ -16,7 +16,7 @@ matrix:
 
 install:
     - export PATH="$PATH:$HOME/.composer/vendor/bin"
-    - composer global require satooshi/php-coveralls ^1.0.0
+    - composer global require php-coveralls/php-coveralls ^1.0.0
     - composer update --no-interaction
 
 before_script:
