@@ -24,7 +24,8 @@ before_script:
     - vendor/bin/codecept build
 
 script:
-    - "! (composer outdated --direct | grep ^)"
+    - composer validate --strict
+    - composer outdated --direct --strict
     - vendor/bin/php-cs-fixer fix --dry-run
     - vendor/bin/phpstan analyse --level=max --configuration=phpstan.neon src tests
     - vendor/bin/codecept run $coverage
