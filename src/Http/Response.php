@@ -31,7 +31,7 @@ class Response implements IResponse
         $this->headers = [];
     }
 
-    public function setCode(int $code): Response
+    public function setCode(int $code): self
     {
         $this->code = $code;
 
@@ -43,21 +43,21 @@ class Response implements IResponse
         return $this->code;
     }
 
-    public function setHeader(string $name, string $value): Response
+    public function setHeader(string $name, string $value): self
     {
         $this->headers[$name] = $value;
 
         return $this;
     }
 
-    public function addHeader(string $name, string $value): Response
+    public function addHeader(string $name, string $value): self
     {
         $this->headers[$name] = $value;
 
         return $this;
     }
 
-    public function setContentType(string $type, ?string $charset = null): Response
+    public function setContentType(string $type, ?string $charset = null): self
     {
         $this->setHeader('Content-Type', $type.($charset ? '; charset='.$charset : ''));
 
@@ -73,7 +73,7 @@ class Response implements IResponse
     /**
      * @param string|int|DateTime $time
      */
-    public function setExpiration($time): Response
+    public function setExpiration($time): self
     {
         if (!$time) {
             $this->setHeader('Cache-Control', 's-maxage=0, max-age=0, must-revalidate');
@@ -107,7 +107,7 @@ class Response implements IResponse
     /**
      * @param string|int|DateTime $time
      */
-    public function setCookie(string $name, string $value, $time, ?string $path = null, ?string $domain = null, ?bool $secure = null, ?bool $httpOnly = null, ?string $sameSite = null): Response
+    public function setCookie(string $name, string $value, $time, ?string $path = null, ?string $domain = null, ?bool $secure = null, ?bool $httpOnly = null, ?string $sameSite = null): self
     {
         return $this;
     }
