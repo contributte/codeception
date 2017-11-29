@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Arachne\Codeception\Http;
 
-use Nette\Http\Helpers;
 use Nette\Http\IResponse;
+use Nette\Http\Response as HttpResponse;
 use Nette\Utils\DateTime;
 
 /**
@@ -31,40 +31,62 @@ class Response implements IResponse
         $this->headers = [];
     }
 
-    public function setCode(int $code): self
+    /**
+     * @param int $code
+     */
+    public function setCode($code): self
     {
         $this->code = $code;
 
         return $this;
     }
 
-    public function getCode(): int
+    /**
+     * @return int
+     */
+    public function getCode()
     {
         return $this->code;
     }
 
-    public function setHeader(string $name, string $value): self
+    /**
+     * @param string $name
+     * @param string $value
+     */
+    public function setHeader($name, $value): self
     {
         $this->headers[$name] = $value;
 
         return $this;
     }
 
-    public function addHeader(string $name, string $value): self
+    /**
+     * @param string $name
+     * @param string $value
+     */
+    public function addHeader($name, $value): self
     {
         $this->headers[$name] = $value;
 
         return $this;
     }
 
-    public function setContentType(string $type, ?string $charset = null): self
+    /**
+     * @param string $type
+     * @param string $charset
+     */
+    public function setContentType($type, $charset = null): self
     {
         $this->setHeader('Content-Type', $type.($charset ? '; charset='.$charset : ''));
 
         return $this;
     }
 
-    public function redirect(string $url, int $code = self::S302_FOUND): void
+    /**
+     * @param string $url
+     * @param int    $code
+     */
+    public function redirect($url, $code = self::S302_FOUND): void
     {
         $this->setCode($code);
         $this->setHeader('Location', $url);
@@ -84,35 +106,65 @@ class Response implements IResponse
 
         $time = DateTime::from($time);
         $this->setHeader('Cache-Control', 'max-age='.($time->format('U') - time()));
-        $this->setHeader('Expires', Helpers::formatDate($time));
+        $this->setHeader('Expires', HttpResponse::date($time));
 
         return $this;
     }
 
-    public function isSent(): bool
+    /**
+     * @return bool
+     */
+    public function isSent()
     {
         return false;
     }
 
-    public function getHeader(string $name): ?string
+    /**
+     * @param string $name
+     * @param mixed  $default
+     *
+     * @return mixed
+     */
+    public function getHeader($name, $default = null)
     {
-        return $this->headers[$name] ?? null;
+        return isset($this->headers[$name]) ? $this->headers[$name] : $default;
     }
 
-    public function getHeaders(): array
+    /**
+     * @return array
+     */
+    public function getHeaders()
     {
         return $this->headers;
     }
 
     /**
+     * @param string              $name
+     * @param string              $value
      * @param string|int|DateTime $time
+     * @param string              $path
+     * @param string              $domain
+     * @param bool                $secure
+     * @param bool                $httpOnly
+     *
+     * @return self
      */
-    public function setCookie(string $name, string $value, $time, ?string $path = null, ?string $domain = null, ?bool $secure = null, ?bool $httpOnly = null, ?string $sameSite = null): self
+    public function setCookie($name, $value, $time, $path = null, $domain = null, $secure = null, $httpOnly = null)
     {
         return $this;
     }
 
-    public function deleteCookie(string $name, ?string $path = null, ?string $domain = null, ?bool $secure = null): void
+    /**
+     * @param string $name
+     * @param string $path
+     * @param string $domain
+     * @param bool   $secure
+     */
+    public function deleteCookie($name, $path = null, $domain = null, $secure = null)
+    {
+    }
+
+    public function removeDuplicateCookies()
     {
     }
 }

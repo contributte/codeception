@@ -14,20 +14,19 @@
     "require": {
         "php": "^7.1.0",
         "codeception/codeception": "^2.3.2",
-        "nette/bootstrap": "^3.0.0",
-        "nette/di": "^3.0.0@dev",
-        "nette/http": "^3.0.0@dev"
+        "nette/bootstrap": "^2.4.0",
+        "nette/di": "^2.4.0",
+        "nette/http": "^2.4.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.8.0",
-        "nette/application": "^3.0.0",
-        "nette/caching": "^3.0.0",
-        "latte/latte": "^3.0.0",
+        "nette/application": "^2.4.0",
+        "nette/caching": "^2.4.0",
+        "latte/latte": "^2.4.0",
         "phpstan/phpstan": "^0.9.0",
         "phpstan/phpstan-nette": "^0.9.0",
         "tracy/tracy": "^2.4.0"
     },
-    "minimum-stability": "alpha",
     "autoload": {
         "psr-4": {
             "Arachne\\Codeception\\": "src"

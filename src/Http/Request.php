@@ -36,9 +36,9 @@ class Request implements IRequest
         $this->request = $this->factory->createHttpRequest();
     }
 
-    public function getCookie(string $key)
+    public function getCookie($key, $default = null)
     {
-        return $this->request->getCookie($key);
+        return $this->request->getCookie($key, $default);
     }
 
     public function getCookies(): array
@@ -46,7 +46,7 @@ class Request implements IRequest
         return $this->request->getCookies();
     }
 
-    public function getFile(string $key)
+    public function getFile($key)
     {
         return $this->request->getFile($key);
     }
@@ -56,9 +56,9 @@ class Request implements IRequest
         return $this->request->getFiles();
     }
 
-    public function getHeader(string $header): ?string
+    public function getHeader($header, $default = null): ?string
     {
-        return $this->request->getHeader($header);
+        return $this->request->getHeader($header, $default);
     }
 
     public function getHeaders(): array
@@ -71,12 +71,12 @@ class Request implements IRequest
         return $this->request->getMethod();
     }
 
-    public function getPost(?string $key = null)
+    public function getPost($key = null, $default = null)
     {
         return $this->request->getPost(...func_get_args());
     }
 
-    public function getQuery(?string $key = null)
+    public function getQuery($key = null, $default = null)
     {
         return $this->request->getQuery(...func_get_args());
     }
@@ -106,7 +106,7 @@ class Request implements IRequest
         return $this->request->isAjax();
     }
 
-    public function isMethod(string $method): bool
+    public function isMethod($method): bool
     {
         return $this->request->isMethod($method);
     }
