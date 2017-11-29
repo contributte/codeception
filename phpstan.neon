@@ -1,6 +1,7 @@
 includes:
     - vendor/phpstan/phpstan-nette/extension.neon
     - vendor/phpstan/phpstan-nette/rules.neon
+    - extension.neon
 
 parameters:
     excludes_analyse:
@@ -9,9 +10,3 @@ parameters:
     ignoreErrors:
         - '#^Calling method getContent\(\) on possibly null value of type Symfony\\Component\\BrowserKit\\Response\|null#'
         - '#^Method Arachne\\Codeception\\Module\\NetteDIModule::getContainer\(\) should return Nette\\DI\\Container but returns Nette\\DI\\Container\|null#'
-
-services:
-    -
-        class: Arachne\Codeception\PHPStan\NetteDIModuleType
-        tags:
-            - phpstan.broker.dynamicMethodReturnTypeExtension
