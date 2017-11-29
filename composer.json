@@ -19,12 +19,12 @@
         "nette/http": "^3.0.0@dev"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.7.0@dev",
+        "friendsofphp/php-cs-fixer": "^2.8.0",
         "nette/application": "^3.0.0",
         "nette/caching": "^3.0.0",
         "latte/latte": "^3.0.0",
-        "phpstan/phpstan": "^0.8.5",
-        "phpstan/phpstan-nette": "^0.8.3",
+        "phpstan/phpstan": "^0.9.0",
+        "phpstan/phpstan-nette": "^0.9.0",
         "tracy/tracy": "^2.4.0"
     },
     "minimum-stability": "alpha",

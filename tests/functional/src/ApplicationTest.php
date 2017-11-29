@@ -15,7 +15,7 @@ use Nette\Application\Application;
 class ApplicationTest extends Unit
 {
     /**
-     * @var NetteApplicationModule|NetteDIModule
+     * @var NetteApplicationModule&NetteDIModule
      */
     protected $tester;
 
