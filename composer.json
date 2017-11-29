@@ -15,7 +15,7 @@
         "php": "^7.1.0",
         "codeception/codeception": "^2.3.2",
         "nette/bootstrap": "^2.4.0",
-        "nette/di": "^2.4.0",
+        "nette/di": "^2.4.10",
         "nette/http": "^2.4.0"
     },
     "require-dev": {
