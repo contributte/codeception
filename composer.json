@@ -16,7 +16,8 @@
         "codeception/codeception": "^2.3.2",
         "nette/bootstrap": "^3.0.0",
         "nette/di": "^3.0.0@dev",
-        "nette/http": "^3.0.0@dev"
+        "nette/http": "^3.0.0@dev",
+        "nette/utils": "^3.0.0@dev"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.8.0",
