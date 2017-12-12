@@ -45,6 +45,7 @@ class MyServiceTest extends Unit
     }
 }
 ```
+`useConfigFiles` method takes array of file paths that are either absolute or relative to suite root. 
 
 NetteApplicationModule
 ----
