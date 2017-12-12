@@ -147,7 +147,7 @@ class NetteDIModule extends Module
 
         $configFiles = is_array($this->configFiles) ? $this->configFiles : $this->config['configFiles'];
         foreach ($configFiles as $file) {
-            $configurator->addConfig($this->path.'/'.$file);
+            $configurator->addConfig(FileSystem::isAbsolute($file) ? $file : $this->path.'/'.$file);
         }
 
         $this->container = $configurator->createContainer();
