@@ -1,63 +1,82 @@
 {
-    "name": "arachne/codeception",
-    "description": "Integration of Nette framework to Codeception.",
-    "type": "library",
-    "keywords": [ "arachne", "codeception", "nette" ],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Jáchym Toušek",
-            "homepage": "http://enumag.cz",
-            "email": "enumag@gmail.com"
-        }
-    ],
-    "require": {
-        "php": "^7.1.0",
-        "codeception/codeception": "^2.3.2",
-        "nette/bootstrap": "^3.0.0",
-        "nette/di": "^3.0.0@dev",
-        "nette/http": "^3.0.0@dev",
-        "nette/utils": "^3.0.0@dev"
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.8.0",
-        "nette/application": "^3.0.0",
-        "nette/caching": "^3.0.0",
-        "latte/latte": "^3.0.0",
-        "phpstan/phpstan": "^0.9.0",
-        "phpstan/phpstan-nette": "^0.9.0",
-        "tracy/tracy": "^2.4.0"
-    },
-    "minimum-stability": "alpha",
-    "autoload": {
-        "psr-4": {
-            "Arachne\\Codeception\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\Functional\\": "tests/functional/src"
-        },
-        "files": [
-            "vendor/codeception/codeception/shim.php"
-        ]
-    },
-    "scripts": {
-        "ci": [
-            "@fix",
-            "@analyse",
-            "@test"
-        ],
-        "fix": "\"vendor/bin/php-cs-fixer\" fix",
-        "analyse": "\"vendor/bin/phpstan\" analyse --no-progress --level=max --configuration=phpstan.neon src tests",
-        "test": [
-            "\"vendor/bin/codecept\" build",
-            "\"vendor/bin/codecept\" run --debug"
-        ]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
+  "name": "contributte/codeception",
+  "description": "Integration of Nette framework to Codeception.",
+  "keywords": [
+    "contributte",
+    "codeception",
+    "nette",
+    "testing",
+    "integration"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://github.com/contributte/codeception",
+  "authors": [
+    {
+      "name": "Jáchym Toušek",
+      "homepage": "http://enumag.cz",
+      "email": "enumag@gmail.com"
     }
+  ],
+  "require": {
+    "php": ">= 7.1",
+    "codeception/codeception": "^2.5.1",
+    "nette/di": "~2.4.14",
+    "nette/bootstrap": "~2.4.6",
+    "nette/http": "~2.4.10",
+    "nette/utils": "~2.5.3"
+  },
+  "require-dev": {
+    "ninjify/qa": "^0.8.0",
+    "nette/application": "~2.4.12",
+    "nette/caching": "~2.5.8",
+    "latte/latte": "~2.4.8",
+    "tracy/tracy": "~2.5.5"
+  },
+  "conflict": {
+    "symfony/browser-kit": "<4.0.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "Contributte\\Codeception\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Functional\\": "tests/functional/src"
+    },
+    "files": [
+      "vendor/codeception/codeception/shim.php"
+    ]
+  },
+  "scripts": {
+    "qa": [
+      "linter src tests",
+      "codesniffer src tests"
+    ],
+    "tests": [
+      "vendor/bin/codecept build",
+      "vendor/bin/codecept run --debug"
+    ],
+    "coverage": [
+      "phpdbg -qrr vendor/bin/phpunit tests --colors=always -c tests/coverage.xml"
+    ],
+    "phpstan-install": [
+      "mkdir -p temp/phpstan",
+      "composer require -d temp/phpstan phpstan/phpstan:^0.10",
+      "composer require -d temp/phpstan phpstan/phpstan-deprecation-rules:^0.10",
+      "composer require -d temp/phpstan phpstan/phpstan-nette:^0.10",
+      "composer require -d temp/phpstan phpstan/phpstan-strict-rules:^0.10"
+    ],
+    "phpstan": [
+      "temp/phpstan/vendor/bin/phpstan analyse -l max -c phpstan.neon src"
+    ]
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.1-dev"
+    }
+  }
 }

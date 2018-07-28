@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<ruleset name="Contributte">
+	<!-- Contributte Coding Standard -->
+    <rule ref="vendor/ninjify/coding-standard/contributte.xml">
+		<exclude name="SlevomatCodingStandard.Classes.UnusedPrivateElements.WriteOnlyProperty"/>
+    </rule>
+
+	<!-- Specific rules -->
+    <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+        <properties>
+            <property name="rootNamespaces" type="array" value="
+                src=>Contributte\Codeception
+            "/>
+        </properties>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName.NoMatchBetweenTypeNameAndFileName">
+        <exclude-pattern>/tests/functional</exclude-pattern>
+    </rule>
+
+    <!-- Exclude folders -->
+	<exclude-pattern>/tests/tmp</exclude-pattern>
+	<exclude-pattern>/tests/_helpers</exclude-pattern>
+</ruleset>

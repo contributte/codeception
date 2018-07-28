@@ -1,12 +1,26 @@
 includes:
-    - vendor/phpstan/phpstan-nette/extension.neon
-    - vendor/phpstan/phpstan-nette/rules.neon
-    - extension.neon
+	- temp/phpstan/vendor/phpstan/phpstan-deprecation-rules/rules.neon
+	- temp/phpstan/vendor/phpstan/phpstan-nette/extension.neon
+	- temp/phpstan/vendor/phpstan/phpstan-nette/rules.neon
+	- temp/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
+
+services:
+	-
+		class: Contributte\Codeception\Qa\PhpStan\NetteDIModuleType
+		tags:
+			- phpstan.broker.dynamicMethodReturnTypeExtension
 
 parameters:
-    excludes_analyse:
-        - %rootDir%/../../../tests/_*
+	excludes_analyse:
+		- %rootDir%/../../../tests/_*
 
-    ignoreErrors:
-        - '#^Calling method getContent\(\) on possibly null value of type Symfony\\Component\\BrowserKit\\Response\|null#'
-        - '#^Method Arachne\\Codeception\\Module\\NetteDIModule::getContainer\(\) should return Nette\\DI\\Container but returns Nette\\DI\\Container\|null#'
+	ignoreErrors:
+		- '#^Only booleans are allowed in a negated boolean, int\|Nette\\Utils\\DateTime\|string given.#'
+
+		# Should not happen
+		- '#^Method Contributte\\Codeception\\Module\\NetteDIModule::getContainer\(\) should return Nette\\DI\\Container but returns Nette\\DI\\Container\|null#'
+		- '#^Method Contributte\\Codeception\\Http\\Request::getFile\(\) should return Nette\\Http\\FileUpload\|null but returns array\|Nette\\Http\\FileUpload\|null.#'
+		- '#^Cannot call method getName\(\) on PHPStan\\Reflection\\ClassReflection\|null.#'
+
+		# Complicated to test dev-required phpstan with separatly installed version
+		- '#^Call to an undefined method PHPStan\\#'
