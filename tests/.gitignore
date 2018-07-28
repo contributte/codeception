@@ -1,2 +1,3 @@
-_helpers/*SuiteTester.php
-_helpers/_generated/*
+/_helpers
+/_log
+/_temp

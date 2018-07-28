@@ -1,5 +1,0 @@
-services:
-    -
-        class: Arachne\Codeception\PHPStan\NetteDIModuleType
-        tags:
-            - phpstan.broker.dynamicMethodReturnTypeExtension

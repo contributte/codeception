@@ -4,9 +4,9 @@ class_name: FunctionalSuiteTester
 
 modules:
     enabled:
-        - Arachne\Codeception\Module\NetteApplicationModule:
+        - Contributte\Codeception\Module\NetteApplicationModule:
             followRedirects: false
-        - Arachne\Codeception\Module\NetteDIModule:
+        - Contributte\Codeception\Module\NetteDIModule:
             tempDir: ../_temp/functional
             removeDefaultExtensions: true
             configFiles:

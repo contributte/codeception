@@ -1,36 +1,33 @@
-<?php
+<?php declare(strict_types = 1);
 
-declare(strict_types=1);
+namespace Contributte\Codeception\DI;
 
-namespace Arachne\Codeception\DI;
-
-use Arachne\Codeception\Http\Request;
-use Arachne\Codeception\Http\Response;
+use Contributte\Codeception\Http\Request;
+use Contributte\Codeception\Http\Response;
 use Nette\DI\CompilerExtension;
 use Nette\Http\IRequest;
 use Nette\Http\IResponse;
 
-/**
- * @author Jáchym Toušek <enumag@gmail.com>
- */
 class HttpExtension extends CompilerExtension
 {
-    public function beforeCompile(): void
-    {
-        $builder = $this->getContainerBuilder();
 
-        $request = $builder->getByType(IRequest::class) ?: 'httpRequest';
-        if ($builder->hasDefinition($request)) {
-            $builder->getDefinition($request)
-                ->setType(IRequest::class)
-                ->setFactory(Request::class);
-        }
+	public function beforeCompile(): void
+	{
+		$builder = $this->getContainerBuilder();
 
-        $response = $builder->getByType(IResponse::class) ?: 'httpResponse';
-        if ($builder->hasDefinition($response)) {
-            $builder->getDefinition($response)
-                ->setType(IResponse::class)
-                ->setFactory(Response::class);
-        }
-    }
+		$request = $builder->getByType(IRequest::class) ?: 'httpRequest';
+		if ($builder->hasDefinition($request)) {
+			$builder->getDefinition($request)
+				->setType(IRequest::class)
+				->setFactory(Request::class);
+		}
+
+		$response = $builder->getByType(IResponse::class) ?: 'httpResponse';
+		if ($builder->hasDefinition($response)) {
+			$builder->getDefinition($response)
+				->setType(IResponse::class)
+				->setFactory(Response::class);
+		}
+	}
+
 }

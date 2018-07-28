@@ -1,8 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
 
-declare(strict_types=1);
-
-namespace Arachne\Codeception\Tracy;
+namespace Contributte\Codeception\Tracy;
 
 use Codeception\Event\FailEvent;
 use Codeception\Events;
@@ -11,24 +9,32 @@ use Tracy\Debugger;
 
 class Logger extends Extension
 {
-    public static $events = [
-        Events::TEST_FAIL => 'testFail',
-        Events::TEST_ERROR => 'testError',
-    ];
 
-    public function __construct($config, $options)
-    {
-        parent::__construct($config, $options);
-        Debugger::$logDirectory = $this->getLogDir();
-    }
+	/** @var string[] */
+	public static $events = [
+		Events::TEST_FAIL => 'testFail',
+		Events::TEST_ERROR => 'testError',
+	];
 
-    public function testFail(FailEvent $event): void
-    {
-        Debugger::log($event->getFail());
-    }
+	/**
+	 * @param mixed[] $config
+	 * @param mixed[] $options
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+	 */
+	public function __construct($config, $options)
+	{
+		parent::__construct($config, $options);
+		Debugger::$logDirectory = $this->getLogDir();
+	}
 
-    public function testError(FailEvent $event): void
-    {
-        Debugger::log($event->getFail());
-    }
+	public function testFail(FailEvent $event): void
+	{
+		Debugger::log($event->getFail());
+	}
+
+	public function testError(FailEvent $event): void
+	{
+		Debugger::log($event->getFail());
+	}
+
 }
