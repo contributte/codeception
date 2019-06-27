@@ -65,6 +65,7 @@
     ],
     "phpstan-install": [
       "mkdir -p temp/phpstan",
+      "composer require -d temp/phpstan nette/utils:~2.5.3",
       "composer require -d temp/phpstan phpstan/phpstan:^0.10",
       "composer require -d temp/phpstan phpstan/phpstan-deprecation-rules:^0.10",
       "composer require -d temp/phpstan phpstan/phpstan-nette:^0.10",
