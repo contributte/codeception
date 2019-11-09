@@ -27,16 +27,13 @@ class Request implements IRequest
 
 	public function reset(): void
 	{
-		$this->request = $this->factory->createHttpRequest();
+		$this->request = $this->factory->fromGlobals();
 	}
 
 	/**
-	 * @param string $key
-	 * @param mixed $default
 	 * @return mixed
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
 	 */
-	public function getCookie($key, $default = null)
+	public function getCookie(string $key)
 	{
 		return $this->request->getCookie($key);
 	}
@@ -49,11 +46,7 @@ class Request implements IRequest
 		return $this->request->getCookies();
 	}
 
-	/**
-	 * @param string $key
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
-	 */
-	public function getFile($key): ?FileUpload
+	public function getFile(string $key): ?FileUpload
 	{
 		return $this->request->getFile($key);
 	}
@@ -66,14 +59,9 @@ class Request implements IRequest
 		return $this->request->getFiles();
 	}
 
-	/**
-	 * @param string $header
-	 * @param string|null $default
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
-	 */
-	public function getHeader($header, $default = null): ?string
+	public function getHeader(string $header): ?string
 	{
-		return $this->request->getHeader($header, $default);
+		return $this->request->getHeader($header);
 	}
 
 	/**
@@ -90,32 +78,26 @@ class Request implements IRequest
 	}
 
 	/**
-	 * @param string|null $key
-	 * @param mixed $default
 	 * @return mixed
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
 	 */
-	public function getPost($key = null, $default = null)
+	public function getPost(?string $key = null)
 	{
 		if (func_num_args() === 0) {
 			return $this->request->getPost();
 		} else {
-			return $this->request->getPost($key, $default);
+			return $this->request->getPost($key);
 		}
 	}
 
 	/**
-	 * @param string|null $key
-	 * @param mixed $default
 	 * @return mixed
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
 	 */
-	public function getQuery($key = null, $default = null)
+	public function getQuery(?string $key = null)
 	{
 		if (func_num_args() === 0) {
 			return $this->request->getQuery();
 		} else {
-			return $this->request->getQuery($key, $default);
+			return $this->request->getQuery($key);
 		}
 	}
 
@@ -144,11 +126,7 @@ class Request implements IRequest
 		return $this->request->isAjax();
 	}
 
-	/**
-	 * @param string $method
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
-	 */
-	public function isMethod($method): bool
+	public function isMethod(string $method): bool
 	{
 		return $this->request->isMethod($method);
 	}

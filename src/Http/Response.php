@@ -2,6 +2,7 @@
 
 namespace Contributte\Codeception\Http;
 
+use DateTimeInterface;
 use Nette\Http\Helpers;
 use Nette\Http\IResponse;
 use Nette\Utils\DateTime;
@@ -30,63 +31,51 @@ class Response implements IResponse
 	}
 
 	/**
-	 * @param int $code
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+	 * @return static
 	 */
-	public function setCode($code): self
+	public function setCode(int $code, ?string $reason = null)
 	{
 		$this->code = $code;
 		return $this;
 	}
 
 	/**
-	 * @param string $name
-	 * @param string $value
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+	 * @return static
 	 */
-	public function setHeader($name, $value): self
+	public function setHeader(string $name, string $value)
 	{
 		$this->headers[$name] = $value;
 		return $this;
 	}
 
 	/**
-	 * @param string $name
-	 * @param string $value
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+	 * @return static
 	 */
-	public function addHeader($name, $value): self
+	public function addHeader(string $name, string $value)
 	{
 		$this->headers[$name] = $value;
 		return $this;
 	}
 
 	/**
-	 * @param string      $type
-	 * @param string|null $charset
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+	 * @return static
 	 */
-	public function setContentType($type, $charset = null): self
+	public function setContentType(string $type, ?string $charset = null)
 	{
 		$this->setHeader('Content-Type', $type . ($charset !== null ? '; charset=' . $charset : ''));
 		return $this;
 	}
 
-	/**
-	 * @param string $url
-	 * @param int    $code
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
-	 */
-	public function redirect($url, $code = self::S302_FOUND): void
+	public function redirect(string $url, int $code = self::S302_FOUND): void
 	{
 		$this->setCode($code);
 		$this->setHeader('Location', $url);
 	}
 
 	/**
-	 * @param string|int|DateTime $time
+	 * @return static
 	 */
-	public function setExpiration($time): self
+	public function setExpiration(?string $time)
 	{
 		if (!$time) {
 			$this->setHeader('Cache-Control', 's-maxage=0, max-age=0, must-revalidate');
@@ -107,14 +96,9 @@ class Response implements IResponse
 		return false;
 	}
 
-	/**
-	 * @param string $name
-	 * @param string|null $default
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
-	 */
-	public function getHeader($name, $default = null): ?string
+	public function getHeader(string $name): ?string
 	{
-		return $this->headers[$name] ?? $default;
+		return $this->headers[$name] ?? null;
 	}
 
 	/**
@@ -126,29 +110,15 @@ class Response implements IResponse
 	}
 
 	/**
-	 * @param string              $name
-	 * @param string              $value
-	 * @param string|int|DateTime $time
-	 * @param string|null         $path
-	 * @param string|null         $domain
-	 * @param bool|null           $secure
-	 * @param bool|null           $httpOnly
-	 * @param string|null         $sameSite
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+	 * @param string|int|DateTimeInterface $time
+	 * @return static
 	 */
-	public function setCookie($name, $value, $time, $path = null, $domain = null, $secure = null, $httpOnly = null, $sameSite = null): self
+	public function setCookie(string $name, string $value, $time, ?string $path = null, ?string $domain = null, ?bool $secure = null, ?bool $httpOnly = null, ?string $sameSite = null)
 	{
 		return $this;
 	}
 
-	/**
-	 * @param string      $name
-	 * @param string|null $path
-	 * @param string|null $domain
-	 * @param bool|null   $secure
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
-	 */
-	public function deleteCookie($name, $path = null, $domain = null, $secure = null): void
+	public function deleteCookie(string $name, ?string $path = null, ?string $domain = null, ?bool $secure = null): void
 	{
 	}
 
