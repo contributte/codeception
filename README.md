@@ -24,11 +24,11 @@ Integration of Nette Framework to Codeception.
 
 ## Versions
 
-| State       | Version  | Branch   | PHP      |                 |
-|-------------|----------|----------|----------|-----------------|
-| dev         | `^1.1.0` | `master` | `>= 7.1` |                 |
-| stable      | `^1.0.0` | `master` | `>= 7.1` |                 |
-| stable      | `^0.8.1` | `master` | `>= 7.1` | (old namespace) |
+| State       | Version  | Branch   | PHP     |                 |
+|-------------|----------|----------|---------|-----------------|
+| dev         | `^1.1.0` | `master` | `^7.2`  |                 |
+| stable      | `^1.0.0` | `master` | `>=7.1` |                 |
+| stable      | `^0.8.1` | `master` | `>=7.1` | (old namespace) |
 
 
 ## Maintainers
