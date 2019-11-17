@@ -55,6 +55,7 @@ class NetteConnector extends Client
 		if (!$httpRequest instanceof HttpRequest || !$httpResponse instanceof HttpResponse) {
 			throw new Exception('Contributte\Codeception\DI\HttpExtension is not used or conflicts with another extension.');
 		}
+
 		$httpRequest->reset();
 		$httpResponse->reset();
 

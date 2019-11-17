@@ -82,11 +82,7 @@ class Request implements IRequest
 	 */
 	public function getPost(?string $key = null)
 	{
-		if (func_num_args() === 0) {
-			return $this->request->getPost();
-		} else {
-			return $this->request->getPost($key);
-		}
+		return func_num_args() === 0 ? $this->request->getPost() : $this->request->getPost($key);
 	}
 
 	/**
@@ -94,11 +90,7 @@ class Request implements IRequest
 	 */
 	public function getQuery(?string $key = null)
 	{
-		if (func_num_args() === 0) {
-			return $this->request->getQuery();
-		} else {
-			return $this->request->getQuery($key);
-		}
+		return func_num_args() === 0 ? $this->request->getQuery() : $this->request->getQuery($key);
 	}
 
 	public function getRawBody(): ?string
