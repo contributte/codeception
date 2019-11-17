@@ -4,10 +4,17 @@ This library is here to help you with Integration and [Functional Tests](http://
 
 ## Content
 
-- [Usage - How to use it](#usage)
+- [Setup](#setup)
+- [Usage](#usage)
     - [DI module - Nette\DI integration](#nettedimodule)
     - [Application module - Nette\Application integration](#netteapplicationmodule)
 - [Development](#development)
+
+## Setup
+
+```bash
+composer require contributte/codeception
+```
 
 ## Usage
 
@@ -35,7 +42,7 @@ modules:
             # newContainerForEachTest: true
 ```
 
-```
+```yml
 # /tests/integration/config/config.neon
 services:
     - MyService
@@ -103,7 +110,7 @@ class HomepageTest extends Unit
 
 ## Development
 
-Simply run scripts in `composer.json` and make sure that qa, tester and phpstan passed.
+Simply run scripts in `Makefile` and make sure that qa, tester and phpstan passed.
 
 ### Advanced usage
 
