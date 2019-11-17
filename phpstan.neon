@@ -1,14 +1,5 @@
 includes:
-	- temp/phpstan/vendor/phpstan/phpstan-deprecation-rules/rules.neon
-	- temp/phpstan/vendor/phpstan/phpstan-nette/extension.neon
-	- temp/phpstan/vendor/phpstan/phpstan-nette/rules.neon
-	- temp/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
-
-services:
-	-
-		class: Contributte\Codeception\Qa\PhpStan\NetteDIModuleType
-		tags:
-			- phpstan.broker.dynamicMethodReturnTypeExtension
+	- extension.neon
 
 parameters:
 	excludes_analyse:
@@ -16,6 +7,7 @@ parameters:
 
 	ignoreErrors:
 		- '#^Only booleans are allowed in a negated boolean, string\|null given.#'
+		- '#(.+)should be contravariant(.+)#'
 
 		# Should not happen
 		- '#^Method Contributte\\Codeception\\Module\\NetteDIModule::getContainer\(\) should return Nette\\DI\\Container but returns Nette\\DI\\Container\|null#'
@@ -29,4 +21,4 @@ parameters:
 		- '#^Call to an undefined method PHPStan\\#'
 
 		# Symfony 4.3 deprecation message
-		- '#^Class Contributte\\Codeception\\Connector\\NetteConnector extends deprecated class Symfony\\Component\\BrowserKit\\Client\.#'
+		- '#^Class Contributte\\Codeception\\Connector\\NetteConnector extends deprecated class Symfony\\Component\\BrowserKit\\Client(.+)#'
