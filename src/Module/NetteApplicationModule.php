@@ -68,6 +68,7 @@ class NetteApplicationModule extends Framework
 		if ($this->client->isFollowingRedirects()) {
 			$this->fail('Method seeRedirectTo only works when followRedirects option is disabled');
 		}
+
 		/** @var NetteDIModule $diModule */
 		$diModule = $this->getModule(NetteDIModule::class);
 		$request = $diModule->grabService(IRequest::class);

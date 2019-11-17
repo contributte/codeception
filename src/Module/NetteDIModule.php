@@ -84,9 +84,11 @@ class NetteDIModule extends Module
 		if ($this->config['newContainerForEachTest'] !== true) {
 			$this->fail('The useConfigFiles can only be used if the newContainerForEachTest option is set to true.');
 		}
+
 		if ($this->container !== null) {
 			$this->fail('Can\'t set configFiles after the container is created.');
 		}
+
 		$this->configFiles = $configFiles;
 	}
 
@@ -158,6 +160,7 @@ class NetteDIModule extends Module
 		if (is_dir($tempDir)) {
 			FileSystem::delete(realpath($tempDir));
 		}
+
 		FileSystem::createDir($tempDir);
 	}
 
