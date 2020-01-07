@@ -154,15 +154,32 @@ class NetteDIModule extends Module
 		}
 	}
 
-	private function clearTempDir(): void
+
+	private function getTempDir(): string
 	{
 		$tempDir = $this->path . '/' . $this->config['tempDir'];
+
+		return $tempDir;
+	}
+
+
+	private function clearTempDir(): void
+	{
+		$this->deleteTempDir();
+
+		$tempDir = $this->getTempDir();
+		FileSystem::createDir($tempDir);
+	}
+
+
+	private function deleteTempDir(): void
+	{
+		$tempDir = $this->getTempDir();
 		if (is_dir($tempDir)) {
 			FileSystem::delete(realpath($tempDir));
 		}
-
-		FileSystem::createDir($tempDir);
 	}
+
 
 	private function stopContainer(): void
 	{
@@ -187,7 +204,7 @@ class NetteDIModule extends Module
 			// IJournal is optional
 		}
 
-		FileSystem::delete(realpath($this->container->getParameters()['tempDir']));
+		$this->deleteTempDir();
 	}
 
 }
