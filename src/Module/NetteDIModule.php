@@ -135,7 +135,7 @@ class NetteDIModule extends Module
 		]);
 
 		$this->clearTempDir();
-		$tempDir = $this->path . '/' . $this->config['tempDir'];
+		$tempDir = $this->getTempDir();
 		$configurator->setTempDirectory($tempDir);
 
 		if ($this->config['debugMode'] !== null) {
