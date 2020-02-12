@@ -15,14 +15,14 @@ class HttpExtension extends CompilerExtension
 	{
 		$builder = $this->getContainerBuilder();
 
-		$request = $builder->getByType(IRequest::class) ?: 'httpRequest';
+		$request = $builder->getByType(IRequest::class) ?? 'httpRequest';
 		if ($builder->hasDefinition($request)) {
 			$builder->getDefinition($request)
 				->setType(IRequest::class)
 				->setFactory(Request::class);
 		}
 
-		$response = $builder->getByType(IResponse::class) ?: 'httpResponse';
+		$response = $builder->getByType(IResponse::class) ?? 'httpResponse';
 		if ($builder->hasDefinition($response)) {
 			$builder->getDefinition($response)
 				->setType(IResponse::class)

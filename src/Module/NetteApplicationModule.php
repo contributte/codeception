@@ -5,6 +5,7 @@ namespace Contributte\Codeception\Module;
 use Codeception\Lib\Framework;
 use Codeception\TestInterface;
 use Contributte\Codeception\Connector\NetteConnector;
+use Nette\DI\Container;
 use Nette\Http\IRequest;
 use Nette\Http\IResponse;
 
@@ -35,7 +36,7 @@ class NetteApplicationModule extends Framework
 	{
 		$this->client = new NetteConnector();
 		$this->client->setContainerAccessor(
-			function () {
+			function (): Container {
 				/** @var NetteDIModule $diModule */
 				$diModule = $this->getModule(NetteDIModule::class);
 
