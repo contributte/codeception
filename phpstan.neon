@@ -22,3 +22,8 @@ parameters:
 
 		# Symfony 4.3 deprecation message
 		- '#^Class Contributte\\Codeception\\Connector\\NetteConnector extends deprecated class Symfony\\Component\\BrowserKit\\Client(.+)#'
+
+	earlyTerminatingMethodCalls:
+		Codeception\Module:
+			- fail
+
