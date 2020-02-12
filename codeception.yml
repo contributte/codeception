@@ -6,8 +6,9 @@ paths:
     data: tests/_data
     support: tests/_helpers
 
+bootstrap: _bootstrap.php
+
 settings:
-    bootstrap: _bootstrap.php
     log: true
 
 coverage:

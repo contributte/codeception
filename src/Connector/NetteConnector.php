@@ -9,12 +9,12 @@ use Nette\Application\Application;
 use Nette\DI\Container;
 use Nette\Http\IRequest;
 use Nette\Http\IResponse;
-use Symfony\Component\BrowserKit\Client;
+use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\BrowserKit\Response;
 use Throwable;
 
-class NetteConnector extends Client
+class NetteConnector extends AbstractBrowser
 {
 
 	/** @var callable */
