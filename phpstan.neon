@@ -20,9 +20,6 @@ parameters:
 		# Complicated to test dev-required phpstan with separatly installed version
 		- '#^Call to an undefined method PHPStan\\#'
 
-		# Symfony 4.3 deprecation message
-		- '#^Class Contributte\\Codeception\\Connector\\NetteConnector extends deprecated class Symfony\\Component\\BrowserKit\\Client(.+)#'
-
 	earlyTerminatingMethodCalls:
 		Codeception\Module:
 			- fail
