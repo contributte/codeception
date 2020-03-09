@@ -17,11 +17,11 @@ use ReflectionProperty;
 class NetteDIModule extends Module
 {
 
+	/** @var callable[] function(Container $configurator): void; */
+	public $onCreateConfigurator = [];
+
 	/** @var callable[] function(Container $container): void; */
 	public $onCreateContainer = [];
-	
-	/** @var array */
-	public $parameters = [];
 
 	/** @var mixed[] */
 	protected $config = [
@@ -132,12 +132,10 @@ class NetteDIModule extends Module
 			$configurator->enableDebugger($logDir);
 		}
 
-		$parameters = array_merge($this->parameters, [
+		$configurator->addParameters([
 			'appDir' => $this->path . ($this->config['appDir'] !== null ? '/' . $this->config['appDir'] : ''),
 			'wwwDir' => $this->path . ($this->config['wwwDir'] !== null ? '/' . $this->config['wwwDir'] : ''),
 		]);
-
-		$configurator->addParameters($parameters);
 
 		$this->clearTempDir();
 		$tempDir = $this->getTempDir();
@@ -150,6 +148,10 @@ class NetteDIModule extends Module
 		$configFiles = $this->configFiles !== [] ? $this->configFiles : $this->config['configFiles'];
 		foreach ($configFiles as $file) {
 			$configurator->addConfig(FileSystem::isAbsolute($file) ? $file : $this->path . '/' . $file);
+		}
+
+		foreach ($this->onCreateConfigurator as $callback) {
+			$callback($configurator);
 		}
 
 		$this->container = $configurator->createContainer();
