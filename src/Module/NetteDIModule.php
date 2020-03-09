@@ -17,6 +17,9 @@ use ReflectionProperty;
 class NetteDIModule extends Module
 {
 
+	/** @var callable[] function(Container $configurator): void; */
+	public $onCreateConfigurator = [];
+
 	/** @var callable[] function(Container $container): void; */
 	public $onCreateContainer = [];
 
@@ -145,6 +148,10 @@ class NetteDIModule extends Module
 		$configFiles = $this->configFiles !== [] ? $this->configFiles : $this->config['configFiles'];
 		foreach ($configFiles as $file) {
 			$configurator->addConfig(FileSystem::isAbsolute($file) ? $file : $this->path . '/' . $file);
+		}
+
+		foreach ($this->onCreateConfigurator as $callback) {
+			$callback($configurator);
 		}
 
 		$this->container = $configurator->createContainer();
