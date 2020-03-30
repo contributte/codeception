@@ -127,5 +127,10 @@ class Request implements IRequest
 	{
 		return $this->request->isSecured();
 	}
+	
+	public function isSameSite(): bool
+	{
+		return true;
+	}
 
 }
