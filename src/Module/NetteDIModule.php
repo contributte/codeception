@@ -54,7 +54,7 @@ class NetteDIModule extends Module
 	 */
 	public function _beforeSuite($settings = []): void
 	{
-		$this->path = $settings['path'];
+		$this->path = rtrim($settings['path'], '/');
 		$this->clearTempDir();
 	}
 
