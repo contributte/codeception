@@ -1,56 +1,54 @@
-# Codeception
+![](https://heatbadger.now.sh/github/readme/contributte/codeception/)
 
-Integration of Nette Framework to Codeception.
+<p align=center>
+    <a href="https://github.com/contributte/codeception/actions"><img src="https://badgen.net/github/checks/contributte/codeception"></a>
+    <a href="https://coveralls.io/r/contributte/codeception"><img src="https://badgen.net/coveralls/c/github/contributte/codeception"></a>
+    <a href="https://packagist.org/packages/contributte/codeception"><img src="https://badgen.net/packagist/dm/contributte/codeception"></a>
+    <a href="https://packagist.org/packages/contributte/codeception"><img src="https://badgen.net/packagist/v/contributte/codeception"></a>
+</p>
+<p align=center>
+    <a href="https://packagist.org/packages/contributte/codeception"><img src="https://badgen.net/packagist/php/contributte/codeception"></a>
+    <a href="https://github.com/contributte/codeception"><img src="https://badgen.net/github/license/contributte/codeception"></a>
+    <a href="https://bit.ly/ctteg"><img src="https://badgen.net/badge/support/gitter/cyan"></a>
+    <a href="https://bit.ly/cttfo"><img src="https://badgen.net/badge/support/forum/yellow"></a>
+    <a href="https://contributte.org/partners.html"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
+</p>
 
-[![Build Status](https://img.shields.io/travis/contributte/codeception.svg?style=flat-square)](https://travis-ci.org/contributte/codeception)
-[![Code coverage](https://img.shields.io/coveralls/contributte/codeception.svg?style=flat-square)](https://coveralls.io/r/contributte/codeception)
-[![Licence](https://img.shields.io/packagist/l/contributte/codeception.svg?style=flat-square)](https://packagist.org/packages/contributte/codeception)
-[![Downloads this Month](https://img.shields.io/packagist/dm/contributte/codeception.svg?style=flat-square)](https://packagist.org/packages/contributte/codeception)
-[![Downloads total](https://img.shields.io/packagist/dt/contributte/codeception.svg?style=flat-square)](https://packagist.org/packages/contributte/codeception)
-[![Latest stable](https://img.shields.io/packagist/v/contributte/codeception.svg?style=flat-square)](https://packagist.org/packages/contributte/codeception)
-[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+<p align=center>
+    Website 🚀 <a href="https://contributte.org">contributte.org</a> | Contact 👨🏻‍💻 <a href="https://f3l1x.io">f3l1x.io</a> | Twitter 🐦 <a href="https://twitter.com/contributte">@contributte</a>
+</p>
 
-## Discussion / Help
+## Usage
 
-[![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](http://bit.ly/ctteg)
+To install latest version of `contributte/codeception` use [Composer](https://getcomposer.com).
+
+```
+composer require contributte/codeception
+```
 
 ## Documentation
 
-- [Setup](.docs/README.md#setup)
-- [Usage](.docs/README.md#usage)
-    - [DI module - Nette\DI integration](.docs/README.md#nettedimodule)
-    - [Application module - Nette\Application integration](.docs/README.md#netteapplicationmodule)
-- [Development](.docs/README.md#development)
+For details on how to use this package, check out our [documentation](.docs).
 
 ## Versions
 
-| State       | Version  | Branch   | PHP     |                 |
-|-------------|----------|----------|---------|-----------------|
-| dev         | `^1.4.0` | `master` | `^7.2`  |                 |
-| stable      | `^1.3.0` | `master` | `^7.2`  |                 |
-| stable      | `^0.8.1` | `master` | `>=7.1` | (old namespace) |
+| State       | Version  | Branch   | PHP     |
+|-------------|----------|----------|---------|
+| dev         | `^1.4.0` | `master` | `>=7.2` |
+| stable      | `^1.3.1` | `master` | `>=7.2` |
 
-## Maintainers
+## Development
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/enumag">
-            <img width="150" height="150" src="https://avatars0.githubusercontent.com/u/539462?s=150&v=4">
-        </a>
-        </br>
-        <a href="https://github.com/enumage">Jáchym Toušek</a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/f3l1x">
-            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=150">
-        </a>
-        </br>
-        <a href="https://github.com/f3l1x">Milan Felix Šulc</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+See [how to contribute](https://contributte.org) to this package. This package is currently maintained by these authors.
 
-Thank you for testing, reporting and contributing.
+<a href="https://github.com/enumag">
+    <img width="80" height="80" src="https://avatars.githubusercontent.com/enumag">
+</a>
+<a href="https://github.com/f3l1x">
+    <img width="80" height="80" src="https://avatars.githubusercontent.com/f3l1x">
+</a>
+
+-----
+
+Consider to [support](https://contributte.org/partners) **contributte** development team.
+Also thank you for using this package.
