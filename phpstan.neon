@@ -1,9 +1,13 @@
 includes:
+	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
+	- vendor/phpstan/phpstan-nette/extension.neon
+	- vendor/phpstan/phpstan-nette/rules.neon
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
 	- extension.neon
 
 parameters:
 	excludes_analyse:
-		- %rootDir%/../../../tests/_*
+		- %currentWorkingDirectory%/tests/_*
 
 	ignoreErrors:
 		- '#^Only booleans are allowed in a negated boolean, string\|null given.#'

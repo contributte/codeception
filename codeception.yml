@@ -1,10 +1,17 @@
 actor: Tester
 
 paths:
+    # where the tests stored
     tests: tests
-    log: tests/_log
+
+    # directory for fixture data
     data: tests/_data
-    support: tests/_helpers
+
+    # directory for support code
+    support: tests/_support
+
+    # directory for output
+    output: tests/_output
 
 bootstrap: _bootstrap.php
 
@@ -14,4 +21,4 @@ settings:
 coverage:
     enabled: true
     include:
-        - src/*
+        - src/**

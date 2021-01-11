@@ -19,6 +19,7 @@
     </rule>
 
     <!-- Exclude folders -->
-	<exclude-pattern>/tests/tmp</exclude-pattern>
-	<exclude-pattern>/tests/_helpers</exclude-pattern>
+	<exclude-pattern>/tests/_output</exclude-pattern>
+	<exclude-pattern>/tests/_support</exclude-pattern>
+	<exclude-pattern>/tests/_temp</exclude-pattern>
 </ruleset>

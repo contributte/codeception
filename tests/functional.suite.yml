@@ -7,7 +7,7 @@ modules:
         - Contributte\Codeception\Module\NetteApplicationModule:
             followRedirects: false
         - Contributte\Codeception\Module\NetteDIModule:
-            tempDir: ../_temp/functional
+            tempDir: ./../_temp/functional
             removeDefaultExtensions: true
             configFiles:
                 - config/config.neon

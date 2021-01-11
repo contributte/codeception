@@ -164,9 +164,7 @@ class NetteDIModule extends Module
 
 	private function getTempDir(): string
 	{
-		$tempDir = $this->path . '/' . $this->config['tempDir'];
-
-		return $tempDir;
+		return $this->path . '/' . $this->config['tempDir'];
 	}
 
 

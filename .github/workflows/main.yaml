@@ -283,9 +283,7 @@ jobs:
 
       - name: "Coveralls.io"
         env:
-          CI_NAME: github
-          CI: true
-          COVERALLS_REPO_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar
-          php php-coveralls.phar --verbose --config tests/.coveralls.yml
+          composer global require php-coveralls/php-coveralls
+          php-coveralls --coverage_clover=tests/_output/coverage.xml --json_path=coveralls-upload.json -v
