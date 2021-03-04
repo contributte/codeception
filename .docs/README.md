@@ -62,7 +62,7 @@ class MyServiceTest extends Unit
     }
 }
 ```
-`useConfigFiles` method takes array of file paths that are either absolute or relative to suite root. 
+`useConfigFiles` method takes array of file paths that are either absolute or relative to suite root.
 
 ### NetteApplicationModule
 
@@ -116,7 +116,7 @@ Simply run scripts in `Makefile` and make sure that qa, tester and phpstan passe
 
 You can use these commands to do more specific tasks.
 
-```
+```bash
 # generate necessary files to run the tests
 ./vendor/bin/codecept build
 

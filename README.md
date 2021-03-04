@@ -22,8 +22,8 @@
 
 To install latest version of `contributte/codeception` use [Composer](https://getcomposer.org).
 
-```
-$ composer require contributte/codeception
+```bash
+composer require contributte/codeception
 ```
 
 ## Documentation
