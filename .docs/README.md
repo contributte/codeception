@@ -22,7 +22,7 @@ composer require contributte/codeception
 
 When you want to write an integration test to make sure that some services work well together you need to create the DI container first.
 
-```yml
+```yaml
 # /tests/integration.suite.yml
 error_level: "E_ALL"
 class_name: IntegrationSuiteTester
@@ -42,7 +42,7 @@ modules:
             # newContainerForEachTest: true
 ```
 
-```yml
+```yaml
 # /tests/integration/config/config.neon
 services:
     - MyService
@@ -62,7 +62,7 @@ class MyServiceTest extends Unit
     }
 }
 ```
-`useConfigFiles` method takes array of file paths that are either absolute or relative to suite root. 
+`useConfigFiles` method takes array of file paths that are either absolute or relative to suite root.
 
 ### NetteApplicationModule
 
@@ -70,7 +70,7 @@ In functional tests you want to emulate the HTTP request and run `Nette\Applicat
 
 Unfortunately Nette framework has some downsides like the fact that Request and Response are registered as services in the DI Container. For this reason the NetteApplicationModule requires `Contributte\Codeception\DI\CodeceptionExtension` to override the default implementations. **Beware that this is meant for the functional tests only. Do NOT register the extension outside of tests.**
 
-```yml
+```yaml
 # /tests/functional.suite.yml
 error_level: "E_ALL"
 class_name: FunctionalSuiteTester
@@ -86,7 +86,7 @@ modules:
                 - config/config.neon
 ```
 
-```yml
+```yaml
 # /tests/functional/config/config.neon
 extensions:
     codeception: Contributte\Codeception\DI\HttpExtension
