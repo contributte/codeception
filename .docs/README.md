@@ -6,8 +6,8 @@ This library is here to help you with Integration and [Functional Tests](http://
 
 - [Setup](#setup)
 - [Usage](#usage)
-    - [DI module - Nette\DI integration](#nettedimodule)
-    - [Application module - Nette\Application integration](#netteapplicationmodule)
+	- [DI module - Nette\DI integration](#nettedimodule)
+	- [Application module - Nette\Application integration](#netteapplicationmodule)
 - [Development](#development)
 
 ## Setup
@@ -42,24 +42,25 @@ modules:
             # newContainerForEachTest: true
 ```
 
-```yaml
+```neon
 # /tests/integration/config/config.neon
 services:
-    - MyService
+	- MyService
 ```
 
 ```php
 # /tests/integration/src/MyServiceTest.php
 use Codeception\Test\Unit;
+
 class MyServiceTest extends Unit
 {
-    public function testMyService(): void
-    {
-        // Here you can override the configFiles from integration.suite.yml if needed.
-        // The newContainerForEachTest option is required for this.
-        // $this->tester->useConfigFiles(['config/another-config.neon']);
-        $this->assertInstanceOf(MyService::class, $this->tester->grabService(MyService::class));
-    }
+	public function testMyService(): void
+	{
+		// Here you can override the configFiles from integration.suite.yml if needed.
+		// The newContainerForEachTest option is required for this.
+		// $this->tester->useConfigFiles(['config/another-config.neon']);
+		$this->assertInstanceOf(MyService::class, $this->tester->grabService(MyService::class));
+	}
 }
 ```
 `useConfigFiles` method takes array of file paths that are either absolute or relative to suite root.
@@ -86,10 +87,10 @@ modules:
                 - config/config.neon
 ```
 
-```yaml
+```neon
 # /tests/functional/config/config.neon
 extensions:
-    codeception: Contributte\Codeception\DI\HttpExtension
+	codeception: Contributte\Codeception\DI\HttpExtension
 ```
 
 ```php
@@ -97,14 +98,14 @@ extensions:
 use Codeception\Test\Unit;
 class HomepageTest extends Unit
 {
-    public function testHomepage(): void
-    {
-        // Create http request and run Nette\Application\Application. See Contributte\Codeception\Connector\NetteConnector for details.
-        $this->tester->amOnPage('/');
-        // Assert that the response is what you expect.
-        $this->tester->seeResponseCodeIs(200);
-        $this->tester->see('Hello World!', 'h1');
-    }
+	public function testHomepage(): void
+	{
+		// Create http request and run Nette\Application\Application. See Contributte\Codeception\Connector\NetteConnector for details.
+		$this->tester->amOnPage('/');
+		// Assert that the response is what you expect.
+		$this->tester->seeResponseCodeIs(200);
+		$this->tester->see('Hello World!', 'h1');
+	}
 }
 ```
 
@@ -116,7 +117,7 @@ Simply run scripts in `Makefile` and make sure that qa, tester and phpstan passe
 
 You can use these commands to do more specific tasks.
 
-```
+```bash
 # generate necessary files to run the tests
 ./vendor/bin/codecept build
 
