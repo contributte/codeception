@@ -3,11 +3,11 @@ error_level: "E_ALL"
 class_name: FunctionalSuiteTester
 
 modules:
-    enabled:
-        - Contributte\Codeception\Module\NetteApplicationModule:
-            followRedirects: false
-        - Contributte\Codeception\Module\NetteDIModule:
-            tempDir: ./../_temp/functional
-            removeDefaultExtensions: true
-            configFiles:
-                - config/config.neon
+  enabled:
+    - Contributte\Codeception\Module\NetteApplicationModule:
+        followRedirects: false
+    - Contributte\Codeception\Module\NetteDIModule:
+        tempDir: ./../_temp/functional
+        removeDefaultExtensions: true
+        configFiles:
+          - config/config.neon
