@@ -6,12 +6,14 @@ includes:
 	- extension.neon
 
 parameters:
-	excludes_analyse:
+	excludePaths:
 		- %currentWorkingDirectory%/tests/_*
 
 	ignoreErrors:
 		- '#^Only booleans are allowed in a negated boolean, string\|null given.#'
 		- '#(.+)should be contravariant(.+)#'
+
+		- '#^Property Contributte\\Codeception\\Module\\NetteApplicationModule::\$path is never read, only written.#'
 
 		# Should not happen
 		- '#^Method Contributte\\Codeception\\Module\\NetteDIModule::getContainer\(\) should return Nette\\DI\\Container but returns Nette\\DI\\Container\|null#'
@@ -28,3 +30,4 @@ parameters:
 		Codeception\Module:
 			- fail
 
+	reportMaybesInPropertyPhpDocTypes: false

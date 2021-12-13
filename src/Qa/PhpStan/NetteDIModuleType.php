@@ -31,7 +31,7 @@ class NetteDIModuleType implements DynamicMethodReturnTypeExtension
 			return $methodReflection->getReturnType();
 		}
 
-		$arg = $methodCall->args[0]->value;
+		$arg = $methodCall->getArgs()[0]->value;
 
 		if (!$arg instanceof ClassConstFetch) {
 			return $methodReflection->getReturnType();
