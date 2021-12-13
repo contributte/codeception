@@ -111,6 +111,7 @@ class NetteDIModule extends Module
 	public function grabService(string $service)
 	{
 		try {
+			/** @phpstan-var class-string $service */
 			return $this->getContainer()->getByType($service);
 		} catch (MissingServiceException $e) {
 			$this->fail($e->getMessage());
