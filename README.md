@@ -20,7 +20,7 @@
 
 ## Usage
 
-To install latest version of `contributte/codeception` use [Composer](https://getcomposer.com).
+To install latest version of `contributte/codeception` use [Composer](https://getcomposer.org).
 
 ```bash
 composer require contributte/codeception
