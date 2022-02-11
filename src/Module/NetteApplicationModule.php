@@ -9,11 +9,11 @@ use Nette\DI\Container;
 use Nette\Http\IRequest;
 use Nette\Http\IResponse;
 
+/**
+ * @property NetteConnector $client
+ */
 class NetteApplicationModule extends Framework
 {
-
-	/** @var NetteConnector */
-	public $client;
 
 	/** @var mixed[] */
 	protected $config = [
