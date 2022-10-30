@@ -15,8 +15,7 @@ use Nette\Http\IResponse;
 class NetteApplicationModule extends Framework
 {
 
-	/** @var mixed[] */
-	protected $config = [
+	protected array $config = [
 		'followRedirects' => true,
 	];
 

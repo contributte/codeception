@@ -23,8 +23,7 @@ class NetteDIModule extends Module
 	/** @var callable[] function(Container $container): void; */
 	public $onCreateContainer = [];
 
-	/** @var mixed[] */
-	protected $config = [
+	protected array $config = [
 		'configFiles' => [],
 		'appDir' => null,
 		'logDir' => null,
@@ -34,8 +33,7 @@ class NetteDIModule extends Module
 		'newContainerForEachTest' => false,
 	];
 
-	/** @var string[] */
-	protected $requiredFields = [
+	protected array $requiredFields = [
 		'tempDir',
 	];
 
