@@ -4,7 +4,7 @@ namespace Contributte\Codeception\Module;
 
 use Codeception\Module;
 use Codeception\TestInterface;
-use Nette\Caching\Storages\IJournal;
+use Nette\Caching\Storages\Journal;
 use Nette\Caching\Storages\SQLiteJournal;
 use Nette\Configurator;
 use Nette\DI\Container;
@@ -23,6 +23,7 @@ class NetteDIModule extends Module
 	/** @var callable[] function(Container $container): void; */
 	public $onCreateContainer = [];
 
+	/** @var array<string, mixed> */
 	protected array $config = [
 		'configFiles' => [],
 		'appDir' => null,
@@ -33,6 +34,7 @@ class NetteDIModule extends Module
 		'newContainerForEachTest' => false,
 	];
 
+	/** @var string[]  */
 	protected array $requiredFields = [
 		'tempDir',
 	];
@@ -47,11 +49,13 @@ class NetteDIModule extends Module
 	private $container;
 
 	/**
-	 * @param mixed[] $settings
+	 * @param array{path?: string} $settings
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
 	 */
-	public function _beforeSuite($settings = []): void
+	public function _beforeSuite(array $settings = []): void
 	{
+		assert(isset($settings['path']));
+
 		$this->path = rtrim($settings['path'], '/');
 		$this->clearTempDir();
 	}
@@ -141,9 +145,10 @@ class NetteDIModule extends Module
 		$configurator->setTempDirectory($tempDir);
 
 		if ($this->config['debugMode'] !== null) {
-			$configurator->setDebugMode($this->config['debugMode']);
+			$configurator->setDebugMode((bool) $this->config['debugMode']);
 		}
 
+		/** @var iterable<string> $configFiles */
 		$configFiles = $this->configFiles !== [] ? $this->configFiles : $this->config['configFiles'];
 		foreach ($configFiles as $file) {
 			$configurator->addConfig(FileSystem::isAbsolute($file) ? $file : $this->path . '/' . $file);
@@ -198,7 +203,7 @@ class NetteDIModule extends Module
 		}
 
 		try {
-			$journal = $this->container->getByType(IJournal::class);
+			$journal = $this->container->getByType(Journal::class);
 			if ($journal instanceof SQLiteJournal) {
 				$property = new ReflectionProperty(SQLiteJournal::class, 'pdo');
 				$property->setAccessible(true);

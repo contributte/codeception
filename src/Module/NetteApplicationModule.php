@@ -15,19 +15,21 @@ use Nette\Http\IResponse;
 class NetteApplicationModule extends Framework
 {
 
+	/** @var array<string, mixed>  */
 	protected array $config = [
 		'followRedirects' => true,
 	];
 
-	/** @var string */
-	private $path;
+	private string $path;
 
 	/**
-	 * @param mixed[] $settings
+	 * @param array{path?: string} $settings
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
 	 */
 	public function _beforeSuite($settings = []): void
 	{
+		assert(isset($settings['path']));
+
 		$this->path = $settings['path'];
 	}
 
@@ -42,7 +44,7 @@ class NetteApplicationModule extends Framework
 				return $diModule->getContainer();
 			}
 		);
-		$this->client->followRedirects($this->config['followRedirects']);
+		$this->client->followRedirects((bool) $this->config['followRedirects']);
 
 		parent::_before($test);
 	}
