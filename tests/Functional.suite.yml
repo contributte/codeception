@@ -1,6 +1,6 @@
 error_level: "E_ALL"
 
-class_name: FunctionalSuiteTester
+actor: FunctionalTester
 
 modules:
   enabled:
