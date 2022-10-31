@@ -19,27 +19,24 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
-    "codeception/codeception": "^4.0.2 || ^5.0.0",
-    "codeception/lib-innerbrowser": "^1.3 || ^2.0 || ^3.0",
-    "nette/di": "^3.0",
-    "nette/bootstrap": "^3.0",
-    "nette/http": "^3.0.3",
-    "nette/utils": "^3.0"
+    "php": ">= 8.0",
+    "codeception/codeception": "^5.0.0",
+    "codeception/lib-innerbrowser": "^3.0",
+    "nette/di": "^3.0.13",
+    "nette/bootstrap": "^3.1.2",
+    "nette/http": "^3.1.6",
+    "nette/utils": "^3.2.8"
   },
   "require-dev": {
-    "latte/latte": "^2.5.1",
-    "nette/application": "^3.0",
-    "nette/caching": "~2.5.8 || ^3.0",
+    "latte/latte": "^2.11.5",
+    "nette/application": "^3.1.7",
+    "nette/caching": "^3.1.4",
     "ninjify/qa": "^0.12",
-    "phpstan/phpstan": "^1.0",
+    "phpstan/phpstan": "^1.8.11",
     "phpstan/phpstan-deprecation-rules": "^1.0",
-    "phpstan/phpstan-nette": "^1.0",
-    "phpstan/phpstan-strict-rules": "^1.0",
-    "tracy/tracy": "~2.6.1 || ~2.7.0"
-  },
-  "conflict": {
-    "symfony/browser-kit": "<4.0.0"
+    "phpstan/phpstan-nette": "^1.1.0",
+    "phpstan/phpstan-strict-rules": "^1.4.4",
+    "tracy/tracy": "^2.7.9"
   },
   "autoload": {
     "psr-4": {
@@ -48,11 +45,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Functional\\": "tests/functional/src"
-    },
-    "files": [
-      "vendor/codeception/codeception/shim.php"
-    ]
+      "Tests\\Functional\\": "tests/Functional/src"
+    }
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -64,7 +58,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.4.x-dev"
+      "dev-master": "1.5.x-dev"
     }
   }
 }
