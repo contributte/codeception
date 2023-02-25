@@ -36,7 +36,8 @@
     "phpstan/phpstan-deprecation-rules": "^1.0",
     "phpstan/phpstan-nette": "^1.1.0",
     "phpstan/phpstan-strict-rules": "^1.4.4",
-    "tracy/tracy": "^2.9.0"
+    "tracy/tracy": "^2.9.0",
+    "phpunit/php-code-coverage": "^9.2.24"
   },
   "autoload": {
     "psr-4": {
