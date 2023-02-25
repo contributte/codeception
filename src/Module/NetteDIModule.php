@@ -4,9 +4,9 @@ namespace Contributte\Codeception\Module;
 
 use Codeception\Module;
 use Codeception\TestInterface;
+use Nette\Bootstrap\Configurator;
 use Nette\Caching\Storages\Journal;
 use Nette\Caching\Storages\SQLiteJournal;
-use Nette\Configurator;
 use Nette\DI\Container;
 use Nette\DI\Extensions\ExtensionsExtension;
 use Nette\DI\MissingServiceException;
@@ -34,7 +34,7 @@ class NetteDIModule extends Module
 		'newContainerForEachTest' => false,
 	];
 
-	/** @var string[]  */
+	/** @var string[] */
 	protected array $requiredFields = [
 		'tempDir',
 	];
@@ -132,10 +132,10 @@ class NetteDIModule extends Module
 		if ($this->config['logDir'] !== null) {
 			$logDir = $this->path . '/' . $this->config['logDir'];
 			FileSystem::createDir($logDir);
-			$configurator->enableDebugger($logDir);
+			$configurator->enableTracy($logDir);
 		}
 
-		$configurator->addParameters([
+		$configurator->addStaticParameters([
 			'appDir' => $this->path . ($this->config['appDir'] !== null ? '/' . $this->config['appDir'] : ''),
 			'wwwDir' => $this->path . ($this->config['wwwDir'] !== null ? '/' . $this->config['wwwDir'] : ''),
 		]);

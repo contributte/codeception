@@ -66,7 +66,7 @@ class Response implements IResponse
 		return $this;
 	}
 
-	public function redirect(string $url, int $code = self::S302_FOUND): void
+	public function redirect(string $url, int $code = self::S302_Found): void
 	{
 		$this->setCode($code);
 		$this->setHeader('Location', $url);
