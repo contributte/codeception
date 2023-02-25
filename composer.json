@@ -25,7 +25,7 @@
     "nette/di": "^3.0.13",
     "nette/bootstrap": "^3.1.2",
     "nette/http": "^3.1.6",
-    "nette/utils": "^3.2.8"
+    "nette/utils": "^3.2.8 || ^4.0"
   },
   "require-dev": {
     "latte/latte": "^2.11.5",
