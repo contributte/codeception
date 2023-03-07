@@ -31,10 +31,12 @@ class NetteConnector extends AbstractBrowser
 	 */
 	public function doRequest($request): Response
 	{
+		$phpSelf = $_SERVER['PHP_SELF'];
 		$_COOKIE = $request->getCookies();
 		$_SERVER = $request->getServer();
 		$_FILES = $request->getFiles();
 
+		$_SERVER['PHP_SELF'] = $phpSelf;
 		$_SERVER['REQUEST_METHOD'] = $method = strtoupper($request->getMethod());
 		$_SERVER['REQUEST_URI'] = str_replace('http://localhost', '', $request->getUri());
 		$_SERVER['REMOTE_ADDR'] = '127.0.0.1';
