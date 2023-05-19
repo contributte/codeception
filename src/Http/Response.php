@@ -12,7 +12,7 @@ use Nette\Utils\DateTime;
  */
 class Response implements IResponse
 {
-	
+
 	/** @var string The domain in which the cookie will be available */
 	public $cookieDomain = '';
 
