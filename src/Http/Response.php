@@ -13,6 +13,15 @@ use Nette\Utils\DateTime;
 class Response implements IResponse
 {
 
+	/** @var string The domain in which the cookie will be available */
+	public $cookieDomain = '';
+
+	/** @var string The path in which the cookie will be available */
+	public $cookiePath = '/';
+
+	/** @var bool Whether the cookie is available only through HTTPS */
+	public $cookieSecure = false;
+
 	/** @var int */
 	private $code = self::S200_OK;
 
