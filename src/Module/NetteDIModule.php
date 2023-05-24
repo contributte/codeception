@@ -5,14 +5,13 @@ namespace Contributte\Codeception\Module;
 use Codeception\Module;
 use Codeception\TestInterface;
 use Nette\Bootstrap\Configurator;
+use Nette\Caching\Cache;
 use Nette\Caching\Storages\Journal;
-use Nette\Caching\Storages\SQLiteJournal;
 use Nette\DI\Container;
 use Nette\DI\Extensions\ExtensionsExtension;
 use Nette\DI\MissingServiceException;
 use Nette\Http\Session;
 use Nette\Utils\FileSystem;
-use ReflectionProperty;
 
 class NetteDIModule extends Module
 {
@@ -204,11 +203,7 @@ class NetteDIModule extends Module
 
 		try {
 			$journal = $this->container->getByType(Journal::class);
-			if ($journal instanceof SQLiteJournal) {
-				$property = new ReflectionProperty(SQLiteJournal::class, 'pdo');
-				$property->setAccessible(true);
-				$property->setValue($journal, null);
-			}
+			$journal->clean([Cache::All => true]);
 		} catch (MissingServiceException $e) {
 			// IJournal is optional
 		}
