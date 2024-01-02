@@ -31,13 +31,10 @@
     "latte/latte": "^2.11.5",
     "nette/application": "^3.1.7",
     "nette/caching": "^3.1.4",
-    "ninjify/qa": "^0.14",
-    "phpstan/phpstan": "^1.8.11",
-    "phpstan/phpstan-deprecation-rules": "^1.0",
-    "phpstan/phpstan-nette": "^1.1.0",
-    "phpstan/phpstan-strict-rules": "^1.4.4",
+    "contributte/qa": "^0.4",
+    "contributte/phpstan": "^0.1",
     "tracy/tracy": "^2.9.0",
-    "phpunit/php-code-coverage": "^9.2.24"
+    "phpunit/php-code-coverage": "^10.1.11"
   },
   "autoload": {
     "psr-4": {
