@@ -20,12 +20,12 @@
   ],
   "require": {
     "php": ">= 8.0",
-    "codeception/codeception": "^5.0.0",
-    "codeception/lib-innerbrowser": "^3.1.3 || ^4.0.0",
-    "nette/di": "^3.1.1",
-    "nette/bootstrap": "^3.2.0",
-    "nette/http": "^3.2.1",
-    "nette/utils": "^3.2.8 || ^4.0"
+    "codeception/codeception": "^5.0.13",
+    "codeception/lib-innerbrowser": "^4.0.2",
+    "nette/di": "^3.1.8",
+    "nette/bootstrap": "^3.2.1",
+    "nette/http": "^3.2.3",
+    "nette/utils": "^4.0.3"
   },
   "require-dev": {
     "latte/latte": "^2.11.5",
