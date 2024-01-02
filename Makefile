@@ -25,8 +25,8 @@ tests:
 coverage:
 ifdef GITHUB_ACTION
 	vendor/bin/codecept build
-	phpdbg -qrr vendor/bin/codecept run --coverage-xml
+	vendor/bin/codecept run --coverage-xml
 else
 	vendor/bin/codecept build
-	phpdbg -qrr vendor/bin/codecept run --coverage-html
+	vendor/bin/codecept run --coverage-html
 endif

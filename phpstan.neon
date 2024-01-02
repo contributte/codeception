@@ -1,37 +1,91 @@
 includes:
+	#- vendor/contributte/phpstan/phpstan.neon
 	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
 	- vendor/phpstan/phpstan-nette/extension.neon
 	- vendor/phpstan/phpstan-nette/rules.neon
-	- vendor/phpstan/phpstan-strict-rules/rules.neon
-	- extension.neon
+	#- vendor/phpstan/phpstan-strict-rules/rules.neon
 
 parameters:
-	level: 9
-	paths:
+	level: 8
+	phpVersion: 80100
+
+	scanDirectories:
 		- src
 
-	excludePaths:
-		- %currentWorkingDirectory%/tests/_*
+	fileExtensions:
+		- php
+
+	paths:
+		- src
+		- .docs
 
 	ignoreErrors:
-		- '#^Only booleans are allowed in a negated boolean, string\|null given.#'
-		- '#(.+)should be contravariant(.+)#'
+		-
+			message: """
+				#^Call to deprecated method getName\\(\\) of class Contributte\\\\Imagist\\\\Bridge\\\\Doctrine\\\\ImageType\\:
+				this method will be removed in Doctrine DBAL 4\\.0,
+				            use \\{@see TypeRegistry\\:\\:lookupName\\(\\)\\} instead\\.$#
+			"""
+			count: 2
+			path: src/Bridge/Doctrine/ImageType.php
 
-		- '#^Property Contributte\\Codeception\\Module\\NetteApplicationModule::\$path is never read, only written.#'
+		-
+			message: "#^Class Contributte\\\\Imagist\\\\Bridge\\\\Nette\\\\DI\\\\GumletImageStorageExtension extends @final class Contributte\\\\Imagist\\\\Bridge\\\\Nette\\\\DI\\\\GumletImagistExtension\\.$#"
+			count: 1
+			path: src/Bridge/Nette/DI/GumletImageStorageExtension.php
 
-		# Should not happen
-		- '#^Method Contributte\\Codeception\\Module\\NetteDIModule::getContainer\(\) should return Nette\\DI\\Container but returns Nette\\DI\\Container\|null#'
-		- '#^Method Contributte\\Codeception\\Http\\Request::getFile\(\) should return Nette\\Http\\FileUpload\|null but returns array\|Nette\\Http\\FileUpload\|null.#'
-		- '#^Cannot call method getName\(\) on PHPStan\\Reflection\\ClassReflection\|null.#'
-		- '#Parameter \#1 \$path of static method Nette\\Utils\\FileSystem::delete\(\) expects string, string\|false given\.#'
-		- '#Call to an undefined method Nette\\DI\\Definitions\\Definition::setFactory\(\)\.#'
-		- '#Call to protected method setType\(\) of class Nette\\DI\\Definitions\\Definition\.#'
+		-
+			message: "#^Class Contributte\\\\Imagist\\\\Bridge\\\\Nette\\\\DI\\\\ImageStorageConfigFiltersExtension extends @final class Contributte\\\\Imagist\\\\Bridge\\\\Nette\\\\DI\\\\ImagistNeonFiltersExtension\\.$#"
+			count: 1
+			path: src/Bridge/Nette/DI/ImageStorageConfigFiltersExtension.php
 
-		# Complicated to test dev-required phpstan with separatly installed version
-		- '#^Call to an undefined method PHPStan\\#'
+		-
+			message: "#^Class Contributte\\\\Imagist\\\\Bridge\\\\Nette\\\\DI\\\\ImageStorageExtension extends @final class Contributte\\\\Imagist\\\\Bridge\\\\Nette\\\\DI\\\\ImagistExtension\\.$#"
+			count: 1
+			path: src/Bridge/Nette/DI/ImageStorageExtension.php
 
-	earlyTerminatingMethodCalls:
-		Codeception\Module:
-			- fail
+		-
+			message: "#^Method Contributte\\\\Imagist\\\\Bridge\\\\Symfony\\\\Serializer\\\\ImagistNormalizer\\:\\:normalize\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Bridge/Symfony/Serializer/ImagistNormalizer.php
 
-	reportMaybesInPropertyPhpDocTypes: false
+		-
+			message: "#^Method Contributte\\\\Imagist\\\\Bridge\\\\Symfony\\\\Serializer\\\\ImagistNormalizer\\:\\:normalize\\(\\) return type with generic class ArrayObject does not specify its types\\: TKey, TValue$#"
+			count: 1
+			path: src/Bridge/Symfony/Serializer/ImagistNormalizer.php
+
+		-
+			message: "#^Method Contributte\\\\Imagist\\\\Bridge\\\\Symfony\\\\Serializer\\\\ImagistNormalizer\\:\\:normalize\\(\\) should return array\\|ArrayObject\\|bool\\|float\\|int\\|string\\|null but returns Contributte\\\\Imagist\\\\Entity\\\\PersistentImageInterface\\.$#"
+			count: 1
+			path: src/Bridge/Symfony/Serializer/ImagistNormalizer.php
+
+		-
+			message: "#^Method Contributte\\\\Imagist\\\\Bridge\\\\Symfony\\\\Serializer\\\\ImagistNormalizer\\:\\:supportsNormalization\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Bridge/Symfony/Serializer/ImagistNormalizer.php
+
+		-
+			message: "#^PHPDoc tag @return with type mixed is not subtype of native type array\\|ArrayObject\\|bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Bridge/Symfony/Serializer/ImagistNormalizer.php
+
+		-
+			message: "#^Method Contributte\\\\Imagist\\\\Entity\\\\PromisedImage\\:\\:getOriginal\\(\\) should return Contributte\\\\Imagist\\\\Entity\\\\PromisedImage but returns Contributte\\\\Imagist\\\\Entity\\\\PersistentImageInterface\\.$#"
+			count: 1
+			path: src/Entity/PromisedImage.php
+
+		-
+			message: "#^Method Contributte\\\\Imagist\\\\Entity\\\\PromisedImage\\:\\:withFilter\\(\\) should return Contributte\\\\Imagist\\\\Entity\\\\PromisedImage but returns Contributte\\\\Imagist\\\\Entity\\\\PersistentImageInterface\\.$#"
+			count: 1
+			path: src/Entity/PromisedImage.php
+
+		-
+			message: "#^Method Contributte\\\\Imagist\\\\Entity\\\\PromisedImage\\:\\:withName\\(\\) should return Contributte\\\\Imagist\\\\Entity\\\\PromisedImage but returns Contributte\\\\Imagist\\\\Entity\\\\PersistentImageInterface\\.$#"
+			count: 1
+			path: src/Entity/PromisedImage.php
+
+		-
+			message: "#^Method Contributte\\\\Imagist\\\\Entity\\\\PromisedImage\\:\\:withScope\\(\\) should return Contributte\\\\Imagist\\\\Entity\\\\PromisedImage but returns Contributte\\\\Imagist\\\\Entity\\\\PersistentImageInterface\\.$#"
+			count: 1
+			path: src/Entity/PromisedImage.php
+

@@ -1,26 +1,24 @@
-<?xml version="1.0"?>
-<ruleset name="Contributte">
-	<!-- Contributte Coding Standard -->
-	<rule ref="vendor/ninjify/coding-standard/contributte.xml">
-		<exclude name="SlevomatCodingStandard.Classes.UnusedPrivateElements.WriteOnlyProperty"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Contributte" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+	<!-- Rulesets -->
+	<rule ref="./vendor/contributte/qa/ruleset-8.0.xml">
+		<exclude name="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable"/>
 	</rule>
 
-	<!-- Specific rules -->
+	<!-- Rules -->
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
 			<property name="rootNamespaces" type="array">
 				<element key="src" value="Contributte\Codeception"/>
 				<element key="tests" value="Tests"/>
 			</property>
+			<property name="extensions" type="array">
+				<element key="php" value="php"/>
+				<element key="phpt" value="phpt"/>
+			</property>
 		</properties>
 	</rule>
 
-	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName.NoMatchBetweenTypeNameAndFileName">
-		<exclude-pattern>/tests/functional</exclude-pattern>
-	</rule>
-
-	<!-- Exclude folders -->
-	<exclude-pattern>/tests/_output</exclude-pattern>
-	<exclude-pattern>/tests/_support</exclude-pattern>
-	<exclude-pattern>/tests/_temp</exclude-pattern>
+	<!-- Excludes -->
+	<exclude-pattern>/tests</exclude-pattern>
 </ruleset>
