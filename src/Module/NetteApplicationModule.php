@@ -15,18 +15,18 @@ use Nette\Http\IResponse;
 class NetteApplicationModule extends Framework
 {
 
-	/** @var array<string, mixed>  */
+	/** @var array<string, mixed> */
 	protected array $config = [
 		'followRedirects' => true,
 	];
 
-	private string $path;
+	private ?string $path = null;
 
 	/**
 	 * @param array{path?: string} $settings
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
 	 */
-	public function _beforeSuite($settings = []): void
+	public function _beforeSuite(mixed $settings = []): void
 	{
 		assert(isset($settings['path']));
 

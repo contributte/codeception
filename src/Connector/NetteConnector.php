@@ -29,7 +29,7 @@ class NetteConnector extends AbstractBrowser
 	 * @param Request $request
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
 	 */
-	public function doRequest($request): Response
+	public function doRequest(object $request): Response
 	{
 		$phpSelf = $_SERVER['PHP_SELF'];
 		$_COOKIE = $request->getCookies();
@@ -67,6 +67,7 @@ class NetteConnector extends AbstractBrowser
 			$content = (string) ob_get_clean();
 		} catch (Throwable $e) {
 			ob_end_clean();
+
 			throw $e;
 		}
 

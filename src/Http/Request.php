@@ -13,11 +13,9 @@ use Nette\Http\UrlScript;
 class Request implements IRequest
 {
 
-	/** @var RequestFactory */
-	private $factory;
+	private RequestFactory $factory;
 
-	/** @var IRequest */
-	private $request;
+	private IRequest $request;
 
 	public function __construct(RequestFactory $factory)
 	{
@@ -30,10 +28,7 @@ class Request implements IRequest
 		$this->request = $this->factory->fromGlobals();
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getCookie(string $key)
+	public function getCookie(string $key): mixed
 	{
 		return $this->request->getCookie($key);
 	}
@@ -77,18 +72,12 @@ class Request implements IRequest
 		return $this->request->getMethod();
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getPost(?string $key = null)
+	public function getPost(?string $key = null): mixed
 	{
 		return func_num_args() === 0 ? $this->request->getPost() : $this->request->getPost($key);
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getQuery(?string $key = null)
+	public function getQuery(?string $key = null): mixed
 	{
 		return func_num_args() === 0 ? $this->request->getQuery() : $this->request->getQuery($key);
 	}

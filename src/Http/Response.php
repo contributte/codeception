@@ -14,19 +14,18 @@ class Response implements IResponse
 {
 
 	/** @var string The domain in which the cookie will be available */
-	public $cookieDomain = '';
+	public string $cookieDomain = '';
 
 	/** @var string The path in which the cookie will be available */
-	public $cookiePath = '/';
+	public string $cookiePath = '/';
 
 	/** @var bool Whether the cookie is available only through HTTPS */
-	public $cookieSecure = false;
+	public bool $cookieSecure = false;
 
-	/** @var int */
-	private $code = self::S200_OK;
+	private int $code = self::S200_OK;
 
 	/** @var string[] */
-	private $headers = [];
+	private array $headers = [];
 
 	public function reset(): void
 	{
@@ -42,36 +41,40 @@ class Response implements IResponse
 	/**
 	 * @return static
 	 */
-	public function setCode(int $code, ?string $reason = null)
+	public function setCode(int $code, ?string $reason = null): static
 	{
 		$this->code = $code;
+
 		return $this;
 	}
 
 	/**
 	 * @return static
 	 */
-	public function setHeader(string $name, string $value)
+	public function setHeader(string $name, string $value): static
 	{
 		$this->headers[$name] = $value;
+
 		return $this;
 	}
 
 	/**
 	 * @return static
 	 */
-	public function addHeader(string $name, string $value)
+	public function addHeader(string $name, string $value): static
 	{
 		$this->headers[$name] = $value;
+
 		return $this;
 	}
 
 	/**
 	 * @return static
 	 */
-	public function setContentType(string $type, ?string $charset = null)
+	public function setContentType(string $type, ?string $charset = null): static
 	{
 		$this->setHeader('Content-Type', $type . ($charset !== null ? '; charset=' . $charset : ''));
+
 		return $this;
 	}
 
@@ -84,7 +87,7 @@ class Response implements IResponse
 	/**
 	 * @return static
 	 */
-	public function setExpiration(?string $time)
+	public function setExpiration(?string $time): static
 	{
 		if (!$time) {
 			$this->setHeader('Cache-Control', 's-maxage=0, max-age=0, must-revalidate');
@@ -122,13 +125,14 @@ class Response implements IResponse
 	 * @param string|int|DateTimeInterface $time
 	 * @return static
 	 */
-	public function setCookie(string $name, string $value, $time, ?string $path = null, ?string $domain = null, ?bool $secure = null, ?bool $httpOnly = null, ?string $sameSite = null)
+	public function setCookie(string $name, string $value, mixed $time, ?string $path = null, ?string $domain = null, ?bool $secure = null, ?bool $httpOnly = null, ?string $sameSite = null): static
 	{
 		return $this;
 	}
 
 	public function deleteCookie(string $name, ?string $path = null, ?string $domain = null, ?bool $secure = null): void
 	{
+		// No-op
 	}
 
 }

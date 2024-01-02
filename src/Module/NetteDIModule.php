@@ -17,10 +17,10 @@ class NetteDIModule extends Module
 {
 
 	/** @var callable[] function(Container $configurator): void; */
-	public $onCreateConfigurator = [];
+	public array $onCreateConfigurator = [];
 
 	/** @var callable[] function(Container $container): void; */
-	public $onCreateContainer = [];
+	public array $onCreateContainer = [];
 
 	/** @var array<string, mixed> */
 	protected array $config = [
@@ -38,14 +38,12 @@ class NetteDIModule extends Module
 		'tempDir',
 	];
 
-	/** @var string */
-	private $path;
+	private string $path;
 
 	/** @var string[] */
-	private $configFiles = [];
+	private array $configFiles = [];
 
-	/** @var Container|null */
-	private $container;
+	private ?Container $container = null;
 
 	/**
 	 * @param array{path?: string} $settings
@@ -106,10 +104,9 @@ class NetteDIModule extends Module
 	}
 
 	/**
-	 * @return object
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint
 	 */
-	public function grabService(string $service)
+	public function grabService(string $service): object
 	{
 		try {
 			/** @phpstan-var class-string $service */
@@ -164,12 +161,10 @@ class NetteDIModule extends Module
 		}
 	}
 
-
 	private function getTempDir(): string
 	{
 		return $this->path . '/' . $this->config['tempDir'];
 	}
-
 
 	private function clearTempDir(): void
 	{
@@ -179,7 +174,6 @@ class NetteDIModule extends Module
 		FileSystem::createDir($tempDir);
 	}
 
-
 	private function deleteTempDir(): void
 	{
 		$tempDir = $this->getTempDir();
@@ -187,7 +181,6 @@ class NetteDIModule extends Module
 			FileSystem::delete(realpath($tempDir));
 		}
 	}
-
 
 	private function stopContainer(): void
 	{

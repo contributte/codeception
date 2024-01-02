@@ -28,29 +28,29 @@ class NetteDIModuleType implements DynamicMethodReturnTypeExtension
 	public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
 	{
 		if ($methodCall->args === []) {
-			return $methodReflection->getReturnType();
+			return $methodReflection->getReturnType(); // @phpstan-ignore-line
 		}
 
 		$arg = $methodCall->getArgs()[0]->value;
 
 		if (!$arg instanceof ClassConstFetch) {
-			return $methodReflection->getReturnType();
+			return $methodReflection->getReturnType(); // @phpstan-ignore-line
 		}
 
 		$class = $arg->class;
 
 		if (!$class instanceof Name) {
-			return $methodReflection->getReturnType();
+			return $methodReflection->getReturnType(); // @phpstan-ignore-line
 		}
 
 		$class = (string) $class;
 
 		if ($class === 'static') {
-			return $methodReflection->getReturnType();
+			return $methodReflection->getReturnType(); // @phpstan-ignore-line
 		}
 
 		if ($class === 'self') {
-			$class = $scope->getClassReflection()->getName();
+			$class = $scope->getClassReflection()->getName(); // @phpstan-ignore-line
 		}
 
 		return new ObjectType($class);
