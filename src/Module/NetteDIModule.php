@@ -124,7 +124,11 @@ class NetteDIModule extends Module
 				'extensions' => ExtensionsExtension::class,
 			];
 		}
-
+		
+		if ($this->config['debugMode'] !== null) {
+			$configurator->setDebugMode((bool) $this->config['debugMode']);
+		}
+		
 		if ($this->config['logDir'] !== null) {
 			$logDir = $this->path . '/' . $this->config['logDir'];
 			FileSystem::createDir($logDir);
@@ -140,9 +144,7 @@ class NetteDIModule extends Module
 		$tempDir = $this->getTempDir();
 		$configurator->setTempDirectory($tempDir);
 
-		if ($this->config['debugMode'] !== null) {
-			$configurator->setDebugMode((bool) $this->config['debugMode']);
-		}
+
 
 		/** @var iterable<string> $configFiles */
 		$configFiles = $this->configFiles !== [] ? $this->configFiles : $this->config['configFiles'];
