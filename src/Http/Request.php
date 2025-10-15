@@ -2,6 +2,7 @@
 
 namespace Contributte\Codeception\Http;
 
+use Exception;
 use Nette\Http\FileUpload;
 use Nette\Http\IRequest;
 use Nette\Http\RequestFactory;
@@ -120,6 +121,23 @@ class Request implements IRequest
 	public function isSameSite(): bool
 	{
 		return true;
+	}
+
+	/**
+	 * Returns basic HTTP authentication credentials.¨
+	 *
+	 * @return array{string, string}|null
+	 */
+	public function getBasicCredentials(): ?array
+	{
+		if (method_exists($this->request, 'getBasicCredentials')) {
+			return $this->request->getBasicCredentials();
+		}
+
+		throw new Exception(sprintf(
+			'getBasicCredentials() method is not available on %s.',
+			get_class($this->request),
+		));
 	}
 
 }
