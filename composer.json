@@ -19,7 +19,7 @@
     }
   ],
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.2",
     "codeception/codeception": "^5.0.13",
     "codeception/lib-innerbrowser": "^4.0.2",
     "nette/di": "^3.1.8",
@@ -31,8 +31,8 @@
     "latte/latte": "^3.0.12",
     "nette/application": "^3.1.7",
     "nette/caching": "^3.2.3",
-    "contributte/qa": "^0.4",
-    "contributte/phpstan": "^0.1",
+    "contributte/qa": "~0.4.0",
+    "contributte/phpstan": "~0.1.0",
     "tracy/tracy": "^2.10.5",
     "phpunit/php-code-coverage": "^10.1.11"
   },
