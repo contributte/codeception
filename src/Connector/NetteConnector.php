@@ -14,6 +14,9 @@ use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\BrowserKit\Response;
 use Throwable;
 
+/**
+ * @extends AbstractBrowser<Request, Response>
+ */
 class NetteConnector extends AbstractBrowser
 {
 
