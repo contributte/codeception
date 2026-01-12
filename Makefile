@@ -23,15 +23,15 @@ phpstan:
 
 .PHONY: tests
 tests:
-	vendor/bin/codecept build
-	vendor/bin/codecept run --debug
+	php -d register_argc_argv=On vendor/bin/codecept build
+	php -d register_argc_argv=On vendor/bin/codecept run --debug
 
 .PHONY: coverage
 coverage:
 ifdef GITHUB_ACTION
-	vendor/bin/codecept build
-	vendor/bin/codecept run --coverage-xml
+	php -d register_argc_argv=On vendor/bin/codecept build
+	php -d register_argc_argv=On vendor/bin/codecept run --coverage-xml
 else
-	vendor/bin/codecept build
-	vendor/bin/codecept run --coverage-html
+	php -d register_argc_argv=On vendor/bin/codecept build
+	php -d register_argc_argv=On vendor/bin/codecept run --coverage-html
 endif
