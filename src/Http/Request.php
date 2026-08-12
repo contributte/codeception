@@ -139,5 +139,15 @@ class Request implements IRequest
 			get_class($this->request),
 		));
 	}
+	
+	/**
+	 * @param FetchSite|list<FetchSite> $site
+	 * @param FetchDest|list<FetchDest>|null $dest
+	 * @param bool|null user
+	 */
+	public function isFrom(array|FetchSite $site, array|FetchDest|null $dest = null, ?bool $user = null): bool
+	{
+		return true;
+	}
 
 }
