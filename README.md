@@ -18,7 +18,16 @@
     Website 🚀 <a href="https://contributte.org">contributte.org</a> | Contact 👨🏻‍💻 <a href="https://f3l1x.io">f3l1x.io</a> | Twitter 🐦 <a href="https://twitter.com/contributte">@contributte</a>
 </p>
 
-## Usage
+Codeception helpers for integration and [functional tests](http://codeception.com/docs/04-FunctionalTests) in Nette applications.
+
+## Versions
+
+| State  | Branch   | Version  | PHP     |
+|--------|----------|----------|---------|
+| dev    | master   | `^1.6.0` | `>=8.1` |
+| stable | master   | `^1.5.0` | `>=8.1` |
+
+## Installation
 
 To install latest version of `contributte/codeception` use [Composer](https://getcomposer.org).
 
@@ -26,18 +35,131 @@ To install latest version of `contributte/codeception` use [Composer](https://ge
 composer require contributte/codeception
 ```
 
-## Documentation
+## Usage
 
-For details on how to use this package, check out our [documentation](.docs).
+### NetteDIModule
 
-## Versions
+When you want to write an integration test to make sure that some services work well together you need to create the DI container first.
 
-| State       | Version  | Branch   | PHP     |
-|-------------|----------|----------|---------|
-| dev         | `^1.6.0` | `master` | `>=8.1` |
-| stable      | `^1.5.0` | `master` | `>=8.1` |
+`/tests/integration.suite.yml`
+
+```yaml
+error_level: "E_ALL"
+class_name: IntegrationSuiteTester
+modules:
+    enabled:
+        - Contributte\Codeception\Module\NetteDIModule:
+            tempDir: ../_temp/integration
+            configFiles:
+                - config/config.neon
+            # Log directory for Tracy.
+            # logDir: ../_log
+            # Debug mode.
+            # debugMode: true
+            # Get rid of the default extensions.
+            # removeDefaultExtensions: true
+            # Compile and create new container for each test.
+            # newContainerForEachTest: true
+```
+
+`/tests/integration/config/config.neon`
+
+```neon
+services:
+	- MyService
+```
+
+`/tests/integration/src/MyServiceTest.php`
+
+```php
+<?php declare(strict_types=1);
+
+use Codeception\Test\Unit;
+
+class MyServiceTest extends Unit
+{
+	public function testMyService(): void
+	{
+		// Here you can override the configFiles from integration.suite.yml if needed.
+		// The newContainerForEachTest option is required for this.
+		// $this->tester->useConfigFiles(['config/another-config.neon']);
+		$this->assertInstanceOf(MyService::class, $this->tester->grabService(MyService::class));
+	}
+}
+```
+
+`useConfigFiles` method takes array of file paths that are either absolute or relative to suite root.
+
+### NetteApplicationModule
+
+In functional tests you want to emulate the HTTP request and run `Nette\Application\Application` to handle it.
+
+Unfortunately Nette framework has some downsides like the fact that Request and Response are registered as services in the DI Container. For this reason the NetteApplicationModule requires `Contributte\Codeception\DI\CodeceptionExtension` to override the default implementations. **Beware that this is meant for the functional tests only. Do NOT register the extension outside of tests.**
+
+`/tests/functional.suite.yml`
+
+```yaml
+error_level: "E_ALL"
+class_name: FunctionalSuiteTester
+modules:
+    enabled:
+        - Contributte\Codeception\Module\NetteApplicationModule
+        - Contributte\Codeception\Module\NetteDIModule:
+            tempDir: ../_temp/functional
+            configFiles:
+                # Your application config file.
+                - ../../app/config/config.neon
+                # Additional config file only to add Contributte\Codeception\DI\HttpExtension.
+                - config/config.neon
+```
+
+`/tests/functional/config/config.neon`
+
+```neon
+extensions:
+	codeception: Contributte\Codeception\DI\HttpExtension
+```
+
+`/tests/functional/src/HomepageTest.php`
+
+```php
+<?php declare(strict_types=1);
+
+use Codeception\Test\Unit;
+class HomepageTest extends Unit
+{
+	public function testHomepage(): void
+	{
+		// Create http request and run Nette\Application\Application. See Contributte\Codeception\Connector\NetteConnector for details.
+		$this->tester->amOnPage('/');
+		// Assert that the response is what you expect.
+		$this->tester->seeResponseCodeIs(200);
+		$this->tester->see('Hello World!', 'h1');
+	}
+}
+```
 
 ## Development
+
+Simply run scripts in `Makefile` and make sure that qa, tester and phpstan passed.
+
+### Advanced Usage
+
+You can use these commands to do more specific tasks.
+
+```bash
+# generate necessary files to run the tests
+./vendor/bin/codecept build
+
+# run all tests
+./vendor/bin/codecept run
+
+# run the specific suite
+./vendor/bin/codecept run <suite>
+
+# run specific test
+./vendor/bin/codecept run <file>
+```
 
 See [how to contribute](https://contributte.org) to this package. This package is currently maintained by these authors.
 
