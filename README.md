@@ -41,8 +41,9 @@ composer require contributte/codeception
 
 When you want to write an integration test to make sure that some services work well together you need to create the DI container first.
 
+`/tests/integration.suite.yml`
+
 ```yaml
-# /tests/integration.suite.yml
 error_level: "E_ALL"
 class_name: IntegrationSuiteTester
 modules:
@@ -61,14 +62,18 @@ modules:
             # newContainerForEachTest: true
 ```
 
+`/tests/integration/config/config.neon`
+
 ```neon
-# /tests/integration/config/config.neon
 services:
 	- MyService
 ```
 
+`/tests/integration/src/MyServiceTest.php`
+
 ```php
-# /tests/integration/src/MyServiceTest.php
+<?php declare(strict_types=1);
+
 use Codeception\Test\Unit;
 
 class MyServiceTest extends Unit
@@ -91,8 +96,9 @@ In functional tests you want to emulate the HTTP request and run `Nette\Applicat
 
 Unfortunately Nette framework has some downsides like the fact that Request and Response are registered as services in the DI Container. For this reason the NetteApplicationModule requires `Contributte\Codeception\DI\CodeceptionExtension` to override the default implementations. **Beware that this is meant for the functional tests only. Do NOT register the extension outside of tests.**
 
+`/tests/functional.suite.yml`
+
 ```yaml
-# /tests/functional.suite.yml
 error_level: "E_ALL"
 class_name: FunctionalSuiteTester
 modules:
@@ -107,14 +113,18 @@ modules:
                 - config/config.neon
 ```
 
+`/tests/functional/config/config.neon`
+
 ```neon
-# /tests/functional/config/config.neon
 extensions:
 	codeception: Contributte\Codeception\DI\HttpExtension
 ```
 
+`/tests/functional/src/HomepageTest.php`
+
 ```php
-# /tests/functional/src/HomepageTest.php
+<?php declare(strict_types=1);
+
 use Codeception\Test\Unit;
 class HomepageTest extends Unit
 {
