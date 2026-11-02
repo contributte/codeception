@@ -7,6 +7,7 @@ use Nette\Http\FileUpload;
 use Nette\Http\IRequest;
 use Nette\Http\RequestFactory;
 use Nette\Http\UrlScript;
+use Nette\Http\FetchSite;
 
 /**
  * HttpRequest class for tests.
